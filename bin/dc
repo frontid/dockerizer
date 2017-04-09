@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+DIRNAME="`dirname $0`"
+CMD="docker-compose -f $DIRNAME/../docker/docker-compose.yml $@"
+
+eval "$CMD"

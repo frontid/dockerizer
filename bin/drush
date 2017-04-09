@@ -1,0 +1,42 @@
+#!/bin/bash
+
+current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+#echo "Current_dir: $current_dir"
+
+script_dirname="`dirname $0`"
+user_uid="`id -u`"
+
+root_dir="$( cd $script_dirname && cd .. && pwd)"
+#echo "Root dir: $root_dir"
+
+relative_path=${PWD#$root_dir}
+
+#echo "Relative path: $relative_path"
+
+docker_compose="docker-compose -f $script_dirname/../docker/docker-compose.yml exec --user $user_uid:$user_uid"
+drush="$docker_compose php bash -c 'cd /var/www$relative_path && drush $@'"
+
+echo "<< $drush >>"
+eval "$drush"
+exit
+
+first_byte=$(dd bs=1 count=1 2>/dev/null | od -t o1 -A n)
+if [ -z "$first_byte" ]; then
+  # stuff to do if the input is empty
+  eval "$drush"
+
+else
+  {
+    printf "\\${first_byte# }"
+    cat
+  } | {
+    # stuff to do if the input is not empty
+    eval "$drush"
+
+  }      
+fi
+
+
+
+
