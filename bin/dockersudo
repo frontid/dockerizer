@@ -14,7 +14,7 @@ relative_path=${PWD#$root_dir}
 
 #echo "Relative path: $relative_path"
 
-docker_compose="docker-compose -f $script_dirname/../docker/docker-compose.yml exec --user 82:82"
+docker_compose="docker-compose -f $script_dirname/../docker/docker-compose.yml exec --user 0:0"
 expose="$docker_compose php bash -c 'cd /var/www$relative_path && $@'"
 
 echo "<< $expose >>"
