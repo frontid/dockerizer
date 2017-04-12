@@ -1,5 +1,8 @@
 # This Makefile is aimed to help start quickly preparing a development sandbox to run drupal under docker4drupal 
 # transparently.
+#
+# Make sure an html folder exists in the root folder before running the create task
+#
 # It is recommended to install smartcd (https://github.com/cxreg/smartcd) for this purpose.
 # Check README for usage
 
@@ -24,16 +27,17 @@ create-storage:
 
 # Bring up docker
 bring-up-docker:
-	docker-compose up -d
+	dc up -d
 
 # It will create a user (ext-user) inside docker with the same ID. This will allow us to run any command with the same user
 # It will also add the www-data user to the ext-user group, so www-data will be able to access its group files
 create-mapped-user:
 	./bin/dockersudo adduser -D -u `id -u` ext-user && \
+		./bin/dockersudo ./bin/add-dependencies && \
 		./bin/dockersudo usermod -a -G www-data ext-user
 
 prepare-smartcd-if-available:
-	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$PWD/bin:\$PATH" | smartcd edit enter; fi
+	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$(PWD)/bin:\$$PATH" | ~/.smartcd/bin/smartcd edit enter && cd .; fi
 
 create: prepare-smartcd-if-available clone-docker prepare-docker create-storage bring-up-docker create-mapped-user
 
