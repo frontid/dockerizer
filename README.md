@@ -19,6 +19,8 @@ After clonning this project you should:
 
 2 (bis)- If you already have a drupal project, clone it manually inside of the root folder, and only make sure, there's a folder (or link) called html that points to the web that will be served.
 
+3- It's recommended to use the drupal-project template from pfressen, check: https://github.com/pfrenssen/drupal-project
+
 Then you're ready to develop!
 
 You can run commands inside the docker from your local OS, just as you were having everything installed.
