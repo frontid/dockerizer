@@ -27,7 +27,7 @@ create-storage:
 
 # Bring up docker
 bring-up-docker:
-	dc up -d
+	./bin/dc up -d
 
 # It will create a user (ext-user) inside docker with the same ID. This will allow us to run any command with the same user
 # It will also add the www-data user to the ext-user group, so www-data will be able to access its group files
@@ -37,9 +37,13 @@ create-mapped-user:
 		./bin/dockersudo usermod -a -G www-data ext-user
 
 prepare-smartcd-if-available:
-	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$(PWD)/bin:\$$PATH" | ~/.smartcd/bin/smartcd edit enter && cd .; fi
+	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$(PWD)/bin:\$$PATH" | ~/.smartcd/bin/smartcd edit enter; fi
 
-create: prepare-smartcd-if-available clone-docker prepare-docker create-storage bring-up-docker create-mapped-user
+# Changing directory will trigger smartcd to load new PATH
+change-dir:
+	cd .
+
+create: prepare-smartcd-if-available change-dir clone-docker prepare-docker create-storage bring-up-docker create-mapped-user
 
 mount-drupal-project:
 	git clone git@github.com:nicobot/drupal-project.git --branch master --single-branch drupal && \
