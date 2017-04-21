@@ -13,9 +13,7 @@ export NAME
 # The site will need to be running under the NAME specified by parameter. 
 # Modify the docker-compose so the new url will look like NAME.docker.localhost:8000
 prepare-docker:
-	sed -i 's/Host:\(.*\)drupal/Host:\1$(NAME)/g' docker/docker-compose.yml && \
-		sed -i 's/projectname/$(NAME)/g' docker/docker-compose.yml && \ 
-		sed -i 's/projectname/$(NAME)/g' docker/.env
+	sed -i 's/Host:\(.*\)drupal/Host:\1$(NAME)/g' docker/docker-compose.yml && sed -i 's/projectname/$(NAME)/g' docker/docker-compose.yml && sed -i 's/projectname/$(NAME)/g' docker/.env
 
 # Prepare the docker installation with the boilerplate branch
 clone-docker:
@@ -27,6 +25,11 @@ clone-docker:
 create-storage:
 	mkdir storage && mkdir mariadb-init
 
+# The project needs to have the drupal code under html folder
+# if it doesn't exist we'll create it
+create-html-folder:
+	mkdir -p html
+
 # Bring up docker
 bring-up-docker:
 	./bin/dc up -d
@@ -34,9 +37,7 @@ bring-up-docker:
 # It will create a user (ext-user) inside docker with the same ID. This will allow us to run any command with the same user
 # It will also add the www-data user to the ext-user group, so www-data will be able to access its group files
 create-mapped-user:
-	./bin/dockersudo adduser -D -u `id -u` ext-user && \
-		./bin/dockersudo ./bin/add-dependencies && \
-		./bin/dockersudo usermod -a -G www-data ext-user
+	./bin/dockersudo adduser -D -u `id -u` ext-user && ./bin/dockersudo ./bin/add-dependencies && ./bin/dockersudo usermod -a -G www-data ext-user
 
 prepare-smartcd-if-available:
 	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$(PWD)/bin:\$$PATH" | ~/.smartcd/bin/smartcd edit enter; fi
@@ -45,8 +46,7 @@ prepare-smartcd-if-available:
 change-dir:
 	cd .
 
-create: prepare-smartcd-if-available change-dir clone-docker prepare-docker create-storage bring-up-docker create-mapped-user
+create: prepare-smartcd-if-available change-dir clone-docker prepare-docker create-storage create-html-folder bring-up-docker create-mapped-user
 
 mount-drupal-project:
-	git clone git@github.com:nicobot/drupal-project.git --branch master --single-branch drupal && \
-		ln -s drupal/web html
+	git clone git@github.com:nicobot/drupal-project.git --branch master --single-branch drupal && ln -s drupal/web html
