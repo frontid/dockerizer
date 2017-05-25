@@ -26,7 +26,7 @@ cache-set:
 # The site will need to be running under the NAME specified by parameter. 
 # Modify the docker-compose so the new url will look like NAME.docker.localhost:8000
 prepare-docker:
-	sed -i 's/projectname/$(NAME)/g' docker/docker-compose.yml && sed -i 's/projectname/$(NAME)/g' docker/.env
+	sed -i "s/projectname/$(NAME)/g" docker/docker-compose.yml && sed -i "s/projectname/$(NAME)/g" docker/.env
 
 # Prepare the docker installation with the boilerplate branch
 clone-docker:
