@@ -11,4 +11,3 @@ storage
 #Ignore files in code directory. This is another git reposory with the
 #project code
 code
-html
