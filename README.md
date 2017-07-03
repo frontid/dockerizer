@@ -3,13 +3,6 @@
 This project is aimed to help start quickly preparing a development sandbox to run drupal under docker4drupal seemlessly.
 It is recommended to install smartcd (https://github.com/cxreg/smartcd) for this purpose.
 
-In order to avoid possible permission issues it is encouraged to create a user in your local OS with ID 82. 
-(http://docs.docker4drupal.org/en/latest/permissions/)
-
-sudo groupadd -r -g 82 alpine-www-data
-sudo usermod -a -G alpine-www-data $(id -un)
-
-
 After clonning this project you should:
 
 1- Run: make create NAME=<drupal_project>
