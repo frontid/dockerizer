@@ -19,6 +19,8 @@ endif
 
 export NAME
 
+CURRENT_USER=$(shell id -u)
+
 # Saves the project name into a file so it can be reloaded without specifying it everytime
 cache-set:
 	@echo "NAME=${NAME}" > .project
@@ -53,10 +55,8 @@ docker-start:
 docker-stop:
 	./bin/dc stop
 
-# It will create a user (ext-user) inside docker with the same ID. This will allow us to run any command with the same user
-# It will also add the www-data user to the ext-user group, so www-data will be able to access its group files
-create-mapped-user:
-	./bin/dockersudo adduser -D -u `id -u` ext-user && ./bin/dockersudo ./bin/add-dependencies && ./bin/dockersudo usermod -a -G www-data ext-user
+update-permissions:
+	setfacl -dRm u:$(CURRENT_USER):rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$(CURRENT_USER):rwX -Rm u:21:rX -Rm u:82:rwX .
 
 prepare-smartcd-if-available:
 	if [ -f ~/.smartcd_config ]; then echo "autostash PATH=$(PWD)/bin:\$$PATH" | ~/.smartcd/bin/smartcd edit enter; fi
@@ -65,9 +65,9 @@ prepare-smartcd-if-available:
 change-dir:
 	cd .
 
-create: cache-set prepare-smartcd-if-available change-dir clone-docker prepare-docker create-storage create-html-folder docker-start create-mapped-user
+create: cache-set prepare-smartcd-if-available change-dir clone-docker prepare-docker create-storage create-html-folder update-permissions docker-start
 
-update: cache-set docker-stop change-dir update-docker prepare-docker create-storage create-html-folder docker-start create-mapped-user
+update: cache-set docker-stop change-dir update-docker prepare-docker create-storage create-html-folder update-permissions docker-start
 
 up: docker-stop docker-start
 
