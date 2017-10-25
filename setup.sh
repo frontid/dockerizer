@@ -72,7 +72,7 @@ echo ''
 # ---------
 
 PS3="Y el servidor http: "
-options=( 'apache' 'nginx' )
+options=( 'apache' 'nginx' 'both' )
 
 select webserver in "${options[@]}" ; do 
 
@@ -121,6 +121,23 @@ read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las 
 
 curl -L http://smartcd.org/install | bash
 
+echo ''
+echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
+mkdir -p storage && mkdir -p mariadb-init
+
+echo ''
+echo -e "Clonando docker for drupal"
+git clone git@github.com:nicobot/docker4drupal.git --branch boilerplate --single-branch docker
+
+echo ''
+echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
+git clone $repo html
+
+echo ''
+echo -e "Ajustando permisos de directorios para que no haya problemas de permisos entre docker y el host"
+setfacl -dRm u:$(USER):rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$(USER):rwX -Rm u:21:rX -Rm u:82:rwX .
+
+
 # Generamos el docker.
 ./build-docker-compose.sh
 
@@ -148,8 +165,15 @@ echo ''
 echo -e "\e[32mAcabamos!\e[0m"
 echo -e "Anota esto en algun lado que te va a ser útil:"
 echo ''
-echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m"
+
+if [ $webserver = "both" ]; then
+    echo -e "Las URL de tu proyecto son \e[32mhttp://$domain.apache.localhost:8000 y http://$domain.nginx.localhost:8000\e[0m"
+    else
+    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m"
+fi
+
 echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
+echo -e "El usuario y clave de mysql es \e[32mdrupal / drupal (DB: drupal)\e[0m (si, todo drupal)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
 echo '¡A por ellos campeón!'

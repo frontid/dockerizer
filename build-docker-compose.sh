@@ -17,6 +17,14 @@ if [ $webserver = "nginx" ]; then
     envsubst < "docker-templates/service-nginx.yml" >> "docker-compose.yml"
 fi
 
+
+# Si ha seleccionado ambos
+if [ $webserver = "both" ]; then
+    envsubst < "docker-templates/service-apache.yml" >> "docker-compose.yml"
+    envsubst < "docker-templates/service-nginx.yml" >> "docker-compose.yml"
+fi
+
+
 envsubst < "docker-templates/service-frontend.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-mailhog.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-pma.yml" >> "docker-compose.yml"

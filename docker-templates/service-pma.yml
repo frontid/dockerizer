@@ -9,7 +9,7 @@
     labels:
       - 'traefik.backend=pma'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:pma.drupal.docker.localhost'
+      - 'traefik.frontend.rule=Host:pma.$domain.docker.localhost'
 
 
 

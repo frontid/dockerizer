@@ -21,7 +21,7 @@
     labels:
       - 'traefik.backend=nginx'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:drupal.docker.localhost'
+      - 'traefik.frontend.rule=Host:$domain.docker.localhost'
 
 
 
