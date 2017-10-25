@@ -85,6 +85,17 @@ select webserver in "${options[@]}" ; do
     fi
 done  
 
+# ---------
+
+while [[ -z "$port" ]]
+do
+  echo ''
+  echo "Indica el puerto que vas a usar para este docker. Por ejemplo 8000 u 8001."
+  echo "Ten en cuenta que si tienes mas proyectos dockerizados y quieres poder tenerlos arrancados al mismo tiempo el puerto entre cada dockerizador tiene que variar: "
+  read -p "Puerto: " port
+done
+
+export port
 
 # ---------
 echo ''
