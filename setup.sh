@@ -127,10 +127,11 @@ echo ''
 
 read -p "Si está todo bien presiona cualquier tecla para proceder (o CTRL + C para cancelar y vuelve a empezar)."
 
+# @fixme no funca
 # @todo verificar si ya está instalado.
-read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
+#read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
 
-curl -L http://smartcd.org/install | bash
+#curl -L http://smartcd.org/install | bash
 
 echo ''
 echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
@@ -144,9 +145,10 @@ echo ''
 echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
 git clone $repo html
 
-echo ''
-echo -e "Ajustando permisos de directorios para que no haya problemas de permisos entre docker y el host"
-setfacl -dRm u:$(USER):rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$(USER):rwX -Rm u:21:rX -Rm u:82:rwX .
+# @fixme no funca
+#echo ''
+#echo -e "Ajustando permisos de directorios para que no haya problemas de permisos entre docker y el host"
+#setfacl -dRm u:$(USER):rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$(USER):rwX -Rm u:21:rX -Rm u:82:rwX .
 
 
 # Generamos el docker.
