@@ -1,0 +1,20 @@
+  apache:
+    image: wodby/drupal-apache:2.4-1.0.2
+    depends_on:
+      - php
+    environment:
+      APACHE_LOG_LEVEL: debug
+      APACHE_BACKEND_HOST: php
+      APACHE_SERVER_ROOT: /var/www/html/web
+    volumes:
+      - codebase:/var/www/html
+# Options for macOS users (https://docker4drupal.readthedocs.io/en/latest/macos)
+#      - codebase:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
+    labels:
+      - 'traefik.backend=apache'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:drupal.docker.localhost'
+
+
+

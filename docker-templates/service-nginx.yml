@@ -1,0 +1,27 @@
+  nginx:
+# wodby/drupal-nginx:[DRUPAL_VERSION]-[NGINX_VERSION]-[STABILITY_TAG].
+    image: wodby/drupal-nginx:8-1.13-2.4.2
+#    image: wodby/drupal-nginx:7-1.13-2.4.2
+#    image: wodby/drupal-nginx:6-1.13-2.4.2
+#    image: wodby/drupal-nginx:8-1.12-2.4.2
+#    image: wodby/drupal-nginx:7-1.12-2.4.2
+#    image: wodby/drupal-nginx:6-1.12-2.4.2
+    depends_on:
+      - php
+    environment:
+      NGINX_STATIC_CONTENT_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/web
+    volumes:
+      - codebase:/var/www/html
+# Options for macOS users (https://docker4drupal.readthedocs.io/en/latest/macos)
+#      - codebase:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
+    labels:
+      - 'traefik.backend=nginx'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=Host:drupal.docker.localhost'
+
+
+
