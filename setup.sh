@@ -102,7 +102,7 @@ echo ''
 # ---------
 
 PS3="Y la versión de MariaBD: "
-options=( '10.1-2.3.5')
+options=( '10.1-2.1.0')
 
 select mysqlver in "${options[@]}" ; do 
 

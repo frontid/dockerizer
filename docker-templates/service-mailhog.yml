@@ -1,9 +1,9 @@
   mailhog:
+    container_name: ${domain}_mailhog
     image: mailhog/mailhog
     labels:
-      - 'traefik.backend=mailhog'
+      - 'traefik.backend=${domain}_mailhog'
       - 'traefik.port=8025'
-      - 'traefik.frontend.rule=Host:mailhog.$domain.docker.localhost'
-
+      - 'traefik.frontend.rule=Host:$domain.mailhog.localhost'
 
 

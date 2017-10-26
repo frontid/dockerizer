@@ -1,15 +1,15 @@
   pma:
+    container_name: ${domain}_pma
     image: phpmyadmin/phpmyadmin
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: ${domain}_db
       PMA_USER: drupal
       PMA_PASSWORD: drupal
       PHP_UPLOAD_MAX_FILESIZE: 1G
       PHP_MAX_INPUT_VARS: 1G
     labels:
-      - 'traefik.backend=pma'
+      - 'traefik.backend=${domain}_pma'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:pma.$domain.docker.localhost'
-
+      - 'traefik.frontend.rule=Host:$domain.pma.localhost'
 
 
