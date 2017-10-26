@@ -15,8 +15,8 @@
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
       # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
     volumes:
-      - ../:/var/www
-     - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+      - ./:/var/www
+      - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
 #      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
 
 

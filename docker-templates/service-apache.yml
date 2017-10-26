@@ -7,7 +7,7 @@
     depends_on:
       - php
     volumes:
-      - ../:/var/www
+      - ./:/var/www
     labels:
       - 'traefik.backend=${domain}_apache2'
       - 'traefik.port=80'

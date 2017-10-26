@@ -1,4 +1,5 @@
   traefik:
+    container_name: ${domain}_traefik
     image: traefik
     command: -c /dev/null --web --docker --logLevel=INFO
     ports:

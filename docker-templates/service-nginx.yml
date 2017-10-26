@@ -12,11 +12,11 @@
       NGINX_BACKEND_HOST: php
       NGINX_SERVER_ROOT: /var/www/html
     volumes:
-      - ../:/var/www
+      - ./:/var/www
 #      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
     labels:
-      - 'traefik.backend=$domain.$webserver_nginx'
+      - 'traefik.backend=$domain.${webserver}_nginx'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=HostRegexp:$domain.localhost, {subdomain:[^.]+}.$domain.localhost'
+      - 'traefik.frontend.rule=HostRegexp:$domain.nginx.localhost, {subdomain:[^.]+}.$domain.nginx.localhost'
 
 
