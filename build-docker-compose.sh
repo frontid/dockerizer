@@ -20,7 +20,9 @@ fi
 
 # Si ha seleccionado ambos
 if [ $webserver = "both" ]; then
+    webserver='nginx'
     envsubst < "docker-templates/service-apache.yml" >> "docker-compose.yml"
+    webserver='apache'
     envsubst < "docker-templates/service-nginx.yml" >> "docker-compose.yml"
 fi
 
@@ -29,3 +31,4 @@ envsubst < "docker-templates/service-frontend.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-mailhog.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-pma.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-traefik.yml" >> "docker-compose.yml"
+envsubst < "docker-templates/docker-compose-base-final.yml" >> "docker-compose.yml"

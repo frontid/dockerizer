@@ -14,7 +14,7 @@
     labels:
       - 'traefik.backend=apache'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:$domain.docker.localhost'
+      - 'traefik.frontend.rule=Host:$domain.$webserver.docker.localhost'
 
 
 

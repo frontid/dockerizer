@@ -1,8 +1,5 @@
-  frontend:
-    container_name: ${domain}_frontend
-    image: frontid/docker-front-dev
-    volumes:
-      - ../:/var/www
-
-
-
+#  frontend:
+#    container_name: ${domain}_frontend
+#    image: frontid/docker-front-dev
+#    volumes:
+#      - ../:/var/www

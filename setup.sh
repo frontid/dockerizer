@@ -122,7 +122,7 @@ echo -e "Repositorio: \e[32m$repo\e[0m"
 echo -e "DB inicial: \e[32m$db\e[0m"
 echo -e "Versión de PHP: \e[32m$phpver\e[0m"
 echo -e "Servidor http: \e[32m$webserver\e[0m"
-echo -e "Versión Mysql: \e[32m$mysqlver\e[0m"
+echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
 echo ''
 
 read -p "Si está todo bien presiona cualquier tecla para proceder (o CTRL + C para cancelar y vuelve a empezar)."
@@ -180,12 +180,14 @@ echo -e "Anota esto en algun lado que te va a ser útil:"
 echo ''
 
 if [ $webserver = "both" ]; then
-    echo -e "Las URL de tu proyecto son \e[32mhttp://$domain.apache.localhost:8000 y http://$domain.nginx.localhost:8000\e[0m"
+    echo -e "Las URL de tu proyecto son http://$domain.apache.localhost:$port y http://$domain.nginx.localhost:$port"
+    echo -e "http://$domain.apache.localhost:$port y http://$domain.nginx.localhost:$port"
+    echo -e "http://$domain.nginx.localhost:$port"
     else
-    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$port\e[0m"
 fi
 
-echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
+echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:$port\e[0m"
 echo -e "El usuario y clave de mysql es \e[32mdrupal / drupal (DB: drupal)\e[0m (si, todo drupal)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
