@@ -180,8 +180,8 @@ echo -e "Anota esto en algun lado que te va a ser útil:"
 echo ''
 
 if [ $webserver = "both" ]; then
-    echo -e "Las URL de tu proyecto son http://$domain.apache.localhost:$port y http://$domain.nginx.localhost:$port"
-    echo -e "http://$domain.apache.localhost:$port y http://$domain.nginx.localhost:$port"
+    echo -e "Las URL de tus proyectos son:"
+    echo -e "http://$domain.apache.localhost:$port"
     echo -e "http://$domain.nginx.localhost:$port"
     else
     echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$port\e[0m"
