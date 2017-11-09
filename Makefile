@@ -32,7 +32,7 @@ prepare-docker:
 
 # Prepare the docker installation with the boilerplate branch
 clone-docker:
-	@echo "Creating docker repo" && git clone git@github.com:nicobot/docker4drupal.git --branch boilerplate --single-branch docker
+	@echo "Creating docker repo" && git clone git@github.com:frontid/docker4drupal.git --branch boilerplate --single-branch docker
 
 update-docker:
 	@echo "Updating docker" && cd docker && git checkout -f && git pull origin boilerplate
