@@ -139,7 +139,7 @@ mkdir -p storage && mkdir -p mariadb-init
 
 echo ''
 echo -e "Clonando docker for drupal"
-git clone git@github.com:nicobot/docker4drupal.git --branch boilerplate --single-branch docker
+git clone git@github.com:front-id/docker4drupal.git --branch boilerplate --single-branch docker
 
 echo ''
 echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
