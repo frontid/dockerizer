@@ -5,7 +5,6 @@
 echo ''
 echo ''
 echo -e "\e[32mA continuación se borrarán todos los ficheros generados automáticamente para este proyecto."
-echo -e "\e[32mPor favor ten a mano la url del repositorio del proyecto en el que vas a trabajar y una copia de la DB que vas a cargar inicialmente:"
 echo -e "\e[0m"
 echo ''
 
