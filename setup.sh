@@ -127,11 +127,13 @@ echo ''
 
 read -p "Si está todo bien presiona cualquier tecla para proceder (o CTRL + C para cancelar y vuelve a empezar)."
 
-# @fixme no funca
-# @todo verificar si ya está instalado.
-#read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
-
-#curl -L http://smartcd.org/install | bash
+# Install smartcd if not installed.
+if [ ! -f "~/.smartcd_config" ]; then
+  read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
+  curl -L http://smartcd.org/install | bash
+fi
+#initialize smartcd.
+source ~/.smartcd_config
 
 echo ''
 echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
