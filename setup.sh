@@ -161,8 +161,10 @@ echo ''
 while ! { test "$rundocker" = 'y' || test "$rundocker" = 'n'; }; do
   read -p "¿Arrancamos docker? [Y/n]: " rundocker
   
-  if [[ $rundocker = '' ]]; then
+  if [[ ${rundocker,,} = 'y' ]]; then
     rundocker='y'
+  elif [[ ${rundocker,,} = 'n' ]]; then
+    rundocker='n'
   fi
 done
 
