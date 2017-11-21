@@ -44,7 +44,20 @@ echo ''
 
 while [[ -z "$db" ]]
 do
-  read -p "Indica el path absoluto donde se encuentra el SQL que vamos a cargar inicialmente (Ej: ~/home/$USER/Downloads/bkp-$domain.sql: " db
+  read -p "Indica el path absoluto donde se encuentra el SQL que vamos a cargar inicialmente (Ej: $HOME/Downloads/bkp-$domain.sql). O pulsa intro para no cargar ninguna base de datos: " db
+
+  # Exit loop if user just press enter.
+  if [[ $db = '' ]]; then
+    unset db
+    break
+  fi
+
+  # Check provided file exit and copy to the needed location.
+  if [ ! -f "$db" ]; then
+    echo "No encuentro la base de datos."
+    echo ""
+    unset db
+  fi
 done
 
 export db
@@ -128,16 +141,16 @@ echo ''
 read -p "Si está todo bien presiona cualquier tecla para proceder (o CTRL + C para cancelar y vuelve a empezar)."
 
 # Install smartcd if not installed.
-if [ ! -f "~/.smartcd_config" ]; then
+if [ ! -f "$HOME/.smartcd_config" ]; then
   read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
   curl -L http://smartcd.org/install | bash
 fi
 #initialize smartcd.
-source ~/.smartcd_config
+source $HOME/.smartcd_config
 
 echo ''
 echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
-mkdir -p storage && mkdir -p mariadb-init
+mkdir -p storage
 
 echo ''
 echo -e "Clonando docker for drupal"
@@ -146,6 +159,13 @@ git clone git@github.com:nicobot/docker4drupal.git --branch boilerplate --single
 echo ''
 echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
 git clone $repo html
+
+# If database should be copied.
+if [ ! -z ${db+x} ]; then
+  echo -e "Copiando la base de datos"
+  mkdir -p mariadb-init
+  cp $db mariadb-init/
+fi
 
 # @fixme no funca
 #echo ''
