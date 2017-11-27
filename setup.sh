@@ -13,7 +13,7 @@
 echo ''
 echo ''
 echo -e "\e[32mBienvenido. Vamos a instalar el entorno para tu proyecto."
-echo -e "\e[32mPor favor ten a mano la url del repositorio del proyecto en el que vas a trabajar y una copia de la DB que vas a cargar inicialmente:"
+echo -e "\e[32mPor favor ten a mano la url del repositorio del proyecto en el que vas a trabajar."
 echo -e "\e[0m"
 echo ''
 
@@ -44,7 +44,7 @@ echo ''
 
 while [[ -z "$db" ]]
 do
-  read -p "Indica el path absoluto donde se encuentra el SQL que vamos a cargar inicialmente (Ej: $HOME/Downloads/bkp-$domain.sql). O pulsa intro para no cargar ninguna base de datos: " db
+  read -p "Puedes indicar el path de la DB si quieres que la carguemos inicialmente(Ej: $HOME/Downloads/bkp-$domain.sql). O pulsa intro si quires saltarte este paso: " db
 
   # Exit loop if user just press enter.
   if [[ $db = '' ]]; then
@@ -138,7 +138,7 @@ echo -e "Servidor http: \e[32m$webserver\e[0m"
 echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
 echo ''
 
-read -p "Si está todo bien presiona cualquier tecla para proceder (o CTRL + C para cancelar y vuelve a empezar)."
+read -p "Si está todo bien presiona ENTER (o CTRL + C para cancelar y vuelve a empezar)."
 
 # Install smartcd if not installed.
 if [ ! -f "$HOME/.smartcd_config" ]; then
