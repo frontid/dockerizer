@@ -1,0 +1,13 @@
+#ignore docker files. They are build automatically
+docker
+
+#Ignore project files
+.project
+.idea
+
+#Ignore database files
+storage
+
+#Ignore files in code directory. This is another git reposory with the
+#project code
+code
