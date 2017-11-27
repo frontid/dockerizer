@@ -16,7 +16,7 @@ while ! { test "$cleanup" = 'y' || test "$cleanup" = 'n'; }; do
     exit 0
   fi
 
-  if [[ ${cleanup,,} = 'y' ]]; then
+  if [[ ${cleanup,,} = '' || ${cleanup,,} = 'y' ]]; then
     cleanup='y'
   fi
 done
