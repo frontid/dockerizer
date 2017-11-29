@@ -33,7 +33,7 @@ echo ''
 
 while [[ -z "$repo" ]]
 do
-  read -p "Indica la URL del repositorio (Ej: git@gitlab.com:frontid/frontid.git): " repo
+  read -p "Indica la URL del repositorio (Ej:  git@github.com:githubtraining/hellogitworld.git): " repo
 done
 
 export repo
