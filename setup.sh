@@ -175,15 +175,13 @@ if [ ! -z ${db+x} ]; then
 fi
 
 # @fixme no funca
-#echo ''
-#echo -e "Ajustando permisos de directorios para que no haya problemas de permisos entre docker y el host"
-#setfacl -dRm u:$(USER):rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$(USER):rwX -Rm u:21:rX -Rm u:82:rwX .
+echo ''
+echo -e "Ajustando permisos de directorios para que no haya problemas de permisos entre docker y el host"
+setfacl -dRm u:$USER:rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$USER:rwX -Rm u:21:rX -Rm u:82:rwX .
 
 
 # Generamos el docker.
 ./build-docker-compose.sh
-
-mv docker-compose.yml docker/
 
 # ---------
 echo ''
