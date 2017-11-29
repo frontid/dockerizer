@@ -183,6 +183,8 @@ fi
 # Generamos el docker.
 ./build-docker-compose.sh
 
+mv docker-compose.yml docker/
+
 # ---------
 echo ''
 # ---------
