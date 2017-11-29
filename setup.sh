@@ -145,7 +145,14 @@ if [ ! -f "$HOME/.smartcd_config" ]; then
   read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
   curl -L http://smartcd.org/install | bash
 fi
-#initialize smartcd.
+
+# Include this folder into smartcd if is not included.
+if [ ! -f "$HOME/.smartcd/scripts$PWD" ]; then
+  mkdir -p "$HOME/.smartcd/scripts$PWD"
+  echo autostash PATH=$PWD/bin:$PATH >> "$HOME/.smartcd/scripts$PWD/bash_enter"
+fi
+
+# Initialize smartcd.
 source $HOME/.smartcd_config
 
 echo ''
