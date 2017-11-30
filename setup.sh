@@ -163,14 +163,11 @@ fi
 
 # Initialize smartcd.
 source $HOME/.smartcd_config
+source $HOME/.smartcd/scripts$PWD/bash_enter
 
 echo ''
 echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
 mkdir -p storage
-
-echo ''
-echo -e "Clonando docker for drupal"
-git clone git@github.com:front-id/docker4drupal.git --branch boilerplate --single-branch docker
 
 echo ''
 echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
