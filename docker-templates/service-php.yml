@@ -1,0 +1,22 @@
+  php:
+    container_name: ${domain}_php
+    image: wodby/drupal-php:$phpver
+    environment:
+      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+      PHP_XDEBUG: 1
+      PHP_XDEBUG_DEFAULT_ENABLE: 1
+      PHP_XDEBUG_REMOTE_AUTOSTART: 1
+      DB_HOST: ${domain}_db
+      DB_USER: drupal
+      DB_PASSWORD: drupal
+      DB_NAME: drupal
+      DB_DRIVER: mysql
+      SSH_AUTH_SOCK: /ssh-agent
+      # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
+      # PHP_XDEBUG_REMOTE_HOST: "10.254.254.254"  # You will also need to 'sudo ifconfig lo0 alias 10.254.254.254'
+    volumes:
+      - ./:/var/www
+      - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+#      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
+
+

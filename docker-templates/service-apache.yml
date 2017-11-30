@@ -1,0 +1,16 @@
+  apache2:
+    container_name: ${domain}_apache2
+    image: webdevops/apache-dev:latest
+    environment:
+      WEB_PHP_SOCKET: ${domain}_php:9000
+      WEB_DOCUMENT_ROOT: /var/www/html/${base_web_root}
+    depends_on:
+      - php
+    volumes:
+      - ./:/var/www
+    labels:
+      - 'traefik.backend=${domain}_apache2'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=HostRegexp:$domain.apache.localhost, {subdomain:[^.]+}.$domain.apache.localhost'
+
+

@@ -35,3 +35,8 @@ If you'd like to run a command as sudo, then you should use the special command 
 You can also run any command using "expose <any-command>"
 
 And last, you can also run docker-compose with the specific docker-compose.yml file, just using "dc", so try "dc ps" from where-ever you're. 
+
+
+## TODOS
+- Implement a configfile "docker4drupal.ini" or something similar to store the specific project configuration. This file will be putted into the html dir to allow it to be pushed to the project. Then when a user use drupal-project-boilerplate it would be able to detect the conf and ask to the user if it should use it (preconfirured projects).
+- We are asking for the initial db location but still is not making anything with this. 

@@ -1,0 +1,22 @@
+  nginx:
+    container_name: ${domain}_nginx
+# wodby/drupal-nginx:[DRUPAL_VERSION]-[NGINX_VERSION]-[STABILITY_TAG].
+    image: wodby/drupal-nginx:8-1.10-2.1.0
+#    image: wodby/drupal-nginx:7-1.10-2.1.0
+#    image: wodby/drupal-nginx:6-1.10-2.1.0
+    depends_on:
+      - php
+    environment:
+      NGINX_STATIC_CONTENT_OPEN_FILE_CACHE: "off"
+      NGINX_ERROR_LOG_LEVEL: debug
+      NGINX_BACKEND_HOST: php
+      NGINX_SERVER_ROOT: /var/www/html/${base_web_root}
+    volumes:
+      - ./:/var/www
+#      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
+    labels:
+      - 'traefik.backend=$domain.${webserver}_nginx'
+      - 'traefik.port=80'
+      - 'traefik.frontend.rule=HostRegexp:$domain.nginx.localhost, {subdomain:[^.]+}.$domain.nginx.localhost'
+
+
