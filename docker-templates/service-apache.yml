@@ -3,7 +3,7 @@
     image: webdevops/apache-dev:latest
     environment:
       WEB_PHP_SOCKET: ${domain}_php:9000
-      WEB_DOCUMENT_ROOT: /var/www/html
+      WEB_DOCUMENT_ROOT: /var/www/html/${base_web_root}
     depends_on:
       - php
     volumes:

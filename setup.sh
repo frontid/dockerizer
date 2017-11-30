@@ -66,6 +66,14 @@ export db
 echo ''
 # ---------
 
+read -p "Si el repositorio tiene la aplicación web en un subdirectorio en lugar de en la raiz pon la ruta en el repositorio(Ej: web). O pulsa intro si la raiz del repositorio es la raiz de la aplicación web: " base_web_root
+
+export base_web_root
+
+# ---------
+echo ''
+# ---------
+
 PS3="Especifica la versión de PHP que vas a usar: "
 options=( '7.1-2.1.0' '7.0-2.1.0' '5.6-2.1.0' '5.3-2.1.0' )
 
@@ -133,6 +141,7 @@ echo -e "Esta el la configuración que nos queda:"
 echo -e "Nombre del proyecto: \e[32m$domain\e[0m"
 echo -e "Repositorio: \e[32m$repo\e[0m"
 echo -e "DB inicial: \e[32m$db\e[0m"
+echo -e "La aplicación web esta en: \e[32m$base_web_root\e[0m"
 echo -e "Versión de PHP: \e[32m$phpver\e[0m"
 echo -e "Servidor http: \e[32m$webserver\e[0m"
 echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
