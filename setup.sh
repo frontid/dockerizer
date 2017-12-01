@@ -123,11 +123,12 @@ echo ''
 # ---------
 
 PS3="Y la versión de MariaBD: "
-options=( '10.1-2.1.0')
+options=( '10.1-x => compatible con MySQL 5.6' '10.2-x => Compatible con Mysql 5.7')
 
 select mysqlver in "${options[@]}" ; do 
 
     if (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
+	mysqlver=$(echo $mysqlver| cut -d'-' -f 1)
         export mysqlver
         break
 
@@ -135,6 +136,8 @@ select mysqlver in "${options[@]}" ; do
         echo "Se te fue el dedo, esa no es una opción válida."
     fi
 done  
+
+echo $mysqlver
 
 echo ''
 echo -e "Esta el la configuración que nos queda:"
