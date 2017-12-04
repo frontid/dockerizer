@@ -1,9 +1,11 @@
   traefik:
     container_name: ${domain}_traefik
-    image: traefik
-    command: -c /dev/null --web --docker --logLevel=INFO
+    build: .
+    restart: always
+    command: --web --docker --logLevel=DEBUG
     ports:
       - '$port:80'
+      - '$secure_port:443'
 #      - '8080:8080' # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

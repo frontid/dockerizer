@@ -236,11 +236,11 @@ if [ $webserver = "both" ]; then
     echo -e "Las URL de tus proyectos son:"
     echo -e "http://$domain.apache.localhost:$port"
     echo -e "http://$domain.nginx.localhost:$port"
-    echo -e "http://$domain.apache.localhost:$secure_port"
-    echo -e "http://$domain.nginx.localhost:$secure_port"
+    echo -e "https://$domain.apache.localhost:$secure_port"
+    echo -e "https://$domain.nginx.localhost:$secure_port"
     else
     echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$port\e[0m"
-    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$secure_port\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttps://$domain.$webserver.localhost:$secure_port\e[0m"
 fi
 
 echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:$port\e[0m"
