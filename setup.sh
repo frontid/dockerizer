@@ -122,6 +122,20 @@ export port
 echo ''
 # ---------
 
+while [[ -z "$secure_port" ]]
+do
+  echo ''
+  echo "Indica el puerto que vas a usar para HTTPS en este docker. Por ejemplo 4430 o 4431 ."
+  echo "Ten en cuenta que si tienes mas proyectos dockerizados y quieres poder tenerlos arrancados al mismo tiempo el puerto entre cada dockerizador tiene que variar: "
+  read -p "Puerto: " secure_port
+done
+
+export secure_port
+
+# ---------
+echo ''
+# ---------
+
 PS3="Y la versión de MariaBD: "
 options=( '10.1-x => compatible con MySQL 5.6' '10.2-x => Compatible con Mysql 5.7')
 
@@ -222,8 +236,11 @@ if [ $webserver = "both" ]; then
     echo -e "Las URL de tus proyectos son:"
     echo -e "http://$domain.apache.localhost:$port"
     echo -e "http://$domain.nginx.localhost:$port"
+    echo -e "http://$domain.apache.localhost:$secure_port"
+    echo -e "http://$domain.nginx.localhost:$secure_port"
     else
     echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$port\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$secure_port\e[0m"
 fi
 
 echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:$port\e[0m"
