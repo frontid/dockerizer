@@ -1,6 +1,6 @@
   traefik:
     container_name: ${domain}_traefik
-    build: .
+    build: ./traefik
     restart: always
     command: --web --docker --logLevel=DEBUG
     ports:
