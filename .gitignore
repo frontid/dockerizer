@@ -2,4 +2,5 @@
 storage
 docker
 html
+mariadb-init
 docker-compose.yml

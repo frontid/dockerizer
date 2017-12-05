@@ -14,8 +14,8 @@
       MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 0
 #    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
     volumes:
-      - ../mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-      - ../storage:/var/lib/mysql # I want to manage volumes manually.
+      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
+      - ./storage:/var/lib/mysql # I want to manage volumes manually.
 #      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
 #      - /path/to/mariadb/data/on/host:/var/lib/mysql # I want to manage volumes manually.
 
