@@ -1,24 +1,17 @@
 # drupal-project-boilerplate
 
-This project is aimed to help start quickly preparing a development sandbox to run drupal under docker4drupal seemlessly.
-It is recommended to install smartcd (https://github.com/cxreg/smartcd) for this purpose.
+This project is aimed to help start quickly preparing a development sandbox to run drupal under docker seemlessly.
 
 After clonning this project you should:
 
-1- Run: make create NAME=<drupal_project>
-
-2- You might want to add the drupal-project into it, then run:
-		make mount-drupal-project
-
-2 (bis)- If you already have a drupal project, clone it manually inside of the root folder, and only make sure, there's a folder (or link) called html that points to the web that will be served.
-
-3- It's recommended to use the drupal-project template from pfressen, check: https://github.com/pfrenssen/drupal-project
+1. Run: ./setup.sh
+ This command starts a wizard that will help you to configure your environment.
 
 Then you're ready to develop!
 
 You can run commands inside the docker from your local OS, just as you were having everything installed.
 
-Currently I have prepared the following common commands:
+Currently there're the following common commands:
 - composer
 - drush
 
@@ -36,7 +29,6 @@ You can also run any command using "expose <any-command>"
 
 And last, you can also run docker-compose with the specific docker-compose.yml file, just using "dc", so try "dc ps" from where-ever you're. 
 
-
 ## TODOS
 - Implement a configfile "docker4drupal.ini" or something similar to store the specific project configuration. This file will be putted into the html dir to allow it to be pushed to the project. Then when a user use drupal-project-boilerplate it would be able to detect the conf and ask to the user if it should use it (preconfirured projects).
-- We are asking for the initial db location but still is not making anything with this. 
+
