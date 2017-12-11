@@ -5,7 +5,8 @@ current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #echo "Current_dir: $current_dir"
 
 script_dirname="`dirname $0`"
-user_uid="`id -u`"
+# Execute the drush command with www-data user.
+user_uid=82
 
 root_dir="$( cd $script_dirname && cd .. && pwd)"
 #echo "Root dir: $root_dir"
@@ -14,8 +15,8 @@ relative_path=${PWD#$root_dir}
 
 #echo "Relative path: $relative_path"
 
-docker_compose="docker-compose -f $script_dirname/../docker-compose.yml exec --user $user_uid:$user_uid"
-drush="$docker_compose php bash -c 'cd /var/www/html$relative_path && drush $@'"
+docker_compose="docker-compose -f $script_dirname/../docker-compose.yml exec --user $user_uid:$user_uid --privileged"
+drush="$docker_compose php /bin/bash -c 'cd /var/www/html$relative_path && drush $@'"
 
 echo "<< $drush >>"
 eval "$drush"
