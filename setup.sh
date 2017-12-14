@@ -75,7 +75,7 @@ echo ''
 # ---------
 
 PS3="Especifica la versión de PHP que vas a usar: "
-options=( '7.1-2.1.0' '7.0-2.1.0' '5.6-2.1.0' '5.3-2.1.0' )
+options=( '7.1-dev-3.3.1' '7.0-dev-3.3.1' '5.6-dev-3.3.1' '5.3-dev-3.3.1' )
 
 select phpver in "${options[@]}" ; do 
 
