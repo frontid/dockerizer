@@ -1,21 +1,13 @@
 #!/bin/bash
 
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-#echo "Current_dir: $current_dir"
-
 script_dirname="`dirname $0`"
-user_uid="`id -u`"
-
+user_uid=0
 root_dir="$( cd $script_dirname && cd .. && pwd)"
-#echo "Root dir: $root_dir"
-
 relative_path=${PWD#$root_dir}
 
-#echo "Relative path: $relative_path"
+docker_compose="docker-compose -f $script_dirname/../docker-compose.yml exec --user 0:0"
+command="$docker_compose postgresdb /bin/bash -c 'cd /root$relative_path && $@'"
 
-docker_compose="docker-compose -f $script_dirname/../docker/docker-compose.yml exec --user 0:0"
-expose="$docker_compose postgresdb bash -c 'cd /root$relative_path && $@'"
-
-echo "<< $expose >>"
-eval "$expose"
+echo "<< $command >>"
+eval "$command"
