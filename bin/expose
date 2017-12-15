@@ -1,16 +1,23 @@
 #!/bin/bash
 
 # MAKES SSH TO THE PHP MACHINE.
+# The default container will be "php" but you can access to any container
+# with "expose frontend", "expose mariadb", etc
 # -----------------------------
 
-current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 script_dirname="`dirname $0`"
-user_uid=0
-root_dir="$( cd $script_dirname && cd .. && pwd)"
-relative_path=${PWD#$root_dir}
+
+if [ "$#" -eq  "0" ]
+  then
+    container="php"
+  else
+    container=$1
+fi
+
+
 
 docker_compose="docker-compose -f $script_dirname/../docker-compose.yml exec --privileged"
-command="$docker_compose php /bin/bash -c 'cd /var/www$relative_path && $@'"
+command="$docker_compose $container /bin/bash"
 
-echo "<< $command >>"
+echo -e "Entering to \e[32m$container\e[0m container"
 eval "$command"

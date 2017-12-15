@@ -1,13 +1,4 @@
 #!/bin/bash
 
-current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-script_dirname="`dirname $0`"
-user_uid=0
-root_dir="$( cd $script_dirname && cd .. && pwd)"
-relative_path=${PWD#$root_dir}
-
-docker_compose="docker-compose -f $script_dirname/../docker-compose.yml run --user $user_uid:$user_uid"
-command="$docker_compose frontend /bin/bash -c 'cd /var/www$relative_path && npm $@'"
-
-echo "<< $command >>"
-eval "$command"
+# source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+source _command_wrapper 'frontend' 'npm' $@

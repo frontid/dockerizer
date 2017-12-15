@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# @todo explain this command please.
+
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 #echo "Current_dir: $current_dir"
