@@ -9,26 +9,23 @@ After clonning this project you should:
 
 Then you're ready to develop!
 
-You can run commands inside the docker from your local OS, just as you were having everything installed.
+Thanks to smartcd (installed when you ran serup.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.
 
 Currently there're the following common commands:
-- composer
-- drush
+- `bower`
+- `bundle`
+- `compass`
+- `composer`
+- `dll` [PLEASE EXPLAIN THIS COMMAND]
+- `drush`
+- `gem`
+- `grunt`
+- `gulp`
+- `node`
+- `npm`
 
-So you can execute from your drupal folder:
-composer install 
-drush updb -y
-drush cr
+And these command are available too:
+- `dc` (alias of docker-compose)
+- `expose` (makes ssh to a container). By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type `expose mariadb`.
+Available containers are: php (by default), mariadb, apache2, nginx, frontend, mailhog, pma.
 ...
-
-Please also note, that using pipes is not currently performing well so that functionality has been postponed.
-
-If you'd like to run a command as sudo, then you should use the special command "dockersudo <my-command>"
-
-You can also run any command using "expose <any-command>"
-
-And last, you can also run docker-compose with the specific docker-compose.yml file, just using "dc", so try "dc ps" from where-ever you're. 
-
-## TODOS
-- Implement a configfile "docker4drupal.ini" or something similar to store the specific project configuration. This file will be putted into the html dir to allow it to be pushed to the project. Then when a user use drupal-project-boilerplate it would be able to detect the conf and ask to the user if it should use it (preconfirured projects).
-
