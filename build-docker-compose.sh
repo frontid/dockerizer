@@ -30,5 +30,4 @@ fi
 envsubst < "docker-templates/service-frontend.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-mailhog.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/service-pma.yml" >> "docker-compose.yml"
-envsubst < "docker-templates/service-traefik.yml" >> "docker-compose.yml"
 envsubst < "docker-templates/docker-compose-base-final.yml" >> "docker-compose.yml"

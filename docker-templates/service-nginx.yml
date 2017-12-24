@@ -4,6 +4,7 @@
     image: wodby/drupal-nginx:8-1.10-2.1.0
 #    image: wodby/drupal-nginx:7-1.10-2.1.0
 #    image: wodby/drupal-nginx:6-1.10-2.1.0
+    network_mode: traefik_network
     depends_on:
       - php
     environment:

@@ -1,6 +1,7 @@
   php:
     container_name: ${domain}_php
     image: wodby/drupal-php:$phpver
+    network_mode: traefik_network
     environment:
       PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       PHP_XDEBUG: 1

@@ -1,6 +1,7 @@
   pma:
     container_name: ${domain}_pma
     image: phpmyadmin/phpmyadmin
+    network_mode: traefik_network
     environment:
       PMA_HOST: ${domain}_db
       PMA_USER: drupal

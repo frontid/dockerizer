@@ -1,6 +1,7 @@
   mariadb:
     container_name: ${domain}_db
     image: wodby/mariadb:$mysqlver
+    network_mode: traefik_network
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: drupal

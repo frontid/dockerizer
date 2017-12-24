@@ -1,6 +1,7 @@
   mailhog:
     container_name: ${domain}_mailhog
     image: mailhog/mailhog
+    network_mode: traefik_network
     labels:
       - 'traefik.backend=${domain}_mailhog'
       - 'traefik.port=8025'

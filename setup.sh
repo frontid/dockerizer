@@ -166,6 +166,10 @@ echo ''
 
 read -p "Si está todo bien presiona ENTER (o CTRL + C para cancelar y vuelve a empezar)."
 
+# @todo averiguar si existe antes de intentar crearla.
+echo -e "Creando la red compartida de traefik (por si no existe)"
+docker network create traefik_network
+
 # Install smartcd if not installed.
 if [ ! -f "$HOME/.smartcd_config" ]; then
   read -p "A continuación se va a instalar smartcd. Deja por defecto a todas las preguntas que te haga y cuando acabe seguimos con el proceso de instalación."
