@@ -107,32 +107,6 @@ select webserver in "${options[@]}" ; do
 done  
 
 # ---------
-
-while [[ -z "$port" ]]
-do
-  echo ''
-  echo "Indica el puerto que vas a usar para este docker. Por ejemplo 8000 u 8001."
-  echo "Ten en cuenta que si tienes mas proyectos dockerizados y quieres poder tenerlos arrancados al mismo tiempo el puerto entre cada dockerizador tiene que variar: "
-  read -p "Puerto: " port
-done
-
-export port
-
-# ---------
-echo ''
-# ---------
-
-while [[ -z "$secure_port" ]]
-do
-  echo ''
-  echo "Indica el puerto que vas a usar para HTTPS en este docker. Por ejemplo 4430 o 4431 ."
-  echo "Ten en cuenta que si tienes mas proyectos dockerizados y quieres poder tenerlos arrancados al mismo tiempo el puerto entre cada dockerizador tiene que variar: "
-  read -p "Puerto: " secure_port
-done
-
-export secure_port
-
-# ---------
 echo ''
 # ---------
 
@@ -165,10 +139,6 @@ echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
 echo ''
 
 read -p "Si está todo bien presiona ENTER (o CTRL + C para cancelar y vuelve a empezar)."
-
-# @todo averiguar si existe antes de intentar crearla.
-echo -e "Creando la red compartida de traefik (por si no existe)"
-docker network create traefik_network
 
 # Install smartcd if not installed.
 if [ ! -f "$HOME/.smartcd_config" ]; then
@@ -213,6 +183,26 @@ setfacl -dRm u:$USER:rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$USER:rwX
 echo ''
 # ---------
 
+echo -e "Vamos a instalar el traefik global (es el proxy que va a enrutar las peticiones de todos los contenedores)"
+
+# @todo averiguar si existe antes de intentar crearla.
+echo -e "Creando la red compartida de traefik (por si no existe)"
+docker network create traefik_network
+
+original_path=$PWD
+user_share_path="/home/$USER/.local/share"
+traefik_path="$user_share_path/traefik"
+mkdir -p $traefik_path
+
+cp docker-templates/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
+cp -R traefik $traefik_path
+cd $traefik_path
+docker-compose up -d
+cd $original_path
+echo ''
+
+# ---------
+
 while ! { test "$rundocker" = 'y' || test "$rundocker" = 'n'; }; do
   read -p "¿Arrancamos docker? [Y/n]: " rundocker
   
@@ -238,16 +228,16 @@ echo ''
 
 if [ $webserver = "both" ]; then
     echo -e "Las URL de tus proyectos son:"
-    echo -e "http://$domain.apache.localhost:$port"
-    echo -e "http://$domain.nginx.localhost:$port"
-    echo -e "https://$domain.apache.localhost:$secure_port"
-    echo -e "https://$domain.nginx.localhost:$secure_port"
+    echo -e "http://$domain.apache.localhost:8000"
+    echo -e "http://$domain.nginx.localhost:8000"
+    echo -e "https://$domain.apache.localhost:4430"
+    echo -e "https://$domain.nginx.localhost:4430"
     else
-    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:$port\e[0m"
-    echo -e "La url de tu proyecto es \e[32mhttps://$domain.$webserver.localhost:$secure_port\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttps://$domain.$webserver.localhost:4430\e[0m"
 fi
 
-echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:$port\e[0m"
+echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
 echo -e "El usuario y clave de mysql es \e[32mdrupal / drupal (DB: drupal)\e[0m (si, todo drupal)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
