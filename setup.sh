@@ -205,4 +205,6 @@ echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
 echo -e "El usuario y clave de mysql es \e[32mdb / db (DB: db)\e[0m (si, todo db)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
+echo 'Se ha creado un archivo con todas las opciones que seleccionaste en el wizard .dockerizer-project.ini'
+echo 'Si quieres que el resto de los desarrolladores tengan la misma conf comitealo en el proyecto.'
 echo '¡A por ellos campeón!'
