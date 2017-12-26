@@ -8,9 +8,9 @@
       PHP_XDEBUG_DEFAULT_ENABLE: 1
       PHP_XDEBUG_REMOTE_AUTOSTART: 1
       DB_HOST: ${domain}_db
-      DB_USER: drupal
-      DB_PASSWORD: drupal
-      DB_NAME: drupal
+      DB_USER: db
+      DB_PASSWORD: db
+      DB_NAME: db
       DB_DRIVER: mysql
       SSH_AUTH_SOCK: /ssh-agent
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
