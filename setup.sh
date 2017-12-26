@@ -39,27 +39,27 @@ export branch
 echo ''
 echo -e "Clonando el proyecto real sobre el que vamos a trabajar degit cat-file -e <remote>:<filename>ntro del directorio html"
 git clone -b $branch $repo html
-
+echo ''
 
 # Si existe un archivo de configuración preguntamos si lo vamos a usar o si quiere pasar por el wizard.
-if [ ! -f "dockerizer-project.ini" ] && [ ! -f "html/dockerizer-project.ini" ]; then
+if [ ! -f ".dockerizer-project.ini" ] && [ ! -f "html/.dockerizer-project.ini" ]; then
   # Si no existe le hacemos le damos.
   source ./make/questions-setup.sh
 else
 
   while ! { test "$run_from_conf_file" = 'y' || test "$run_from_conf_file" = 'n'; }; do
 
-    if [ -f "dockerizer-project.ini" ]; then
-      conf_file_location="dockerizer-project.ini"
+    if [ -f ".dockerizer-project.ini" ]; then
+      conf_file_location=".dockerizer-project.ini"
       echo -e "Archivo de configuración encontrado en \e[32mel dockerizador\e[0m"
     fi
 
-    if [ -f "html/dockerizer-project.ini" ]; then
-      conf_file_location="html/dockerizer-project.ini"
+    if [ -f "html/.dockerizer-project.ini" ]; then
+      conf_file_location="html/.dockerizer-project.ini"
       echo -e "Archivo de configuración encontrado \e[32mcomiteado como parte del proyecto\e[0m"
     fi
 
-    if [ -f "dockerizer-project.ini" ] && [ -f "html/dockerizer-project.ini" ]; then
+    if [ -f ".dockerizer-project.ini" ] && [ -f "html/.dockerizer-project.ini" ]; then
         echo -e "Como hay mas de un archivo de configutración prevalece el que está comiteado en el proyecto."
     fi
 
@@ -132,13 +132,13 @@ setfacl -dRm u:$USER:rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$USER:rwX
 ./make/build-docker-compose.sh
 
 # Guardamos todas las variables en un archivo (solo si no existe)
-if [ ! -f "dockerizer-project.ini" ]; then
+if [ ! -f ".dockerizer-project.ini" ]; then
   echo ""
-  echo -e "\e[32mdockerizer-project.ini\e[0m no existe. Creando."
-  envsubst < "make/variables-template.ini" >> "dockerizer-project.ini"
+  echo -e "\e[32m.dockerizer-project.ini\e[0m no existe. Creando."
+  envsubst < "make/variables-template.ini" >> ".dockerizer-project.ini"
 else
   echo ""
-  echo -e "\e[32mdockerizer-project.ini\e[0m ya existe no lo vamos a sobreescribir."
+  echo -e "\e[32m.dockerizer-project.ini\e[0m ya existe no lo vamos a sobreescribir."
   echo -e "Si realmente quieres cambiar la configuración de este proyecto primero elimina el archivo."
 fi
 
