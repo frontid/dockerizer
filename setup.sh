@@ -17,6 +17,30 @@ echo -e "\e[32mPor favor ten a mano la url del repositorio del proyecto en el qu
 echo -e "\e[0m"
 echo ''
 
+# Antes de inisiar el wizard vamos a necesitar el repo para saber si tiene un archivo de configuración
+# ---------
+echo ''
+# ---------
+
+while [[ -z "$repo" ]]
+do
+  read -p "Indica la URL del repositorio (Ej:  git@github.com:githubtraining/hellogitworld.git): " repo
+done
+
+export repo
+
+while [[ -z "$branch" ]]
+do
+  read -p "Especifica la rama en la que vas a trabajar: " branch
+done
+
+export branch
+
+echo ''
+echo -e "Clonando el proyecto real sobre el que vamos a trabajar degit cat-file -e <remote>:<filename>ntro del directorio html"
+git clone -b $branch $repo html
+
+
 # Si existe un archivo de configuración preguntamos si lo vamos a usar o si quiere pasar por el wizard.
 if [ ! -f "dockerizer-project.ini" ] && [ ! -f "html/dockerizer-project.ini" ]; then
   # Si no existe le hacemos le damos.
@@ -91,10 +115,6 @@ source $HOME/.smartcd/scripts$PWD/bash_enter
 echo ''
 echo -e "Creando directorio de almacenamiento \e[32mstorage\e[0m (donde se alojará la DB)"
 mkdir -p storage
-
-echo ''
-echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
-git clone $repo html
 
 # If database should be copied.
 if [ ! -z ${db+x} ]; then

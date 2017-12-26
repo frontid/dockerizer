@@ -12,17 +12,6 @@ export domain
 echo ''
 # ---------
 
-while [[ -z "$repo" ]]
-do
-  read -p "Indica la URL del repositorio (Ej:  git@github.com:githubtraining/hellogitworld.git): " repo
-done
-
-export repo
-
-# ---------
-echo ''
-# ---------
-
 while [[ -z "$db" ]]
 do
   read -p "Puedes indicar el path de la DB si quieres que la carguemos inicialmente(Ej: $HOME/Downloads/bkp-$domain.sql). O pulsa intro si quires saltarte este paso: " db
