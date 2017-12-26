@@ -37,7 +37,7 @@ done
 export branch
 
 echo ''
-echo -e "Clonando el proyecto real sobre el que vamos a trabajar degit cat-file -e <remote>:<filename>ntro del directorio html"
+echo -e "Clonando el proyecto real sobre el que vamos a trabajar dentro del directorio html"
 git clone -b $branch $repo html
 echo ''
 
@@ -60,9 +60,10 @@ else
     fi
 
     if [ -f ".dockerizer-project.ini" ] && [ -f "html/.dockerizer-project.ini" ]; then
-        echo -e "Como hay mas de un archivo de configutración prevalece el que está comiteado en el proyecto."
+      echo -e "Como hay mas de un archivo de configutración prevalece el que está comiteado en el proyecto."
     fi
 
+    echo ''
     read -p "Actualmente existe un archivo de configuración con todos los parametros necesarios para echar a andar este proyecto. ¿Usamos el archivo de configuración (recomendado)? [Y/n]: " run_from_conf_file
 
     if [[ ${run_from_conf_file,,} = '' || ${run_from_conf_file,,} = 'y' ]]; then
