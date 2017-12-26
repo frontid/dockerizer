@@ -177,20 +177,18 @@ setfacl -dRm u:$USER:rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$USER:rwX
 
 
 # Generamos el docker.
-./build-docker-compose.sh
+./make/build-docker-compose.sh
 
 # Guardamos todas las variables en un archivo (solo si no existe)
 if [ ! -f "dockerizer-project.ini" ]; then
   echo ""
   echo -e "\e[32mdockerizer-project.ini\e[0m no existe. Creando."
-  envsubst < "variables-template.ini" >> "dockerizer-project.ini"
+  envsubst < "make/variables-template.ini" >> "dockerizer-project.ini"
 else
   echo ""
   echo -e "\e[32mdockerizer-project.ini\e[0m ya existe no lo vamos a sobreescribir."
   echo -e "Si realmente quieres cambiar la configuración de este proyecto primero elimina el archivo."
 fi
-
-
 
 # ---------
 echo ''
@@ -210,8 +208,8 @@ user_share_path="$HOME/.local/share"
 traefik_path="$user_share_path/traefik"
 mkdir -p $traefik_path
 
-cp docker-templates/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
-cp -R traefik $traefik_path
+cp make/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
+cp -R make/traefik $traefik_path
 cd $traefik_path
 docker-compose up -d
 cd $original_path
