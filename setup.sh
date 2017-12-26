@@ -18,12 +18,27 @@ echo -e "\e[0m"
 echo ''
 
 # Si existe un archivo de configuración preguntamos si lo vamos a usar o si quiere pasar por el wizard.
-if [ ! -f "dockerizer-project.ini" ]; then
-  #Si no existe le hacemos le damos
+if [ ! -f "dockerizer-project.ini" ] && [ ! -f "html/dockerizer-project.ini" ]; then
+  # Si no existe le hacemos le damos.
   source ./make/questions-setup.sh
 else
 
   while ! { test "$run_from_conf_file" = 'y' || test "$run_from_conf_file" = 'n'; }; do
+
+    if [ -f "dockerizer-project.ini" ]; then
+      conf_file_location="dockerizer-project.ini"
+      echo -e "Archivo de configuración encontrado en \e[32mel dockerizador\e[0m"
+    fi
+
+    if [ -f "html/dockerizer-project.ini" ]; then
+      conf_file_location="html/dockerizer-project.ini"
+      echo -e "Archivo de configuración encontrado \e[32mcomiteado como parte del proyecto\e[0m"
+    fi
+
+    if [ -f "dockerizer-project.ini" ] && [ -f "html/dockerizer-project.ini" ]; then
+        echo -e "Como hay mas de un archivo de configutración prevalece el que está comiteado en el proyecto."
+    fi
+
     read -p "Actualmente existe un archivo de configuración con todos los parametros necesarios para echar a andar este proyecto. ¿Usamos el archivo de configuración (recomendado)? [Y/n]: " run_from_conf_file
 
     if [[ ${run_from_conf_file,,} = '' || ${run_from_conf_file,,} = 'y' ]]; then
@@ -35,7 +50,7 @@ else
 
   if [[ $run_from_conf_file = 'y' ]]; then
     # Si ha decidido usar el archivo de configuración lo cargamos y seguimos.
-    source ./dockerizer-project.ini
+    source $conf_file_location
     else
     # Si el usuario quiere omitir el archivo de configuración y pasar si o si por el wizard lo hacemos:
     source ./make/questions-setup.sh
