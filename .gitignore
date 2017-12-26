@@ -4,3 +4,4 @@ docker
 html
 mariadb-init
 docker-compose.yml
+dockerizer-project.ini

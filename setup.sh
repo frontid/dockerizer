@@ -179,18 +179,34 @@ setfacl -dRm u:$USER:rwX -dRm u:21:rX -dRm u:82:rwX . && setfacl -Rm u:$USER:rwX
 # Generamos el docker.
 ./build-docker-compose.sh
 
+# Guardamos todas las variables en un archivo (solo si no existe)
+if [ ! -f "dockerizer-project.ini" ]; then
+  echo ""
+  echo -e "\e[32mdockerizer-project.ini\e[0m no existe. Creando."
+  envsubst < "variables-template.ini" >> "dockerizer-project.ini"
+else
+  echo ""
+  echo -e "\e[32mdockerizer-project.ini\e[0m ya existe no lo vamos a sobreescribir."
+  echo -e "Si realmente quieres cambiar la configuración de este proyecto primero elimina el archivo."
+fi
+
+
+
 # ---------
 echo ''
 # ---------
 
 echo -e "Vamos a instalar el traefik global (es el proxy que va a enrutar las peticiones de todos los contenedores)"
 
-# @todo averiguar si existe antes de intentar crearla.
 echo -e "Creando la red compartida de traefik (por si no existe)"
-docker network create traefik_network
+network_exist="$(docker network ls | grep traefik_network)"
+
+if [ -z "$network_exist" ]; then
+    docker network create traefik_network
+fi
 
 original_path=$PWD
-user_share_path="/home/$USER/.local/share"
+user_share_path="$HOME/.local/share"
 traefik_path="$user_share_path/traefik"
 mkdir -p $traefik_path
 
@@ -228,17 +244,14 @@ echo ''
 
 if [ $webserver = "both" ]; then
     echo -e "Las URL de tus proyectos son:"
-    echo -e "http://$domain.apache.localhost:8000"
-    echo -e "http://$domain.nginx.localhost:8000"
-    echo -e "https://$domain.apache.localhost:4430"
-    echo -e "https://$domain.nginx.localhost:4430"
+    echo -e "\e[32mhttp://$domain.apache.localhost:8000\e[0m (accesible desde https)"
+    echo -e "\e[32mhttp://$domain.nginx.localhost:8000\e[0m (accesible desde https)"
     else
-    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m"
-    echo -e "La url de tu proyecto es \e[32mhttps://$domain.$webserver.localhost:4430\e[0m"
+    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m (accesible desde https)"
 fi
 
 echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
-echo -e "El usuario y clave de mysql es \e[32mdrupal / drupal (DB: drupal)\e[0m (si, todo drupal)"
+echo -e "El usuario y clave de mysql es \e[32mdb / db (DB: db)\e[0m (si, todo db)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
 echo '¡A por ellos campeón!'
