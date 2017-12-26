@@ -207,4 +207,5 @@ echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop
 echo ''
 echo 'Se ha creado un archivo con todas las opciones que seleccionaste en el wizard .dockerizer-project.ini'
 echo 'Si quieres que el resto de los desarrolladores tengan la misma conf comitealo en el proyecto.'
+echo ''
 echo '¡A por ellos campeón!'
