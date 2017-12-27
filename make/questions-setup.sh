@@ -45,7 +45,7 @@ echo ''
 # ---------
 
 PS3="Especifica la versión de PHP que vas a usar: "
-options=( '7.1-dev-3.3.1' '7.0-dev-3.3.1' '5.6-dev-3.3.1' '5.3-dev-3.3.1' )
+options=( '7.1-3.3.1' '7.0-3.3.1' '5.6-3.3.1' '5.3-3.3.1' )
 
 select phpver in "${options[@]}" ; do
 
@@ -81,7 +81,7 @@ echo ''
 # ---------
 
 PS3="Y la versión de MariaBD: "
-options=( '10.1-x => compatible con MySQL 5.6' '10.2-x => Compatible con Mysql 5.7')
+options=( '10.2-x => Compatible con Mysql 5.7' '10.1-x => compatible con MySQL 5.6')
 
 select mysqlver in "${options[@]}" ; do
 

@@ -1,10 +1,11 @@
   apache2:
     container_name: ${domain}_apache2
-    image: webdevops/apache-dev:latest
+    image: wodby/php-apache:2.4-2.0.2
     network_mode: traefik_network
     environment:
-      WEB_PHP_SOCKET: ${domain}_php:9000
-      WEB_DOCUMENT_ROOT: /var/www/html/${base_web_root}
+      APACHE_LOG_LEVEL: debug
+      APACHE_BACKEND_HOST: ${domain}_php
+      APACHE_SERVER_ROOT: /var/www/html/${base_web_root}
     depends_on:
       - php
     volumes:

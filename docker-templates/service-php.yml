@@ -18,6 +18,6 @@
     volumes:
       - ./:/var/www
       - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
-#      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
+      #- docker-sync-unison:/var/www/html # Docker-sync for macOS users
 
 

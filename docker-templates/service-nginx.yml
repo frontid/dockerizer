@@ -1,9 +1,12 @@
   nginx:
     container_name: ${domain}_nginx
-# wodby/drupal-nginx:[DRUPAL_VERSION]-[NGINX_VERSION]-[STABILITY_TAG].
-    image: wodby/drupal-nginx:8-1.10-2.1.0
-#    image: wodby/drupal-nginx:7-1.10-2.1.0
-#    image: wodby/drupal-nginx:6-1.10-2.1.0
+    # wodby/drupal-nginx:[DRUPAL_VERSION]-[NGINX_VERSION]-[STABILITY_TAG].
+    image: wodby/drupal-nginx:8-1.13-3.0.2
+    # image: wodby/drupal-nginx:7-1.13-3.0.2
+    # image: wodby/drupal-nginx:6-1.13-3.0.2
+    # image: wodby/drupal-nginx:8-1.12-3.0.2
+    # image: wodby/drupal-nginx:7-1.12-3.0.2
+    # image: wodby/drupal-nginx:6-1.12-3.0.2
     network_mode: traefik_network
     depends_on:
       - php
@@ -14,7 +17,7 @@
       NGINX_SERVER_ROOT: /var/www/html/${base_web_root}
     volumes:
       - ./:/var/www
-#      - docker-sync-unison:/var/www/html # Docker-sync for macOS users
+      # - docker-sync-unison:/var/www/html # Docker-sync for macOS users
     labels:
       - 'traefik.backend=$domain.${webserver}_nginx'
       - 'traefik.port=80'
