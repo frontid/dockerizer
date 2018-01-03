@@ -13,5 +13,9 @@ shift;
 docker_compose="docker-compose -f $script_dirname/../docker-compose.yml run --user $user_uid:$user_uid"
 command="$docker_compose $container /bin/bash -c 'cd /var/www$relative_path && $@'"
 
-echo -e "SENDING \e[32m$command\e[0m TO \"$container\" container."
+# Only show a screen message if the output is stdout.
+if [ -t 1 ]; then
+  echo -e "SENDING \e[32m$command\e[0m TO \"$container\" container."
+fi
+
 eval "$command"
