@@ -1,15 +1,23 @@
-# drupal-project-boilerplate
+# Dockerizer
 
-This project is aimed to help start quickly preparing a development sandbox to run drupal under docker seemlessly.
+Dockerizador es un programa que permite generar un docker-compose.yml y algunos bindings de aplicaciones comunes para ejecutarlas desde el host.
 
-After clonning this project you should:
+Features:
+- Usa un proxy central (traefik) y arrancha al inicio del SO.
+- Tiene un wizard para instalaciones iniciales para seleccionar versión de PHP, Mysql, Apache o nginx, etc.
+- El wizard genera un archivo de conf que se puede comitear en el proyecto. Luego el dockerizador lo reconoce y puede montar el docker en nuevos ordenadores (util para compartir una configuración unica para todos los que trabajan sobre un proyecto).
+- Bind de comandos desde el host*: Lanza comando dentro de los contenedores de forma transparente gracias a los comandos que proporciona el dockerizador. (ver directorio bin/)
+- Acceso rapido a contenedores mediante el comando "*expose*"
+El bind de un comando realmente es solo un wrapper que reenvía un comando desde el host al contenedor que corresponda. Por ejemplo al hacer "drush cr", el dockerizador abre una conexion al contenedor "php" y le envía ese comando.
 
-1. Run: ./setup.sh
- This command starts a wizard that will help you to configure your environment.
+
+## Install
+After clonning this project you should run `./setup.sh`. This command starts a wizard that will help you to configure your environment.
 
 Then you're ready to develop!
 
-Thanks to smartcd (installed when you ran serup.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.
+## Usage
+Thanks to smartcd (installed when you ran setup.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.
 
 Currently there're the following common commands:
 - `bower`

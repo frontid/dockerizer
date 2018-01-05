@@ -17,11 +17,11 @@ echo -e "\e[32mPor favor ten a mano la url del repositorio del proyecto en el qu
 echo -e "\e[0m"
 echo ''
 
-# Antes de inisiar el wizard vamos a necesitar el repo para saber si tiene un archivo de configuración
 # ---------
 echo ''
 # ---------
 
+# Antes de iniciar el wizard vamos a necesitar el repo para saber si tiene un archivo de configuración.
 while [[ -z "$repo" ]]
 do
   read -p "Indica la URL del repositorio (Ej:  git@github.com:githubtraining/hellogitworld.git): " repo
