@@ -21,6 +21,6 @@
     labels:
       - 'traefik.backend=$domain.${webserver}_nginx'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=HostRegexp:$domain.nginx.localhost, {subdomain:[^.]+}.$domain.nginx.localhost'
+      - 'traefik.frontend.rule=HostRegexp:$domain.localhost, {subdomain:[^.]+}.$domain.localhost'
 
 

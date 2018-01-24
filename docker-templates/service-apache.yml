@@ -13,6 +13,6 @@
     labels:
       - 'traefik.backend=${domain}_apache2'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=HostRegexp:$domain.apache.localhost, {subdomain:[^.]+}.$domain.apache.localhost'
+      - 'traefik.frontend.rule=HostRegexp:$domain.localhost, {subdomain:[^.]+}.$domain.localhost'
 
 
