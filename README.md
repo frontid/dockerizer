@@ -24,8 +24,9 @@ Currently there're the following common commands:
 - `bundle`
 - `compass`
 - `composer`
-- `dll` [PLEASE EXPLAIN THIS COMMAND]
+- `dll` (send an internal `ls -l`)
 - `drush`
+- `drupal` (drupal console)
 - `gem`
 - `grunt`
 - `gulp`
