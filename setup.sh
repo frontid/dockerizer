@@ -107,6 +107,10 @@ fi
 if [ ! -f "$HOME/.smartcd/scripts$PWD" ]; then
   mkdir -p "$HOME/.smartcd/scripts$PWD"
   echo autostash PATH=$PWD/bin:$PATH >> "$HOME/.smartcd/scripts$PWD/bash_enter"
+
+  # Phpstorm local terminal fails to autostash bash_enter when you change the
+  # project or open a new terminal tab. This addition to .bashrc ensure the script gets run.
+  echo source $HOME/.smartcd/scripts$PWD/bash_enter >> "$HOME/.bashrc"
 fi
 
 # Initialize smartcd.
