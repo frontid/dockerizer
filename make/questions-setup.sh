@@ -63,7 +63,7 @@ echo ''
 # ---------
 
 PS3="Y el servidor http: "
-options=( 'apache' 'nginx' 'both' )
+options=( 'apache' 'nginx' )
 
 select webserver in "${options[@]}" ; do
 
@@ -96,3 +96,27 @@ select mysqlver in "${options[@]}" ; do
 done
 
 echo $mysqlver
+
+
+# ---------
+echo ''
+# ---------
+
+
+PS3="¿Qué tipo de proyecto es?: "
+options=( 'D8' 'D7' 'generic' )
+
+select app_kind in "${options[@]}" ; do
+
+    if (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
+        export app_kind
+        break
+
+    else
+        echo "Se te fue el dedo, esa no es una opción válida."
+    fi
+done
+
+# ---------
+echo ''
+# ---------

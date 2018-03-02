@@ -93,6 +93,7 @@ echo -e "La aplicación web esta en: \e[32m$base_web_root\e[0m"
 echo -e "Versión de PHP: \e[32m$phpver\e[0m"
 echo -e "Servidor http: \e[32m$webserver\e[0m"
 echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
+echo -e "Tipo de proyecto: \e[32m$app_kind\e[0m"
 echo ''
 
 read -p "Si está todo bien presiona ENTER (o CTRL + C para cancelar y vuelve a empezar)."
@@ -107,6 +108,10 @@ fi
 if [ ! -f "$HOME/.smartcd/scripts$PWD" ]; then
   mkdir -p "$HOME/.smartcd/scripts$PWD"
   echo autostash PATH=$PWD/bin:$PATH >> "$HOME/.smartcd/scripts$PWD/bash_enter"
+
+  # Phpstorm local terminal fails to autostash bash_enter when you change the
+  # project or open a new terminal tab. This addition to .bashrc ensure the script gets run.
+  echo -n source "$HOME/.smartcd/scripts$PWD/bash_enter >> /dev/null" >> "$HOME/.bashrc"
 fi
 
 # Initialize smartcd.
@@ -193,15 +198,8 @@ echo -e "\e[32mAcabamos!\e[0m"
 echo -e "Anota esto en algun lado que te va a ser útil:"
 echo ''
 
-if [ $webserver = "both" ]; then
-    echo -e "Las URL de tus proyectos son:"
-    echo -e "\e[32mhttp://$domain.apache.localhost:8000\e[0m (accesible desde https)"
-    echo -e "\e[32mhttp://$domain.nginx.localhost:8000\e[0m (accesible desde https)"
-    else
-    echo -e "La url de tu proyecto es \e[32mhttp://$domain.$webserver.localhost:8000\e[0m (accesible desde https)"
-fi
-
-echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost:8000\e[0m"
+echo -e "La url de tu proyecto es \e[32mhttp://$domain.localhost\e[0m (accesible desde https)"
+echo -e "El phpmyadmin es \e[32mhttp://$domain.pma.localhost\e[0m"
 echo -e "El usuario y clave de mysql es \e[32mdb / db (DB: db)\e[0m (si, todo db)"
 echo -e "Para arrancar y parar el docker usa \e[32mdc up -d\e[0m y \e[32mdc stop\e[0m (dentro del directorio de tu proyecto en cualquier carpeta. No importa la ubicacion mientras estés dentro del proyecto)"
 echo ''
