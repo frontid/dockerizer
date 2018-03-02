@@ -2,12 +2,12 @@
 
 # This command target to different binaries according to the app kind (D7 or D8)
 # So we need the configured params.
-if [ -f "../.dockerizer-project.ini" ]; then
-  conf_file_location="../.dockerizer-project.ini"
+if [ -f "$root_dir/../.dockerizer-project.ini" ]; then
+  conf_file_location="$root_dir/../.dockerizer-project.ini"
 fi
 
-if [ -f ".dockerizer-project.ini" ]; then
-  conf_file_location=".dockerizer-project.ini"
+if [ -f "$root_dir/.dockerizer-project.ini" ]; then
+  conf_file_location="$root_dir/.dockerizer-project.ini"
 fi
 
 source $conf_file_location
@@ -19,6 +19,5 @@ if [[ $app_kind = 'D7' ]]; then
 else
     echo "DEBUG: ejecutando drush para D8"
     # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-    source _command_wrapper 'php' './vendor/bin/drush' $@
+    source _command_wrapper 'php' "/var/www/html/vendor/bin/drush" $@
 fi
-
