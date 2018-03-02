@@ -13,11 +13,9 @@ fi
 source $conf_file_location
 
 if [[ $app_kind = 'D7' ]]; then
-    echo "DEBUG: ejecutando drush para D7"
     # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
     source _command_wrapper 'php' 'drush' $@
 else
-    echo "DEBUG: ejecutando drush para D8"
     # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
     source _command_wrapper 'php' "/var/www/html/vendor/bin/drush" $@
 fi
