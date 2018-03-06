@@ -36,9 +36,17 @@ export db
 echo ''
 # ---------
 
-read -p "Si el repositorio tiene la aplicación web en un subdirectorio en lugar de en la raiz pon la ruta en el repositorio(Ej: web). O pulsa intro si la raiz del repositorio es la raiz de la aplicación web: " base_web_root
+read -p "Si el repositorio tiene la aplicación web en un subdirectorio en lugar de en la raiz pon la ruta en el repositorio (Ej: web). O pulsa intro si la raiz es '/': " base_web_root
 
 export base_web_root
+
+# ---------
+echo ''
+# ---------
+
+read -p "Ubicación real de la app: " app_path
+
+export app_path
 
 # ---------
 echo ''
