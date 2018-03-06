@@ -25,7 +25,7 @@ fi
 
 if [[ $app_kind = 'D8' ]]; then
     # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-    source _command_wrapper 'php' "/var/www/html/$app_path/vendor/bin/drush --root=/var/www/html/$app_path" $@
+    source _command_wrapper 'php' 'exec' "/var/www/html/$app_path/vendor/bin/drush --root=/var/www/html/$app_path" $@
 fi
 
 if [[ $app_kind = 'generic' ]]; then
