@@ -19,12 +19,12 @@ fi
 source $conf_file_location
 
 if [[ $app_kind = 'D7' ]]; then
-    # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-    source _command_wrapper 'php' 'drush' $@
+    # source command_wrapper [CONTAINER NAME] [EXECUTION KIND] [COMMAND] $@ = params to send.
+    source _command_wrapper 'php' 'run' 'drush' $@
 fi
 
 if [[ $app_kind = 'D8' ]]; then
-    # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+    # source command_wrapper [CONTAINER NAME] [EXECUTION KIND] [COMMAND] $@ = params to send.
     source _command_wrapper 'php' 'exec' "/var/www/html/$app_path/vendor/bin/drush --root=/var/www/html/$app_path" $@
 fi
 
