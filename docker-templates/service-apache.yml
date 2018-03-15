@@ -6,6 +6,9 @@
       APACHE_LOG_LEVEL: debug
       APACHE_BACKEND_HOST: ${domain}_php
       APACHE_SERVER_ROOT: /var/www/html/${base_web_root}
+      # For xdebug when we hold a breakpoint we need the server wait until we
+      #release the request. APACHE_FCGI_PROXY_TIMEOUT prevent the "Gateway Timeout"
+      APACHE_FCGI_PROXY_TIMEOUT: 600
     depends_on:
       - php
     volumes:
