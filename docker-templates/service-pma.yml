@@ -4,9 +4,9 @@
     network_mode: traefik_network
     environment:
       PMA_HOST: ${domain}_db
-      PMA_USER: db
+      PMA_USER: root
       PMA_NAME: db
-      PMA_PASSWORD: db
+      PMA_PASSWORD: password
       PHP_UPLOAD_MAX_FILESIZE: 1G
       PHP_MAX_INPUT_VARS: 1G
     labels:
