@@ -1,23 +1,19 @@
 #!/bin/bash
 
-# MAKES SSH TO THE PHP MACHINE.
-# The default container will be "php" but you can access to any container
-# with "expose frontend", "expose mariadb", etc
-# -----------------------------
+source _common_params_loader
 
-script_dirname="`dirname $0`"
-
+# In case the user just entered expose without any
+# container destination we will set a default one.
 if [ "$#" -eq  "0" ]
   then
-    container="php"
+    container_base_name="php"
   else
-    container=$1
+    container_base_name=$1
 fi
 
-
-
-docker_compose="docker-compose -f $script_dirname/../docker-compose.yml exec --privileged"
-command="$docker_compose $container /bin/bash"
+container=$domain
+container+="_$container_base_name"
 
 echo -e "Entering to \e[32m$container\e[0m container"
-eval "$command"
+# @todo allow to the command the --user options to allow enter to the container as root for example.
+docker exec -it --privileged --workdir "/var/www$relative_path" $container /bin/bash

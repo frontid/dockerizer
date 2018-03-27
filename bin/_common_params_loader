@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# This file set up the most common variables to use them in the scripts.
+# 1. Prepare all paths like relative, absolute, script_path, etc.
+# 2. Loads the dockerizer project variables
+
+# To use this script just add this to your own script "source _common_params_loader" after "#!/bin/bash"
+# and start using the available variables with $current_dir for example.
+
+current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+script_dirname="`dirname $0`"
+user_uid=0
+root_dir="$( cd $script_dirname && cd .. && pwd)"
+relative_path=${PWD#$root_dir}
+
+# There is a config file at dockerizer?
+if [ -f "$root_dir/.dockerizer-project.ini" ]; then
+  conf_file_location="$root_dir/.dockerizer-project.ini"
+fi
+
+# There is a config file at the repo?
+if [ -f "$root_dir/html/.dockerizer-project.ini" ]; then
+  conf_file_location="$root_dir/html/.dockerizer-project.ini"
+fi
+
+source $conf_file_location
