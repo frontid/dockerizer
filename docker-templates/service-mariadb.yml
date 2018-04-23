@@ -1,22 +1,11 @@
   mariadb:
-    container_name: ${domain}_db
-    image: wodby/mariadb:$mysqlver
-    network_mode: traefik_network
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: "${PROJECT_NAME}_mariadb"
+    stop_grace_period: 30s
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db
-      MYSQL_USER: db
-      MYSQL_PASSWORD: db
-      # Improved performance: check https://dba.stackexchange.com/questions/83125/mysql-any-way-to-import-a-huge-32-gb-sql-dump-faster
-      MYSQL_INNODB_BUFFER_POOL_SIZE: 2G
-      MYSQL_INNODB_LOG_BUFFER_SIZE: 256M
-      MYSQL_INNODB_LOG_FILE_SIZE: 1G
-      MYSQL_INNODB_WRITE_IO_THREADS: 16
-      MYSQL_INNODB_FLUSH_LOG_AT_TRX_COMMIT: 0
-      #    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci # The simple way to override the mariadb config.
-    volumes:
-      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-      - ./storage:/var/lib/mysql # I want to manage volumes manually.
-#      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
-#      - /path/to/mariadb/data/on/host:/var/lib/mysql # I want to manage volumes manually.
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+    network_mode: traefik_network
 

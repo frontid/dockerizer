@@ -7,7 +7,7 @@ services:
     build: ./traefik
     network_mode: traefik_network
     restart: always
-    command: --web --docker --logLevel=DEBUG
+    command: -c /dev/null --web --docker --logLevel=DEBUG
     ports:
       - '80:80'
       - '443:443'

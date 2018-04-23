@@ -1,17 +1,15 @@
   pma:
-    container_name: ${domain}_pma
     image: phpmyadmin/phpmyadmin
+    container_name: "${PROJECT_NAME}_pma"
     network_mode: traefik_network
     environment:
-      PMA_HOST: ${domain}_db
+      PMA_HOST: $DB_HOST
       PMA_USER: root
-      PMA_NAME: db
-      PMA_PASSWORD: password
+      PMA_PASSWORD: $DB_ROOT_PASSWORD
       PHP_UPLOAD_MAX_FILESIZE: 1G
       PHP_MAX_INPUT_VARS: 1G
     labels:
-      - 'traefik.backend=${domain}_pma'
+      - 'traefik.backend=pma'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:$domain.pma.localhost'
-
+      - 'traefik.frontend.rule=Host:pma.${PROJECT_BASE_URL}'
 

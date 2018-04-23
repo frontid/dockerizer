@@ -1,10 +1,10 @@
   mailhog:
-    container_name: ${domain}_mailhog
     image: mailhog/mailhog
-    network_mode: traefik_network
+    container_name: "${PROJECT_NAME}_mailhog"
     labels:
-      - 'traefik.backend=${domain}_mailhog'
+      - 'traefik.backend=mailhog'
       - 'traefik.port=8025'
-      - 'traefik.frontend.rule=Host:$domain.mailhog.localhost'
+      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+    network_mode: traefik_network
 
 
