@@ -4,7 +4,19 @@
 touch docker-compose.yml
 cat docker-templates/docker-compose-base.yml > docker-compose.yml
 
-envsubst < "docker-templates/service-mariadb.yml" >> "docker-compose.yml"
+# Si se ha seleccionado mariadb
+if [ $db_type = "mariadb" ]; then
+    envsubst < "docker-templates/service-mariadb.yml" >> "docker-compose.yml"
+fi
+# Si se ha seleccionado postgres
+if [ $db_type = "postgres" ]; then
+    envsubst < "docker-templates/service-postgres.yml" >> "docker-compose.yml"
+fi
+# Si se ha seleccionado postgis
+if [ $db_type = "postgis" ]; then
+    envsubst < "docker-templates/service-postgis.yml" >> "docker-compose.yml"
+fi
+
 envsubst < "docker-templates/service-php.yml" >> "docker-compose.yml"
 
 # Si se ha seleccionado apache
