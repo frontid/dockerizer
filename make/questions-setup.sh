@@ -88,14 +88,13 @@ done
 echo ''
 # ---------
 
-PS3="Y la versión de MariaBD: "
-options=( '10.2-x => Compatible con Mysql 5.7' '10.1-x => compatible con MySQL 5.6')
+PS3="Y la base de datos?: "
+options=( 'mariadb' 'postgres' 'postgis' )
 
-select mysqlver in "${options[@]}" ; do
+select db_type in "${options[@]}" ; do
 
     if (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
-	mysqlver=$(echo $mysqlver| cut -d'-' -f 1)
-        export mysqlver
+        export db_type
         break
 
     else
@@ -103,8 +102,46 @@ select mysqlver in "${options[@]}" ; do
     fi
 done
 
-echo $mysqlver
+# ---------
+echo ''
+# ---------
+if [[ $db_type = 'mariadb' ]]; then
+  
+  PS3="Y la versión de MariaBD: "
+  options=( '10.2-x => Compatible con Mysql 5.7' '10.1-x => compatible con MySQL 5.6')
 
+  select mysqlver in "${options[@]}" ; do
+
+      if (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
+          mysqlver=$(echo $mysqlver| cut -d'-' -f 1)
+          export mysqlver
+          break
+
+      else
+          echo "Se te fue el dedo, esa no es una opción válida."
+      fi
+  done
+
+  echo $mysqlver
+fi
+
+if [[ $db_type = 'postgres' ]]; then
+  PS3="Y la versión de Postgres: "
+  options=( '10-1.3.0' '9.6-1.3.0')
+
+  select postgres_tag in "${options[@]}" ; do
+
+      if (( REPLY > 0 && REPLY <= ${#options[@]} )) ; then
+          export postgres_tag
+          break
+
+      else
+          echo "Se te fue el dedo, esa no es una opción válida."
+      fi
+  done
+
+  echo $postgres_tag
+fi
 
 # ---------
 echo ''
