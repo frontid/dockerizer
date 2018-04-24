@@ -32,6 +32,7 @@ Currently there're the following common commands:
 - `gulp`
 - `node`
 - `npm`
+- `yarn`
 
 And these command are available too:
 - `dc` (alias of docker-compose)
