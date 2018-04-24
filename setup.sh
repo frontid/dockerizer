@@ -92,7 +92,15 @@ echo -e "DB inicial: \e[32m$db\e[0m"
 echo -e "La aplicación web esta en: \e[32m$base_web_root\e[0m"
 echo -e "Versión de PHP: \e[32m$phpver\e[0m"
 echo -e "Servidor http: \e[32m$webserver\e[0m"
-echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
+if [[ $db_type = 'mariadb' ]]; then
+  echo -e "Versión Mysql (MariaDB): \e[32m$mysqlver\e[0m"
+fi  
+if [[ $db_type = 'postgres' ]]; then
+  echo -e "Versión Postgres: \e[32m$postgres_tag\e[0m"
+fi  
+if [[ $db_type = 'postgis' ]]; then
+  echo -e "Versión Postgis: \e[32mlatest\e[0m"
+fi 
 echo -e "Tipo de proyecto: \e[32m$app_kind\e[0m"
 echo ''
 
