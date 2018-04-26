@@ -1,6 +1,6 @@
   frontend:
     container_name: ${domain}_frontend
-    image: frontid/docker-front-dev
+    image: frontid/docker-front-tools
     network_mode: traefik_network
     volumes:
       - ./:/var/www
