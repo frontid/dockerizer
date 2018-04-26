@@ -16,4 +16,8 @@ container+="_$container_base_name"
 
 echo -e "Entering to \e[32m$container\e[0m container"
 # @todo allow to the command the --user options to allow enter to the container as root for example.
-docker exec -it --privileged --workdir "/var/www$relative_path" $container /bin/bash -c "COLUMNS=160 /bin/bash"
+if [ conainer_base_name="frontend" ]; then
+	source _command_wrapper 'frontend' 'run' '/bin/bash'
+else
+	docker exec -it --privileged --workdir "/var/www$relative_path" $container /bin/bash -c "COLUMNS=160 /bin/bash"
+fi
