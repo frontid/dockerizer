@@ -18,6 +18,15 @@ services:
       # Our traefik needs the exact name instead just "php" since
       # it holds many containters and each one has it own unique name.
       APACHE_BACKEND_HOST: "${PROJECT_NAME}_php"
+    labels:
+
+      # Our traefik needs the exact name instead just "apache" since
+      # it holds many containters and each one has it own unique name.
+      - 'traefik.backend=${PROJECT_NAME}_apache'
+
+      # Minimal modifications to allow subdomain wildcard. Any URL that does not match with
+      # taken domains liske pma."project".localhost will fall intro apache container.
+      - 'traefik.frontend.rule=HostRegexp:${PROJECT_BASE_URL}, {subdomain:[^.]+}.${PROJECT_BASE_URL}'
 
   pma:
     network_mode: traefik_network
