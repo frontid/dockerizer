@@ -1,10 +1,15 @@
 #!/bin/bash
 
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-script_dirname="`dirname $0`"
-user_uid=0
-root_dir="$( cd $script_dirname && cd .. && pwd)"
+bin_path="`dirname $0`"
+root_dir="$( cd $bin_path && cd .. && pwd)"
 relative_path=${PWD#$root_dir}
+user_uid=1000
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
 
 # We assign the container name to a variable then shift it from the array of params.
 container=$1
@@ -12,8 +17,8 @@ shift;
 runexec=$1
 shift;
 
-docker_compose="docker-compose -f $script_dirname/../docker-compose.yml $runexec --user $user_uid:$user_uid"
-command="$docker_compose $container /bin/bash -c 'cd /var/www$relative_path && $@'"
+docker_compose="docker-compose -f $bin_path/../docker-compose.yml $runexec --user $user_uid:$user_uid"
+command="$docker_compose $container /bin/bash -c 'cd /var/www/html$relative_path && $@'"
 
 # Only show a screen message if the output is stdout.
 if [ -t 1 ]; then

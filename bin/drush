@@ -1,33 +1,6 @@
 #!/bin/bash
+# Since docker4drupal internally uses "Drush Launcher" we
+# dont need to take care about the drush location (different betweem drupal 7 and 8)
 
-script_dirname="`dirname $0`"
-root_dir="$( cd $script_dirname && cd .. && pwd)"
-
-# This command target to different binaries according to the app kind (D7 or D8)
-# So we need the configured params.
-
-# There is a config file at dockerizer?
-if [ -f "$root_dir/.dockerizer-project.ini" ]; then
-  conf_file_location="$root_dir/.dockerizer-project.ini"
-fi
-
-# There is a config file at the repo?
-if [ -f "$root_dir/html/.dockerizer-project.ini" ]; then
-  conf_file_location="$root_dir/html/.dockerizer-project.ini"
-fi
-
-source $conf_file_location
-
-if [[ $app_kind = 'D7' ]]; then
-    # source command_wrapper [CONTAINER NAME] [EXECUTION KIND] [COMMAND] $@ = params to send.
-    source _command_wrapper 'php' 'run' 'drush' $@
-fi
-
-if [[ $app_kind = 'D8' ]]; then
-    # source command_wrapper [CONTAINER NAME] [EXECUTION KIND] [COMMAND] $@ = params to send.
-    source _command_wrapper 'php' 'exec' "COLUMNS=160 /var/www/html/$app_path/vendor/bin/drush --root=/var/www/html/$base_web_root" $@
-fi
-
-if [[ $app_kind = 'generic' ]]; then
-    echo -e "\e[91mThis dockerized app is not defined as a Drupal app.\e[0m"
-fi
+# source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+source _command_wrapper 'php' 'exec' 'COLUMNS=160 drush' $@

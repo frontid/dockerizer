@@ -1,6 +1,13 @@
 #!/bin/bash
 
-source _common_params_loader
+bin_path="`dirname $0`"
+root_dir="$( cd $bin_path && cd .. && pwd)"
+relative_path=${PWD#$root_dir}
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
 
 # In case the user just entered expose without any
 # container destination we will set a default one.
@@ -11,9 +18,9 @@ if [ "$#" -eq  "0" ]
     container_base_name=$1
 fi
 
-container=$domain
+container=$PROJECT_NAME
 container+="_$container_base_name"
 
 echo -e "Entering to \e[32m$container\e[0m container"
 # @todo allow to the command the --user options to allow enter to the container as root for example.
-docker exec -it --privileged --workdir "/var/www$relative_path" $container /bin/bash
+docker exec -it --privileged --workdir "/var/www/html$relative_path" $container /bin/bash
