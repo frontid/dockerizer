@@ -1,10 +1,9 @@
 # Dockerizer
 
-Dockerizador es un programa que permite generar un docker-compose.yml y algunos bindings de aplicaciones comunes para ejecutarlas desde el host.
+Dockerizador es un entorno de desarrollo basado en docker enforcado a aplicaciones LAMP proncipalmente.
 
 Features:
 - Usa un proxy central (traefik) y arrancha al inicio del SO.
-- Tiene un wizard para instalaciones iniciales para seleccionar versión de PHP, Mysql, Apache o nginx, etc.
 - El wizard genera un archivo de conf que se puede comitear en el proyecto. Luego el dockerizador lo reconoce y puede montar el docker en nuevos ordenadores (util para compartir una configuración unica para todos los que trabajan sobre un proyecto).
 - Bind de comandos desde el host*: Lanza comando dentro de los contenedores de forma transparente gracias a los comandos que proporciona el dockerizador. (ver directorio bin/)
 - Acceso rapido a contenedores mediante el comando "*expose*"
@@ -12,7 +11,12 @@ El bind de un comando realmente es solo un wrapper que reenvía un comando desde
 
 
 ## Install
-After clonning this project you should run `./setup.sh`. This command starts a wizard that will help you to configure your environment.
+After clonning this project you should run `./setup.sh`. This command setup some needed tools around docker.
+
+
+## Setup project
+After cloning the dockerizer you unly need to fill your project preferences. Copy example.env to .env and change the variables you need.
+Then you are ready to run `docker-compose up -d`
 
 Then you're ready to develop!
 
@@ -43,7 +47,7 @@ Available containers are: php (by default), mariadb, apache2, nginx, frontend, m
 Pendientes:
 Soporte para mac (estaba en el dc original)
 Añadir los contenedorers extras que tiene el proyecto original
-Implementar el override para modificar cosas extra como los labels de traefik o añadir la red a la que pertenecen los contenedores.
 la version minima de docker ahora es 18.03
 aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
 el setup.sh lo elimine pero lo necesitamos como minimo para que cree la red interna de traefik y àra que lo instale. Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
+revisar documentación
