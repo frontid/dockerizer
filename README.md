@@ -38,3 +38,10 @@ And these command are available too:
 - `expose` (makes ssh to a container). By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type `expose mariadb`.
 Available containers are: php (by default), mariadb, apache2, nginx, frontend, mailhog, pma.
 ...
+
+
+Pendientes:
+Soporte para mac (estaba en el dc original)
+Añadir los contenedorers extras que tiene el proyecto original
+Implementar el override para modificar cosas extra como los labels de traefik o añadir la red a la que pertenecen los contenedores.
+la version minima de docker ahora es 18.03
