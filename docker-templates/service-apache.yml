@@ -1,20 +1,21 @@
   apache2:
-    image: wodby/php-apache:$APACHE_TAG
-    container_name: "${PROJECT_NAME}_apache"
-    depends_on:
-      - php
+    container_name: ${domain}_apache2
+    image: wodby/php-apache:2.4-2.0.2
+    network_mode: traefik_network
     environment:
       APACHE_LOG_LEVEL: debug
-      APACHE_BACKEND_HOST: php
-      APACHE_SERVER_ROOT: /var/www/_html
+      APACHE_BACKEND_HOST: ${domain}_php
+      APACHE_SERVER_ROOT: /var/www/html/${base_web_root}
       # For xdebug when we hold a breakpoint we need the server wait until we
       #release the request. APACHE_FCGI_PROXY_TIMEOUT prevent the "Gateway Timeout"
       APACHE_FCGI_PROXY_TIMEOUT: 600
+    depends_on:
+      - php
     volumes:
       - ./:/var/www
     labels:
-      - 'traefik.backend=apache'
+      - 'traefik.backend=${domain}_apache2'
       - 'traefik.port=80'
-      - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
-    network_mode: traefik_network
+      - 'traefik.frontend.rule=HostRegexp:$domain.localhost, {subdomain:[^.]+}.$domain.localhost'
+
 

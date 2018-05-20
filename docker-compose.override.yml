@@ -1,0 +1,30 @@
+version: "2"
+
+services:
+
+  mariadb:
+    network_mode: traefik_network
+
+  php:
+    network_mode: traefik_network
+
+  apache:
+    network_mode: traefik_network
+    environment:
+      # For xdebug when we hold a breakpoint we need the server
+      # wait until we release the request. APACHE_FCGI_PROXY_TIMEOUT
+      # prevent the "Gateway Timeout"
+      APACHE_FCGI_PROXY_TIMEOUT: 600
+      # Our traefik needs the exact name instead just "php" since
+      # it holds many containters and each one has it own unique name.
+      APACHE_BACKEND_HOST: "${PROJECT_NAME}_php"
+
+  pma:
+    network_mode: traefik_network
+    environment:
+      # Our traefik needs the exact name instead just "mariadb" since
+      # it holds many containters and each one has it own unique name.
+      PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
+
+  mailhog:
+    network_mode: traefik_network
