@@ -12,12 +12,17 @@ source "${bin_path}/../.env"
 set +o allexport
 
 # We assign the container name to a variable then shift it from the array of params.
-container=$1
+container_name=$1
 shift;
 runexec=$1
 shift;
 
-docker_compose="docker-compose -f $bin_path/../docker-compose.yml $runexec --user $user_uid:$user_uid"
+
+container=$PROJECT_NAME
+container+="_$container_name"
+
+
+docker_compose="docker $runexec --user $user_uid:$user_uid"
 command="$docker_compose $container /bin/bash -c 'cd /var/www/html$relative_path && $@'"
 
 # Only show a screen message if the output is stdout.

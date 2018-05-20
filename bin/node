@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-source _command_wrapper 'frontend' 'run' 'node' $@
+source _command_wrapper 'frontend' 'exec' 'node' $@
