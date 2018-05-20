@@ -7,6 +7,10 @@ services:
 
   php:
     network_mode: traefik_network
+    environment:
+      SSH_AUTH_SOCK: /ssh-agent
+    volumes:
+      - $SSH_CREDENTIALS:/ssh-agent
 
   apache:
     network_mode: traefik_network

@@ -49,7 +49,8 @@ Soporte para mac (estaba en el dc original)
 Añadir los contenedorers extras que tiene el proyecto original
 la version minima de docker ahora es 18.03
 aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
-el setup.sh lo elimine pero lo necesitamos como minimo para que cree la red interna de traefik y àra que lo instale. Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
+el setup.sh Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
 revisar documentación
 recuperar las claves ssh
 el comando drupal no creo que funcione. debería mirar dentro de vendors pero el script no esta configurado para tal cosa.
+verificar xdebug.
