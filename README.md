@@ -1,5 +1,4 @@
 # Dockerizer
-
 Dockerizador es un entorno de desarrollo basado en docker enforcado a aplicaciones LAMP proncipalmente.
 
 Features:
@@ -9,6 +8,9 @@ Features:
 - Acceso rapido a contenedores mediante el comando "*expose*"
 El bind de un comando realmente es solo un wrapper que reenvía un comando desde el host al contenedor que corresponda. Por ejemplo al hacer "drush cr", el dockerizador abre una conexion al contenedor "php" y le envía ese comando.
 
+
+# Requirements
+- Docker > 18.03
 
 ## Install
 After clonning this project you should run `./setup.sh`. This command setup some needed tools around docker.
@@ -36,21 +38,34 @@ Currently there're the following common commands:
 - `gulp`
 - `node`
 - `npm`
+- `yarn`
 
 And these command are available too:
 - `dc` (alias of docker-compose)
 - `expose` (makes ssh to a container). By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type `expose mariadb`.
 Available containers are: php (by default), mariadb, apache2, nginx, frontend, mailhog, pma.
+
+## Adding new commands
+to create a new "command" like "drush" doews just create a new empty file at ./bin dir and fill with this core:
+
+```
+#!/bin/bash
+source _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
+```
+CONTAINER NAME: The container where the command resides.
+COMMAND: the command to be run. 
+
+And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it. 
 ...
 
+# Known issues
+- smartcd trends to mess the dir where its on [docme]. 
 
 Pendientes:
-Soporte para mac (estaba en el dc original)
+- aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
 Añadir los contenedorers extras que tiene el proyecto original
-la version minima de docker ahora es 18.03
-aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
 el setup.sh Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
 revisar documentación
-recuperar las claves ssh
 el comando drupal no creo que funcione. debería mirar dentro de vendors pero el script no esta configurado para tal cosa.
 verificar xdebug.
+Soporte para mac (estaba en el dc original)
