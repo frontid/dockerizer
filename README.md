@@ -61,6 +61,26 @@ And that's all. Now you will be able to run the command locally as any other com
 # Known issues
 - smartcd trends to mess the dir where its on [docme]. 
 
+# Estructura (para contribuidores)
+El dockerizador es un paquete de 3 herramientas:
+- SmartCD
+- Docker
+- Traefik
+
+Al lanzar el instalador este instala traefik globalmente (en el dir ~/.local/share/traefik).  
+Traekif se encarga de entender la URL y enviar la peticion al contenedor que toca.
+Esto es especialmente util a medida que vayas añadiendo mas y mas webs dockerizadas en tu ordenador ya 
+que no vas a tener que preocuparte de andar añadiendo nada a /etc/hosts ni jugar con los puertos.
+
+Smartcd es el encargado de convertir comandos locales en comandos remotos. Esto lo logra escuchando el directorio de algun proyecto dockerizado. Cuando entras, smartcd "activa" todos los comandos que tengas definidos en el directorio "bin". Que a su vez, estos comandos lo unico que hacen es enviar el comando escrito localmente al contenedor internamente. 
+De esta forma no tienes que estar usando comandos complejos para lanzar por ejemplo drush. Simplemente lanza "drush cc all" estando dentro del directorio dockerixado (o cualquier subdirectorio) y drush se ejecutará dentro del contenedor que haga falta.
+
+La capa de docker está dicidida en 3 partes. 
+1: docker-compose.yml que es la implementacion casi pura de https://github.com/wodby/docker4drupal y es la base de todo el dockerizador.
+2: docker-compose.override.yml que es nuestra propia capa que modifica al docker-compose.yml y que usamos para añadir funcionalidad (o modificar parametros) al docker-compose.yml de docker4drupal.
+3: .env Almacena todas las variables especificas del proyecto dockerizado como la URL, versiones de php, db, etc. 
+  
+
 Pendientes:
 - aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
 Añadir los contenedorers extras que tiene el proyecto original
