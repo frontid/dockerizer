@@ -82,8 +82,6 @@ La capa de docker está dicidida en 3 partes.
   
 
 Pendientes:
-- aplicar las evoluciones y fixes que se fueron haciendo en la rama master.
-Añadir los contenedorers extras que tiene el proyecto original
 el setup.sh Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
 revisar documentación
 el comando drupal no creo que funcione. debería mirar dentro de vendors pero el script no esta configurado para tal cosa.

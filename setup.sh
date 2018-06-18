@@ -49,6 +49,10 @@ cd $original_path
 echo ''
 
 # ---------
+# Install a really simple cli to manage traefik.
+cp setup_files/dockerizer ~/.local/bin
+
+# ---------
 echo ''
 echo -e "\e[32mAcabamos!\e[0m"
 echo ''
