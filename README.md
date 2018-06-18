@@ -79,11 +79,3 @@ La capa de docker está dicidida en 3 partes.
 1: docker-compose.yml que es la implementacion casi pura de https://github.com/wodby/docker4drupal y es la base de todo el dockerizador.
 2: docker-compose.override.yml que es nuestra propia capa que modifica al docker-compose.yml y que usamos para añadir funcionalidad (o modificar parametros) al docker-compose.yml de docker4drupal.
 3: .env Almacena todas las variables especificas del proyecto dockerizado como la URL, versiones de php, db, etc. 
-  
-
-Pendientes:
-el setup.sh Adicionalmente que añada un par de alias en los binarios del sistema para parar y arrancar el dockerizer traefik.
-revisar documentación
-el comando drupal no creo que funcione. debería mirar dentro de vendors pero el script no esta configurado para tal cosa.
-verificar xdebug.
-Soporte para mac (estaba en el dc original)

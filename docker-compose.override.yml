@@ -8,6 +8,7 @@ services:
   php:
     network_mode: traefik_network
     environment:
+      PHP_XDEBUG_REMOTE_AUTOSTART: 1
       SSH_AUTH_SOCK: /ssh-agent
     volumes:
       - $SSH_CREDENTIALS:/ssh-agent
