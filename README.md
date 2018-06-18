@@ -1,13 +1,11 @@
 # Dockerizer
-Dockerizador es un entorno de desarrollo basado en docker enforcado a aplicaciones LAMP proncipalmente.
+Dockerizador es un entorno de desarrollo basado en docker enforcado a aplicaciones LAMP principalmente.
 
 Features:
-- Usa un proxy central (traefik) y arrancha al inicio del SO.
-- El wizard genera un archivo de conf que se puede comitear en el proyecto. Luego el dockerizador lo reconoce y puede montar el docker en nuevos ordenadores (util para compartir una configuración unica para todos los que trabajan sobre un proyecto).
-- Bind de comandos desde el host*: Lanza comando dentro de los contenedores de forma transparente gracias a los comandos que proporciona el dockerizador. (ver directorio bin/)
+- Usa un proxy central, traefik, que se autoinicia cuando el SO inicia.
+- Solo necesitas confirgurar una vez el proyecto y comitear el archivo .env para que todos tengan el mismo entorno de desarrollo.
+- Ejecuta comandos de forma transparente en los contenedores.
 - Acceso rapido a contenedores mediante el comando "*expose*"
-El bind de un comando realmente es solo un wrapper que reenvía un comando desde el host al contenedor que corresponda. Por ejemplo al hacer "drush cr", el dockerizador abre una conexion al contenedor "php" y le envía ese comando.
-
 
 # Requirements
 - Docker > 18.03
