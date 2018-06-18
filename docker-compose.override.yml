@@ -53,7 +53,7 @@ services:
 
   postgres:
     container_name: ${PROJECT_NAME}_postgres
-    image: wodby/postgres:$postgres_tag
+    image: wodby/postgres:${POSTGRESS_TAG}
     network_mode: traefik_network
     stop_grace_period: 30s
     environment:
