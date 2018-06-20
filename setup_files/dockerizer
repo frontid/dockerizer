@@ -2,14 +2,10 @@
 
 if [ $1 = "stop" ]; then
     echo "Stopping dockerizer traefik."
-    cd ~/.local/share/traefik
-    docker-compose stop
-    cd - >> /dev/null
+    docker-compose -f ~/.local/share/traefik/docker-compose.yml stop
 fi
 
 if [ $1 = "start" ]; then
     echo "Starting dockerizer traefik."
-    cd ~/.local/share/traefik
-    docker-compose up -d
-    cd - >> /dev/null
+    docker-compose -f ~/.local/share/traefik/docker-compose.yml start
 fi
