@@ -1,13 +1,40 @@
 #!/bin/bash
 
-if [ $1 = "stop" ]; then
-    if [ $2 = "traefik" ]; then
-        docker-compose -f ~/.local/share/traefik/docker-compose.yml stop
+# Check if the .env exist or copy it from web dir.
+# Starts docker-compose and traefik if not already running.
+_docker_project() {
+    if [ -e web/.docker.env ]
+        then cp web/.docker.env ./.env
     fi
+
+    docker-compose -f $PWD/docker-compose.yml $1
+}
+
+# run docker-compose commands on traefik service.
+_traefik_service() {
+    docker-compose -f ~/.local/share/traefik/docker-compose.yml $1
+}
+
+
+# -----------------------------------------------
+
+
+# Start project?
+if [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
+    _docker_project "up -d"
 fi
 
-if [ $1 = "start" ]; then
-    if [ $2 = "traefik" ]; then
-        docker-compose -f ~/.local/share/traefik/docker-compose.yml start
-    fi
+# Stop project?
+if [ ! -z "$1" ] && [ $1 = "stop" ] && [ -z "$2" ]; then
+    _docker_project "stop"
+fi
+
+# Start traefik?
+if [ ! -z "$1" ] && [ $1 = "start" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
+    _traefik_service "up -d"
+fi
+
+# Stop traefik?
+if [ ! -z "$1" ] && [ $1 = "stop" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
+    _traefik_service "stop"
 fi
