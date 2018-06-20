@@ -1,11 +1,13 @@
 #!/bin/bash
 
 if [ $1 = "stop" ]; then
-    echo "Stopping dockerizer traefik."
-    docker-compose -f ~/.local/share/traefik/docker-compose.yml stop
+    if [ $2 = "traefik" ]; then
+        docker-compose -f ~/.local/share/traefik/docker-compose.yml stop
+    fi
 fi
 
 if [ $1 = "start" ]; then
-    echo "Starting dockerizer traefik."
-    docker-compose -f ~/.local/share/traefik/docker-compose.yml start
+    if [ $2 = "traefik" ]; then
+        docker-compose -f ~/.local/share/traefik/docker-compose.yml start
+    fi
 fi

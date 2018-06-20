@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+if [[ $UID != 0 ]]; then
+    echo "Hey! usa este comando para iniciar el script:"
+    echo ''
+    echo -e "\e[32msudo -s $0 $*"
+    echo ''
+    exit 1
+fi
+
 echo ''
 echo -e "\e[31mEste es el instalador del dockerizador. Si ya lo tienes funcionando (porque en algún momento lo instalaste para otro proyecto) no hace falta lanzarlo para cada nuevo proyecto.\e[0m"
 echo -e "\e[31mSi tu caso es el anterior, lee README.md apartado 'Setup project'.\e[0m"
@@ -51,6 +59,7 @@ echo ''
 # ---------
 # Install a really simple cli to manage traefik.
 cp setup_files/dockerizer ~/.local/bin
+cp setup_files/dockerizer_bash_autocomplete /etc/bash_completion.d/dockerizer
 
 # ---------
 echo ''

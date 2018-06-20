@@ -1,0 +1,30 @@
+_dockerizer() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+
+    if [ $COMP_CWORD -eq 1 ]; then
+
+        COMPREPLY=( $(compgen -W "start stop" -- $cur) )
+
+    elif [ $COMP_CWORD -eq 2 ]; then
+
+        case "$prev" in
+          "start")
+            COMPREPLY=( $(compgen -W "traefik" -- $cur) )
+            ;;
+          "stop")
+            COMPREPLY=( $(compgen -W "traefik" -- $cur) )
+            ;;
+          *)
+            ;;
+        esac
+
+    fi
+
+    return 0
+}
+
+complete -F _dockerizer dockerizer
