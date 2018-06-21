@@ -51,26 +51,26 @@ services:
       - ./:/var/www/html
     command: tail -f /dev/null
 
-  postgres:
-    container_name: ${PROJECT_NAME}_postgres
-    image: wodby/postgres:${POSTGRESS_TAG}
-    network_mode: traefik_network
-    stop_grace_period: 30s
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: db
-      POSTGRES_USER: db
-    volumes:
-      - ./:/var/www/html
+#  postgres:
+#    container_name: ${PROJECT_NAME}_postgres
+#    image: wodby/postgres:${POSTGRESS_TAG}
+#    network_mode: traefik_network
+#    stop_grace_period: 30s
+#    environment:
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: db
+#      POSTGRES_USER: db
+#    volumes:
+#      - ./:/var/www/html
 
-  postgis:
-    container_name: ${PROJECT_NAME}_postgis
-    network_mode: traefik_network
-    image: mdillon/postgis
-    environment:
-      POSTGRES_PASSWORD: db
-      POSTGRES_USER: db
-      POSTGRES_DB: db
-      PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - ./:/var/www/html
+#  postgis:
+#    container_name: ${PROJECT_NAME}_postgis
+#    network_mode: traefik_network
+#    image: mdillon/postgis
+#    environment:
+#      POSTGRES_PASSWORD: db
+#      POSTGRES_USER: db
+#      POSTGRES_DB: db
+#      PGDATA: /var/lib/postgresql/data/pgdata
+#    volumes:
+#      - ./:/var/www/html

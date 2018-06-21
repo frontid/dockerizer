@@ -1,4 +1,4 @@
-_dockerizer() {
+_dkiz() {
     local cur prev opts
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -27,4 +27,4 @@ _dockerizer() {
     return 0
 }
 
-complete -F _dockerizer dockerizer
+complete -F _dkiz dkiz

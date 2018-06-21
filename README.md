@@ -7,18 +7,27 @@ Features:
 - Ejecuta comandos de forma transparente en los contenedores.
 - Acceso rapido a contenedores mediante el comando "*expose*"
 
+## dkiz the dockerizer cli
+Dockerizer uses a very simple tool to start and stop the projects. Aditionaly manages the traefix proxy too.
+To start a project just go to the dockerized dir and run `dkis start` or `dkiz stop`
+And if you want to stop (or start) the traefik proxy just run `dkiz stop traefik` (no matter the current path you are on).
+
 # Requirements
-- Docker > 18.03
+- Docker > 18.00
 
 ## Install
 After clonning this project you should run `./setup.sh`. This command setup some needed tools around docker.
 
 
 ## Setup project
-After cloning the dockerizer you unly need to fill your project preferences. Copy example.env to .env and change the variables you need.
-Then you are ready to run `docker-compose up -d`
+After cloning the dockerizer you only need to fill your project preferences in your repo. 
 
-Then you're ready to develop!
+Copy `example.docker.env` to `web/.docker.env` (at this point you should have cloned your project on this dir) and change the variables you need.
+
+`web/.docker.env` contains the common settings for your project like the PHP version. But sometimes you need to customize come variables to fit dockerizer on your system. 
+For example, dockerizer assumes your ssh agent is located at `SSH_CREDENTIALS=/run/user/1000/keyring/ssh` and still this is the most common case, it is not the real path for all users. SO, in case you need to customize some defaults you can create `web/.docker.override.env` and override any of the existing vars on `web/.docker.env`. ASh and please, add `.docker.override.env` to `.gitignore` to prevent overriding custom settions of your colleagues! 
+
+At this point you are ready to run `dkiz start` and start coding!
 
 ## Usage
 Thanks to smartcd (installed when you ran setup.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.
@@ -77,7 +86,3 @@ La capa de docker está dicidida en 3 partes.
 1: docker-compose.yml que es la implementacion casi pura de https://github.com/wodby/docker4drupal y es la base de todo el dockerizador.
 2: docker-compose.override.yml que es nuestra propia capa que modifica al docker-compose.yml y que usamos para añadir funcionalidad (o modificar parametros) al docker-compose.yml de docker4drupal.
 3: .env Almacena todas las variables especificas del proyecto dockerizado como la URL, versiones de php, db, etc. 
-
-
-Pendientes:
-Se puede desactivar un container ?

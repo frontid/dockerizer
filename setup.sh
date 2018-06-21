@@ -58,8 +58,8 @@ echo ''
 
 # ---------
 # Install a really simple cli to manage traefik.
-cp setup_files/dockerizer ~/.local/bin
-cp setup_files/dockerizer_bash_autocomplete /etc/bash_completion.d/dockerizer
+cp setup_files/dockerizer_cli ~/.local/bin/dkiz
+cp setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dkiz
 
 # ---------
 echo ''

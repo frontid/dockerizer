@@ -1,11 +1,21 @@
 #!/bin/bash
 
-# Check if the .env exist or copy it from web dir.
-# Starts docker-compose and traefik if not already running.
+# Check if the .docker.env (and optionally .docker.override.env).
+# and run docker-compose commands.
 _docker_project() {
-    if [ -e web/.docker.env ]
-        then cp web/.docker.env ./.env
+    if [ -e web/.docker.env ]; then
+
+        if [ -e web/.docker.override.env ]; then
+            paste -s -d '\n' web/.docker.env web/.docker.override.env > ./.env
+        else
+            cp web/.docker.env ./.env
+        fi
+
+    else
+        echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see README.md\e[0m"
+        exit 1
     fi
+
 
     docker-compose -f $PWD/docker-compose.yml $1
 }
