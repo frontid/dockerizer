@@ -38,7 +38,6 @@ Currently there're the following common commands:
 - `bundle`
 - `compass`
 - `composer`
-- `dll` (send an internal `ls -l`)
 - `drush`
 - `drupal` (drupal console)
 - `gem`
@@ -49,9 +48,10 @@ Currently there're the following common commands:
 - `yarn`
 
 And these command are available too:
-- `dc` (alias of docker-compose)
-- `expose` (makes ssh to a container). By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type `expose mariadb`.
-Available containers are: php (by default), mariadb, apache2, nginx, frontend, mailhog, pma.
+- `cmd` Allows you to run arbitrary commands like `ls`, `tail` etc. Use this command when there is no an alias (see "common commands"). Usage `cmd php drush ws --tail` where "php" is the container and "drush ws --tail" is the sent command. 
+- `expose` (makes ssh to a container). By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type `expose mariadb`. If you want to enter as root just add `--root`: `expose apache --root`.
+
+Available containers are: php (by default), mariadb, apache, frontend, mailhog, pma.
 
 ## Adding new commands
 to create a new "command" like "drush" doews just create a new empty file at ./bin dir and fill with this core:

@@ -10,18 +10,32 @@ set -o allexport
 source "${bin_path}/../.env"
 set +o allexport
 
-# In case the user just entered expose without any
-# container destination we will set a default one.
+# Check the provided arguments and set the variables.
 if [ "$#" -eq  "0" ]
   then
+    #  "expose"
     container_base_name="php"
   else
-    container_base_name=$1
+
+    if [ $1 = "--root" ]; then
+        #  "expose --root"
+        user_uid=0
+        container_base_name="php"
+    else
+        #  "expose php"
+        container_base_name=$1
+    fi
+
+    if [ ! -z "$2" ] && [ $2 = "--root" ]; then
+        #  "expose php --root"
+        user_uid=0
+        container_base_name=$1
+    fi
+
 fi
 
 container=$PROJECT_NAME
 container+="_$container_base_name"
 
 echo -e "Entering to \e[32m$container\e[0m container"
-# @todo allow to the command the --user options to allow enter to the container as root for example.
 docker exec -it --privileged --user $user_uid:$user_uid --workdir "/var/www/html$relative_path" $container /bin/bash
