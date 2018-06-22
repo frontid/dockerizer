@@ -17,7 +17,7 @@ _docker_project() {
     fi
 
 
-    docker-compose -f $PWD/docker-compose.yml $1
+    docker-compose -f $PWD/docker-compose.yml -f $PWD/docker-compose.override.yml $1
 }
 
 # run docker-compose commands on traefik service.
