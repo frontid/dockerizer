@@ -1,4 +1,7 @@
 #!/bin/bash
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-source _command_wrapper 'php' 'exec' $@
+container=$1
+shift
+
+source _command_wrapper $container 'exec' $@
