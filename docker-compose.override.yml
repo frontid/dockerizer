@@ -39,9 +39,13 @@ services:
       # Our traefik needs the exact name instead just "mariadb" since
       # it holds many containters and each one has it own unique name.
       PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
+    labels:
+      - 'traefik.frontend.rule=Host:${PROJECT_NAME}.pma.localhost'
 
   mailhog:
     network_mode: traefik_network
+    labels:
+      - 'traefik.frontend.rule=Host:${PROJECT_NAME}.mailhog.localhost'
 
   frontend:
     container_name: ${PROJECT_NAME}_frontend

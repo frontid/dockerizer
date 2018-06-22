@@ -8,8 +8,9 @@ Features:
 - Acceso rapido a contenedores mediante el comando "*expose*"
 
 ## dk the dockerizer cli
-Dockerizer uses a very simple tool to start and stop the projects. Aditionaly manages the traefix proxy too.
-To start a project just go to the dockerized dir and run `dk start` or `dk stop`
+Dockerizer uses a very simple tool to start, stop or restart the projects. Additionally manages the traefix proxy too.
+To manage a project just go to the dockerized dir and run `dk start`, `dk stop` or `dk restart`
+
 And if you want to stop (or start) the traefik proxy just run `dk stop traefik` (no matter the current path you are on).
 
 # Requirements

@@ -39,6 +39,14 @@ if [ ! -z "$1" ] && [ $1 = "stop" ] && [ -z "$2" ]; then
     _docker_project "stop"
 fi
 
+# Restart project?
+if [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
+    # We dont use just "restart" because this: If you make changes to your docker-compose.yml
+    # configuration these changes are not reflected after running this command.
+    _docker_project "stop"
+    _docker_project "up -d"
+fi
+
 # Start traefik?
 if [ ! -z "$1" ] && [ $1 = "start" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
     _traefik_service "up -d"
