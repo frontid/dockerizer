@@ -7,10 +7,10 @@ Features:
 - Ejecuta comandos de forma transparente en los contenedores.
 - Acceso rapido a contenedores mediante el comando "*expose*"
 
-## dkiz the dockerizer cli
+## dk the dockerizer cli
 Dockerizer uses a very simple tool to start and stop the projects. Aditionaly manages the traefix proxy too.
-To start a project just go to the dockerized dir and run `dkis start` or `dkiz stop`
-And if you want to stop (or start) the traefik proxy just run `dkiz stop traefik` (no matter the current path you are on).
+To start a project just go to the dockerized dir and run `dk start` or `dk stop`
+And if you want to stop (or start) the traefik proxy just run `dk stop traefik` (no matter the current path you are on).
 
 # Requirements
 - Docker > 18.00
@@ -27,7 +27,7 @@ Copy `example.docker.env` to `web/.docker.env` (at this point you should have cl
 `web/.docker.env` contains the common settings for your project like the PHP version. But sometimes you need to customize come variables to fit dockerizer on your system. 
 For example, dockerizer assumes your ssh agent is located at `SSH_CREDENTIALS=/run/user/1000/keyring/ssh` and still this is the most common case, it is not the real path for all users. SO, in case you need to customize some defaults you can create `web/.docker.override.env` and override any of the existing vars on `web/.docker.env`. ASh and please, add `.docker.override.env` to `.gitignore` to prevent overriding custom settions of your colleagues! 
 
-At this point you are ready to run `dkiz start` and start coding!
+At this point you are ready to run `dk start` and start coding!
 
 ## Usage
 Thanks to smartcd (installed when you ran setup.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.

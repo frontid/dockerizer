@@ -1,4 +1,4 @@
-_dkiz() {
+_dk() {
     local cur prev opts
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -27,4 +27,4 @@ _dkiz() {
     return 0
 }
 
-complete -F _dkiz dkiz
+complete -F _dk dk

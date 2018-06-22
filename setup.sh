@@ -58,12 +58,11 @@ echo ''
 
 # ---------
 # Install a really simple cli to manage traefik.
-cp setup_files/dockerizer_cli ~/.local/bin/dkiz
-cp setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dkiz
+cp setup_files/dockerizer_cli ~/.local/bin/dk
+cp setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
 
 # ---------
 echo ''
 echo -e "\e[32mAcabamos!\e[0m"
 echo ''
-echo -e "Ahora solo tienes que configurar el archivo .env y arrancar docker."
-echo -e "No olvides pasarle este archivo a tus colegas para tener todos el mismo entorno de desarrollo para este proyecto."
+echo -e "Ahora solo tienes que configurar el archivo .docker.env (lee readme.md para mas detalles)y arrancar docker."
