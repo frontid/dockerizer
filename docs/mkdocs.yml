@@ -1,0 +1,5 @@
+site_name: Dockerizer
+pages:
+    - Home: index.md
+    - Install: install.md
+theme: readthedocs
