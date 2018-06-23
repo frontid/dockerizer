@@ -5,3 +5,4 @@ web
 # prevent those files get commited accidentally.
 .docker.override.env
 .docker.env
+docs/site
