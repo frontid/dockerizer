@@ -1,0 +1,3 @@
+- Docker
+- docker-compose
+- git

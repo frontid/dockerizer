@@ -3,6 +3,7 @@ To install dockerizer run:
 ```bash
 git clone git@github.com:frontid/dockerizer.git dockerizer_install
 cd dockerizer_install
+chmod +x install.sh
 sudo -s ./install.sh
 cd ..
 rm -rf dockerizer_install

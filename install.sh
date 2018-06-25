@@ -30,8 +30,8 @@ echo -e "Installing traefik dockerizer proxy"
 echo ""
 
 original_path=$PWD
-user_share_path="$HOME/.local/share"
-traefik_path="$user_share_path/traefik"
+user_share_path="/usr/local/bin"
+traefik_path="$user_share_path/dk_traefik"
 mkdir -p $traefik_path
 
 cp setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
@@ -45,8 +45,9 @@ echo ''
 echo -e "Installing dk cli"
 echo ""
 
-cp setup_files/dockerizer_cli ~/.local/bin/dk
+cp setup_files/dockerizer_cli /usr/local/bin/dk
 cp setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
+chmod +x /usr/local/bin/dk
 
 # ---------
 echo ''

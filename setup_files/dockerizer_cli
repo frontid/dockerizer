@@ -22,7 +22,7 @@ _docker_project() {
 
 # run docker-compose commands on traefik service.
 _traefik_service() {
-    docker-compose -f ~/.local/share/traefik/docker-compose.yml $1
+    docker-compose -f /usr/local/bin/dk_traefik/docker-compose.yml $1
 }
 
 

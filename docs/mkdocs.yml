@@ -4,4 +4,5 @@ pages:
     - Install: install.md
     - dk the dockerizer cli: dk.md
     - The .docker.env file: dockerenv.md
+    - Requirements: requirements.md
 theme: readthedocs
