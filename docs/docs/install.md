@@ -6,7 +6,6 @@ cd dockerizer_install
 sudo -s ./install.sh
 cd ..
 rm -rf dockerizer_install
-
 ```
 
 # Configure a new project
