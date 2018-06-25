@@ -1,7 +1,12 @@
 # Installation
-To install dockerizer run this script:
+To install dockerizer run:
 ```bash
-sudo -s curl -L https://raw.githubusercontent.com/frontid/dockerizer/master/setup.sh | bash
+git clone git@github.com:frontid/dockerizer.git dockerizer_install
+cd dockerizer_install
+sudo -s ./install.sh
+cd ..
+rm -rf dockerizer_install
+
 ```
 
 # Configure a new project
@@ -10,6 +15,7 @@ Dockerizer works on a high level of your project and the first step is to clone 
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
+./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there.  
@@ -30,6 +36,7 @@ Go to your projects dir and:
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
+./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there. (Remember, at this point you must have a configured `.docker.env` on your project dir [`web/docker.env`])  
