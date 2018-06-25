@@ -1,20 +1,11 @@
 # Dockerizer
-Dockerizador es un entorno de desarrollo basado en docker enforcado a aplicaciones LAMP principalmente.
+Dockerizer is a docker development tool that allows you to run dockerized LAMP projects. 
 
-Features:
-- Usa un proxy central, traefik, que se autoinicia cuando el SO inicia.
-- Solo necesitas confirgurar una vez el proyecto y comitear el archivo .env para que todos tengan el mismo entorno de desarrollo.
-- Ejecuta comandos de forma transparente en los contenedores.
-- Acceso rapido a contenedores mediante el comando "*expose*"
-
-## dk the dockerizer cli
-Dockerizer uses a very simple tool to start, stop or restart the projects. Additionally manages the traefix proxy too.
-To manage a project just go to the dockerized dir and run `dk start`, `dk stop` or `dk restart`
-
-And if you want to stop (or start) the traefik proxy just run `dk stop traefik` (no matter the current path you are on).
-
-# Requirements
-- Docker > 18.00
+## Features
+- A centralized proxy. It allows you to run many different projects all under the common **80** and **443** ports instead assigning a por for each project.
+- Out of the box you have **https** enabled.
+- Configure once and spread to the other collaborators. Commit `.docker.env` into your project with the required options and your colleagues will just run the same environment with just one command. 
+- Forget about the fact that you are working with dockerized projects when run commands. Do you want use `gulp` or `drush` from your host machine but execute on the containers? No problem. Dockerizer has the ability to run commands seamlessly. Just run `gulp build` and that's it. 
 
 ## Install
 After clonning this project you should run `./setup.sh`. This command setup some needed tools around docker.

@@ -2,4 +2,6 @@ site_name: Dockerizer
 pages:
     - Home: index.md
     - Install: install.md
+    - dk the dockerizer cli: dk.md
+    - The .docker.env file: dockerenv.md
 theme: readthedocs

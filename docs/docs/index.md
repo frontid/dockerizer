@@ -1,17 +1,8 @@
-# MkLorum
+# Dockerizer
+Dockerizer is a docker development tool that allows you to run dockerized LAMP projects. 
 
-sssssssssFor full documentation visit [mkdocs.org](http://mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## Features
+- A centralized proxy. It allows you to run many different projects all under the common **80** and **443** ports instead assigning a por for each project.
+- Out of the box you have **https** enabled.
+- Configure once and spread to the other collaborators. Commit `.docker.env` into your project with the required options and your colleagues will just run the same environment with just one command. 
+- Forget about the fact that you are working with dockerized projects when run commands. Do you want use `gulp` or `drush` from your host machine but execute on the containers? No problem. Dockerizer has the ability to run commands seamlessly. Just run `gulp build` and that's it. 
