@@ -12,7 +12,7 @@ _docker_project() {
         fi
 
     else
-        echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see README.md\e[0m"
+        echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/\e[0m"
         exit 1
     fi
 

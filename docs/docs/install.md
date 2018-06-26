@@ -16,7 +16,7 @@ Dockerizer works on a high level of your project and the first step is to clone 
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
 chmod +x setup.sh
-./setup.sh
+sudo -s ./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there.  
@@ -38,7 +38,7 @@ Go to your projects dir and:
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
 chmod +x setup.sh
-./setup.sh
+sudo -s ./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there. (Remember, at this point you must have a configured `.docker.env` on your project dir [`web/docker.env`])  
