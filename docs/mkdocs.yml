@@ -2,6 +2,7 @@ site_name: Dockerizer
 pages:
     - Home: index.md
     - Install: install.md
+    - Domains: domains.md
     - dk the dockerizer cli: dk.md
     - The .docker.env file: dockerenv.md
     - Requirements: requirements.md
