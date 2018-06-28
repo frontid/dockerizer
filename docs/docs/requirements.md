@@ -1,3 +1,3 @@
-- Docker
+- Docker 18.03+
 - docker-compose
 - git
