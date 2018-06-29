@@ -42,6 +42,8 @@ services:
   pma:
     network_mode: traefik_network
     environment:
+      PMA_USER: root
+      PMA_PASSWORD: $DB_ROOT_PASSWORD
       # Our traefik needs the exact name instead just "mariadb" since
       # it holds many containters and each one has it own unique name.
       PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
