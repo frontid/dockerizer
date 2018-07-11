@@ -3,7 +3,6 @@ To install dockerizer run:
 ```bash
 git clone git@github.com:frontid/dockerizer.git dockerizer_install
 cd dockerizer_install
-chmod +x install.sh
 sudo -s ./install.sh
 cd ..
 rm -rf dockerizer_install
@@ -15,7 +14,6 @@ Dockerizer works on a high level of your project and the first step is to clone 
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
-chmod +x setup.sh
 sudo -s ./setup.sh
 ```
 
@@ -37,7 +35,6 @@ Go to your projects dir and:
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
-chmod +x setup.sh
 sudo -s ./setup.sh
 ```
 
