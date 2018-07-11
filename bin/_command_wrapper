@@ -18,7 +18,13 @@ shift;
 container=$PROJECT_NAME
 container+="_$container_name"
 
-docker_compose="docker exec -it --user $user_uid:$user_uid"
+if [ -t 1 ]; then
+  	tty="-i"
+else
+	tty="-it"
+fi
+
+docker_compose="docker exec $tty --user $user_uid:$user_uid"
 command="$docker_compose $container /bin/bash -c 'cd /var/www/html$relative_path && $@'"
 
 # Only show a screen message if the output is stdout.
