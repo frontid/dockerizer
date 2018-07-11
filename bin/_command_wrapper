@@ -18,6 +18,8 @@ shift;
 container=$PROJECT_NAME
 container+="_$container_name"
 
+# If the input comes from a pipe or file ("< something.txt") we cant use "t" 
+#flag since it will fail with "the input device is not a TTY"
 if [ -t 1 ]; then
   	tty="-i"
 else
