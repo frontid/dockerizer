@@ -10,6 +10,7 @@ fi
 source $HOME/.smartcd_config
 source $HOME/.smartcd/scripts$PWD/bash_enter
 
+# @todo remove when the perms get commited.
 chmod +x bin/ -R
 
 echo ''
