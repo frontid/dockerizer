@@ -22,6 +22,7 @@ services:
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME
       DB_DRIVER: $DB_DRIVER
+      COLUMNS: 80 # Set 80 columns for docker exec -it.
 ## Read instructions at https://wodby.com/stacks/drupal/docs/local/xdebug/
 #      PHP_XDEBUG: 1
 #      PHP_XDEBUG_DEFAULT_ENABLE: 1
@@ -33,20 +34,28 @@ services:
 #      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
     volumes:
       - ./:/var/www/html
+## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
 ## For Xdebug profiler files
 #      - files:/mnt/files
 
+
   apache:
-    image: wodby/php-apache:$APACHE_TAG
+    image: wodby/apache:$APACHE_TAG
     container_name: "${PROJECT_NAME}_apache"
     depends_on:
       - php
     environment:
       APACHE_LOG_LEVEL: debug
       APACHE_BACKEND_HOST: php
-      APACHE_SERVER_ROOT: /var/www/html/web
+      APACHE_VHOST_PRESET: php
+      APACHE_DOCUMENT_ROOT: /var/www/html/web
     volumes:
       - ./:/var/www/html
+# For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
     labels:
       - 'traefik.backend=apache'
       - 'traefik.port=80'
