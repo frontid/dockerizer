@@ -1,4 +1,11 @@
 # Installation
+A brief of what install script will do:
+- Install smartcd if not installed
+- Create a new docker network called `traefik_network` if no exist.
+- Installs a traefik service (at `/usr/local/bin/tdk_traefik)
+- Installs `dk` cli`
+
+
 To install dockerizer run:
 ```bash
 git clone git@github.com:frontid/dockerizer.git dockerizer_install
