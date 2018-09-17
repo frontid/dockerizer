@@ -1,9 +1,10 @@
 # Installation
 A brief of what install script will do:
-- Install smartcd if not installed
-- Create a new docker network called `traefik_network` if no exist.
-- Installs a traefik service (at `/usr/local/bin/tdk_traefik)
-- Installs `dk` cli`
+
+* Install **smartcd** if not installed.
+* Create a new docker network called `traefik_network` if no exist.  
+* Installs a traefik service (at `/usr/local/bin/tdk_traefik).  
+* Installs `dk` cli.
 
 
 To install dockerizer run:
@@ -23,6 +24,7 @@ Dockerizer works on a high level of your project and the first step is to clone 
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
+./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there.  
@@ -43,6 +45,7 @@ Go to your projects dir and:
 ```bash
 git clone git@github.com:frontid/dockerizer.git myproject_dockerized
 cd myproject_dockerized
+./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there. (Remember, at this point you must have a configured `.docker.env` on your project dir [`web/docker.env`])  
