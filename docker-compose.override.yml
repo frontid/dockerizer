@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 
 services:
 
@@ -15,6 +15,9 @@ services:
       PHP_IDE_CONFIG: serverName=my-ide
       #  Please see DOCKER_HOST -> https://github.com/docker/for-linux/issues/264
       PHP_XDEBUG_REMOTE_HOST: $DOCKER_PROJECT_HOST
+      PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-120}
+      PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-32M}
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
       SSH_AUTH_SOCK: /ssh-agent
     volumes:
       - $SSH_CREDENTIALS:/ssh-agent
