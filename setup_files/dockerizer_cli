@@ -59,7 +59,11 @@ fi
 
 # Self update dockerizer
 if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
+    echo "Cleaning /tmp/dockerizer"
+    rm -rf /tmp/dockerizer
+    echo "Cloning a new version of dockerizer"
     git clone https://github.com/frontid/dockerizer.git /tmp/dockerizer
+    echo "Installing..."
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
     sudo chmod +x /usr/local/bin/dk
