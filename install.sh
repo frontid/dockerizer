@@ -20,17 +20,6 @@ else
 fi
 
 echo ""
-echo -e "Creating a traefik docker network"
-
-network_exist="$(docker network ls | grep traefik_network)"
-
-if [ -z "$network_exist" ]; then
-    docker network create traefik_network
-else
-    echo -e "\e[32mTraefik docker network currently installed\e[0m"
-fi
-
-echo ""
 echo -e "Installing/updating traefik dockerizer proxy"
 
 traefik_path="/usr/local/bin/dk_traefik"

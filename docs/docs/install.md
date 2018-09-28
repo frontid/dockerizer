@@ -2,7 +2,6 @@
 A brief of what install script will do:
 
 * Install **smartcd** if not installed (will be prompted for configuration. Just leave all options by default).
-* Create a new docker network called `traefik_network` if no exist.  
 * Installs a traefik service (at `/usr/local/bin/tdk_traefik).  
 * Installs `dk` cli.
 
