@@ -7,5 +7,6 @@ pages:
     - The .docker.env file: dockerenv.md
     - Available commands: commands.md
     - Requirements: requirements.md
+    - Uninstall: uninstall.md
     - Troubleshoot: troubleshoot.md
 theme: readthedocs
