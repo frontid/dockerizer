@@ -56,3 +56,31 @@ fi
 if [ ! -z "$1" ] && [ $1 = "stop" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
     _traefik_service "stop"
 fi
+
+# Add new dockerizer
+if [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
+    git clone https://github.com/frontid/dockerizer.git $2
+    cd $2
+    sh setup.sh
+fi
+
+# Self update dockerizer
+if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
+    echo "Cleaning /tmp/dockerizer"
+    echo "------------------------"
+
+    rm -rf /tmp/dockerizer
+
+    echo "Cloning a new version of dockerizer"
+
+    git clone https://github.com/frontid/dockerizer.git /tmp/dockerizer
+
+    echo "------------------------"
+    echo "Installing..."
+    echo "------------------------"
+
+    sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
+    sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
+    sudo chmod +x /usr/local/bin/dk
+    echo "Done."
+fi

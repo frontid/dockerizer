@@ -34,8 +34,20 @@ if [ "$#" -eq  "0" ]
 
 fi
 
+
+# If we received a first argument means the user wants to reach a
+# different container than "php" and since we can't predict the
+# location we just send it to the root filesystem.
+if [ "$#" -eq  "0" ]
+  then
+    workdir="/var/www/html$relative_path"
+  else
+    workdir="/"
+fi
+
+
 container=$PROJECT_NAME
 container+="_$container_base_name"
 
 echo -e "Entering to \e[32m$container\e[0m container"
-docker exec -it --privileged --user $user_uid:$user_uid --workdir "/var/www/html$relative_path" $container /bin/bash
+docker exec -it --privileged --user $user_uid:$user_uid --workdir $workdir $container /bin/bash

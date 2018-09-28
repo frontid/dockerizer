@@ -5,4 +5,4 @@ Fin all documentation here:
 https://frontid.github.io/dockerizer/
 
 # Known issues
-- smartcd trends to mess the dir where its on [docme]. 
+- smartcd sometines doesn't realize you're entering a directory that should map. 
