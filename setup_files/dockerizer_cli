@@ -57,6 +57,13 @@ if [ ! -z "$1" ] && [ $1 = "stop" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
     _traefik_service "stop"
 fi
 
+# Add new dockerizer
+if [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
+    git clone https://github.com/frontid/dockerizer.git $2
+    cd $2
+    sh setup.sh
+fi
+
 # Self update dockerizer
 if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     echo "Cleaning /tmp/dockerizer"

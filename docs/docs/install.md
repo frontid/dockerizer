@@ -22,9 +22,8 @@ Why sudo? because the install script will copy `dk` cli program to the system bi
 Dockerizer works on a high level of your project and the first step is to clone it on your projects dir:
 
 ```bash
-git clone git@github.com:frontid/dockerizer.git myproject_dockerized
+dk new myproject_dockerized
 cd myproject_dockerized
-./setup.sh
 ```
 
 At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there.  
