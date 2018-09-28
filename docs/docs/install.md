@@ -1,56 +1,35 @@
 # Installation
 A brief of what install script will do:
 
-* Install **smartcd** if not installed.
+* Install **smartcd** if not installed (will be prompted for configuration. Just leave all options by default).
 * Create a new docker network called `traefik_network` if no exist.  
 * Installs a traefik service (at `/usr/local/bin/tdk_traefik).  
 * Installs `dk` cli.
 
-
 To install dockerizer run:
 ```bash
-git clone git@github.com:frontid/dockerizer.git dockerizer_install
-cd dockerizer_install
-sudo -s ./install.sh
-cd ..
-rm -rf dockerizer_install
+curl -L https://raw.githubusercontent.com/frontid/dockerizer/master/install.sh | bash
 ```
-
-Why sudo? because the install script will copy `dk` cli program to the system bin dir and it requires sudo.
 
 # Configure a new project
 Dockerizer works on a high level of your project and the first step is to clone it on your projects dir:
 
 ```bash
 dk new myproject_dockerized
-cd myproject_dockerized
+git clone git@github.com:YOU/YOUR-PROJECT.git web
 ```
 
-At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there.  
- 
-
 Next you need "dockerize" a project. To accomplish that the only thing you need to do is  create `.docker.env` and commit the preferences on the file.  
-Dockerizer provides you an example. Copy `example.docker.env` as `.docker.env`. 
+Dockerizer provides you an example. Copy `example.docker.env` as `.docker.env` at your "web" dir and configure it (See **[.docker.env](/dockerenv)** documentation for a more detailed explanation). 
 
-The file has things like the PHP and Mysql versions, ssh credentials path, etc. Please configure the options you need for this project and commit the file.(See **[.docker.env](dockerenv)** documentation for a more detailed explanation).
-
-That's all, now run `dk start` and start coding!
+That's all, now run `dk start` and happy coding!
 
 # Run a configured project
 If your project already has `.docker.env` pushed on your project follow these steps.
 
-Go to your projects dir and:
-
 ```bash
-git clone git@github.com:frontid/dockerizer.git myproject_dockerized
-cd myproject_dockerized
-./setup.sh
-```
-
-At this point you need to create "web" dir (`myproject_dockerized/web`) and clone your project there. (Remember, at this point you must have a configured `.docker.env` on your project dir [`web/docker.env`])  
-Then you are ready to start your dockerizer  
-
-```bash
+dk new myproject_dockerized
+git clone git@github.com:YOU/YOUR-PROJECT.git web
 dk start
 ```
 
