@@ -7,7 +7,7 @@ A brief of what install script will do:
 
 To install dockerizer run:
 ```bash
-curl -L https://raw.githubusercontent.com/frontid/dockerizer/master/install.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/frontid/dockerizer/master/install.sh)
 ```
 
 # Configure a new project

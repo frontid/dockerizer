@@ -34,6 +34,7 @@ echo -e "Installing/updating dk cli"
 sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
 sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
 sudo chmod +x /usr/local/bin/dk
+dk start traefik
 
 # ---------
 echo ''
