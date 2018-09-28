@@ -8,6 +8,7 @@ A brief of what install script will do:
 To install dockerizer run:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/frontid/dockerizer/master/install.sh)
+dk start traefik
 ```
 
 # Configure a new project
