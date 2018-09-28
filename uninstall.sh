@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo "test"
-
 while ! { test "$answer" = 'y' || test "$answer" = 'n'; }; do
   read -p "¿Uninstall dockerizer? [N/y]: " answer
   
