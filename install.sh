@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-if [[ $UID != 0 ]]; then
-    echo "Please run it as sudo:"
-    echo ''
-    echo -e "\e[32msudo -s $0 $*"
-    echo ''
-    exit 1
-fi
+rm -rf /tmp/dockerizer
+
+echo "Installing dockerizer"
+
+git clone https://github.com/frontid/dockerizer.git /tmp/dockerizer
+
+echo "------------------------"
+echo "Installing..."
+echo "------------------------"
 
 echo -e "Installing smartcd"
 
@@ -32,17 +34,17 @@ echo ""
 echo -e "Installing/updating traefik dockerizer proxy"
 
 traefik_path="/usr/local/bin/dk_traefik"
-mkdir -p $traefik_path
-cp setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
-cp -R setup_files/traefik $traefik_path
+sudo mkdir -p $traefik_path
+sudo cp /tmp/dockerizer/setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
+sudo cp -R /tmp/dockerizer/setup_files/traefik $traefik_path
 
 # ---------
 echo ""
 echo -e "Installing/updating dk cli"
 
-cp setup_files/dockerizer_cli /usr/local/bin/dk
-cp setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
-chmod +x /usr/local/bin/dk
+sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
+sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
+sudo chmod +x /usr/local/bin/dk
 
 # ---------
 echo ''
