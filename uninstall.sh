@@ -16,4 +16,3 @@ while ! { test "$answer" = 'y' || test "$answer" = 'n'; }; do
     echo -e "\e[32mEverything uninstalled\e[0m"
   fi
 done
-
