@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3"
 # version: "2.1" is required to allow to docker-compose.override.yml
 # set default values on environment variables.
 
@@ -13,6 +13,9 @@ services:
       MYSQL_DATABASE: $DB_NAME
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
+  #    volumes:
+  #      - ./mariadb-init:/docker-entrypoint-initdb.d # Place init .sql file(s) here.
+  #      - /path/to/mariadb/data/on/host:/var/lib/mysql # Use bind mount
 
   php:
     image: wodby/drupal-php:$PHP_TAG
@@ -25,22 +28,22 @@ services:
       DB_NAME: $DB_NAME
       DB_DRIVER: $DB_DRIVER
       COLUMNS: 80 # Set 80 columns for docker exec -it.
-## Read instructions at https://wodby.com/stacks/drupal/docs/local/xdebug/
-#      PHP_XDEBUG: 1
-#      PHP_XDEBUG_DEFAULT_ENABLE: 1
-#      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
-#      PHP_IDE_CONFIG: serverName=my-ide
-#      PHP_XDEBUG_REMOTE_HOST: host.docker.internal # Docker 18.03+ & Linux/Mac/Win
-#      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1 # Linux, Docker < 18.03
-#      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS, Docker < 18.03
-#      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
+    ## Read instructions at https://wodby.com/stacks/drupal/docs/local/xdebug/
+    #      PHP_XDEBUG: 1
+    #      PHP_XDEBUG_DEFAULT_ENABLE: 1
+    #      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
+    #      PHP_IDE_CONFIG: serverName=my-ide
+    #      PHP_XDEBUG_REMOTE_HOST: host.docker.internal # Docker 18.03+ & Linux/Mac/Win
+    #      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1 # Linux, Docker < 18.03
+    #      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS, Docker < 18.03
+    #      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
     volumes:
-      - ./:/var/www/html
-## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
-#      - ./:/var/www/html:cached # User-guided caching
-#      - docker-sync:/var/www/html # Docker-sync
-## For Xdebug profiler files
-#      - files:/mnt/files
+    - ./:/var/www/html
+  ## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+  #      - ./:/var/www/html:cached # User-guided caching
+  #      - docker-sync:/var/www/html # Docker-sync
+  ## For Xdebug profiler files
+  #      - files:/mnt/files
 
 
   apache:
@@ -81,6 +84,6 @@ services:
     image: mailhog/mailhog
     container_name: "${PROJECT_NAME}_mailhog"
     labels:
-      - 'traefik.backend=mailhog'
-      - 'traefik.port=8025'
-      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+    - 'traefik.backend=mailhog'
+    - 'traefik.port=8025'
+    - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
