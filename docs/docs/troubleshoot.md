@@ -33,3 +33,15 @@ We should connect from our web project using this config:
 'password' => 'db',
 'host' => 'foo_mariadb',
 ```
+
+# Chrome shows me "Your connection is not private" when I try to enter to the https dockerized page.
+
+Since dockerizer provides a self signed certificate to allow https localhost development, iy's common to see a warning link this:
+
+![](img/your-connection-is-not-private.png)
+
+The solution at chrome is to open a new tab and paste this command: `chrome://flags/#allow-insecure-localhost` mark the option to "enabled" and restart the browser:
+
+![](img/conf-chrome-allow-https-self-signed.png) 
+
+Now chrome will show the page without prompting you with "Your connection is not private" anymore.
