@@ -1,4 +1,3 @@
-# Commands
 Thanks to smartcd (installed when you ran install.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.
 
 Currently there're the following common commands:

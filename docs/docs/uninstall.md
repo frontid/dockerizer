@@ -1,4 +1,3 @@
-# Uninstall
 If you want to uninstall dockerizer just run this command:
 
 ```bash
