@@ -2,7 +2,7 @@
 A brief of what install script will do:
 
 * Install **smartcd** if not installed (will be prompted for configuration. Just leave all options by default).
-* Installs a traefik service (at `/usr/local/bin/tdk_traefik`).  
+* Installs a traefik service (at `/usr/local/bin/dk_traefik`).  
 * Installs `dk` cli.
 
 To install dockerizer run:
