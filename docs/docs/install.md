@@ -16,6 +16,7 @@ Dockerizer works on a high level of your project and the first step is to clone 
 
 ```bash
 dk new myproject_dockerized
+cd myproject_dockerized
 git clone git@github.com:YOU/YOUR-PROJECT.git web
 ```
 
@@ -29,6 +30,7 @@ If your project already has `.docker.env` pushed on your project follow these st
 
 ```bash
 dk new myproject_dockerized
+cd myproject_dockerized
 git clone git@github.com:YOU/YOUR-PROJECT.git web
 dk start
 ```
