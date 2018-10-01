@@ -1,6 +1,4 @@
 version: "3"
-# version: "2.1" is required to allow to docker-compose.override.yml
-# set default values on environment variables.
 
 services:
 
