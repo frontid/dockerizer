@@ -10,5 +10,7 @@ fi
 source $HOME/.smartcd_config
 source $HOME/.smartcd/scripts$PWD/bash_enter
 
+chmod +x bin/ -R
+
 echo ''
 echo -e "\e[32mSetup finished.\e[0m"
