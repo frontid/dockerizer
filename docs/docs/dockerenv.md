@@ -11,6 +11,7 @@ This is the shared docker configuration file. On it you can configure things lik
 | PROJECT_BASE_PATH        | Base project's path                        | If your project resides in a subdir you can specify it on PROJECT_BASE_PATH                |
 | PHP_MAX_EXECUTION_TIME   | PHP max execution time                     | |
 | PHP_POST_MAX_SIZE        | PHP max $_POST size                        | |
+| PHP_UPLOAD_MAX_FILESIZE  | PHP max $_POST file size                   | |
 | PHP_MEMORY_LIMIT         | PHP apache memory limit (cli is unlimited) | |
 
 For the rest of available variables please see  [https://github.com/wodby/docker4drupal](https://github.com/wodby/docker4drupal)
