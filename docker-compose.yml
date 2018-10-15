@@ -36,10 +36,10 @@ services:
     #      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS, Docker < 18.03
     #      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
     volumes:
-    # - ./:/var/www/html
+      - ./:/var/www/html
   ## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
       # - ./:/var/www/html:cached # User-guided caching
-      - docker-sync:/var/www/html:nocopy # Docker-sync
+      # - docker-sync-test:/var/www/html:nocopy # Docker-sync
   ## For Xdebug profiler files
   #      - files:/mnt/files
 
@@ -55,10 +55,10 @@ services:
       APACHE_VHOST_PRESET: php
       APACHE_DOCUMENT_ROOT: /var/www/html/web
     volumes:
-      # - ./:/var/www/html
+      - ./:/var/www/html
 # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
       # - ./:/var/www/html:cached # User-guided caching
-      - docker-sync:/var/www/html:nocopy # Docker-sync
+      # - docker-sync-test:/var/www/html:nocopy # Docker-sync
     labels:
       - 'traefik.backend=apache'
       - 'traefik.port=80'
@@ -85,10 +85,3 @@ services:
     - 'traefik.backend=mailhog'
     - 'traefik.port=8025'
     - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
-
-volumes:
-## Docker-sync for macOS users
-  docker-sync:
-    external: true
-## For Xdebug profiler
-#  files:

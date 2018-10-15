@@ -20,8 +20,9 @@ services:
       PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
       PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-32M}
       SSH_AUTH_SOCK: /ssh-agent
-    # volumes:
+    volumes:
     #   - $SSH_CREDENTIALS:/ssh-agent
+      - "docker-sync-${PROJECT_NAME}:/var/www/html:nocopy"
 
   apache:
     network_mode: traefik_default
@@ -43,7 +44,8 @@ services:
       # Minimal modifications to allow subdomain wildcard. Any URL that does not match with
       # taken domains liske pma."project".localhost will fall intro apache container.
       - 'traefik.frontend.rule=HostRegexp:${PROJECT_BASE_URL}, {subdomain:[^.]+}.${PROJECT_BASE_URL}'
-
+    volumes:
+      - - "docker-sync-${PROJECT_NAME}:/var/www/html:nocopy"
   pma:
     network_mode: traefik_default
     environment:
@@ -68,7 +70,7 @@ services:
     network_mode: traefik_default
     volumes:
       # - ./:/var/www/html:cached
-      - docker-sync:/var/www/html:nocopy # Docker-sync
+      - docker-sync-test:/var/www/html:nocopy # Docker-sync
     command: tail -f /dev/null
 
 #  postgres:
@@ -94,3 +96,10 @@ services:
 #      PGDATA: /var/lib/postgresql/data/pgdata
 #    volumes:
 #      - ./:/var/www/html
+
+volumes:
+## Docker-sync for macOS users
+  "docker-sync${PROJECT_NAME}":
+    external: true
+## For Xdebug profiler
+#  files:
