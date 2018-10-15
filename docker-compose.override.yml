@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 
 services:
 
@@ -22,7 +22,7 @@ services:
       SSH_AUTH_SOCK: /ssh-agent
     volumes:
     #   - $SSH_CREDENTIALS:/ssh-agent
-      - "docker-sync-${PROJECT_NAME}:/var/www/html:nocopy"
+      - docker-sync:/var/www/html:nocopy
 
   apache:
     network_mode: traefik_default
@@ -45,7 +45,7 @@ services:
       # taken domains liske pma."project".localhost will fall intro apache container.
       - 'traefik.frontend.rule=HostRegexp:${PROJECT_BASE_URL}, {subdomain:[^.]+}.${PROJECT_BASE_URL}'
     volumes:
-      - - "docker-sync-${PROJECT_NAME}:/var/www/html:nocopy"
+      - docker-sync:/var/www/html:nocopy
   pma:
     network_mode: traefik_default
     environment:
@@ -70,7 +70,7 @@ services:
     network_mode: traefik_default
     volumes:
       # - ./:/var/www/html:cached
-      - docker-sync-test:/var/www/html:nocopy # Docker-sync
+      - docker-sync:/var/www/html:nocopy # Docker-sync
     command: tail -f /dev/null
 
 #  postgres:
@@ -99,7 +99,6 @@ services:
 
 volumes:
 ## Docker-sync for macOS users
-  "docker-sync${PROJECT_NAME}":
-    external: true
-## For Xdebug profiler
-#  files:
+  docker-sync:
+      external: true
+      name: "docker-sync-${PROJECT_NAME}"
