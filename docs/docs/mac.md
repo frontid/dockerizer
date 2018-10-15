@@ -1,5 +1,3 @@
-# Mac support
-
 # Requirements
 
 ```
@@ -11,7 +9,7 @@ brew install bash
 
 Brew  ([Homebrew](http://brew.sh/)) is a tool you need under OSX to install / easy compile other tools.
 
-## Installation
+# Installation
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/frontid/dockerizer/mac-support/install.sh)
@@ -45,7 +43,7 @@ docker-sync start
 dk start
 ```
 
-## Debug
+# Debug
 
 For debugging it's necessary add the server into phpstorm. When you active the debugger, you can see a message like this:
 
