@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+
+  php:
+    environment:
+      PHP_FPM_USER: 501
+      PHP_FPM_GROUP: 20
+      
+    volumes:
+      - docker-sync:/var/www/html:nocopy
+      
+  
+  apache:
+    volumes:
+      - docker-sync:/var/www/html/:nocopy
+      
+
+  frontend:
+    volumes:
+      - docker-sync:/var/www/html:nocopy
+      
+
+volumes:
+  docker-sync:
+      external: true
+      name: "docker-sync-${PROJECT_NAME}"

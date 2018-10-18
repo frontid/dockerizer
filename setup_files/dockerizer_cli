@@ -16,15 +16,46 @@ _docker_project() {
         exit 1
     fi
 
+    # Create temporal files for ssh configuration.
+    if [[ "$1" == "up -d" ]]; then
+        # temporal file with ssh id_rsa.
+        if [[ -f ~/.ssh/id_rsa ]]; then
+            cat ~/.ssh/id_rsa > .id
+        fi
 
-    docker-compose -f $PWD/docker-compose.yml -f $PWD/docker-compose.override.yml $1
+        # temporal file with ssh config.
+        if [[ -f ~/.ssh/config ]]; then
+            cat ~/.ssh/config > .ssh_config
+        fi
+    fi
+
+    ARGS="-f $PWD/docker-compose.yml -f $PWD/docker-compose.override.yml"
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        if [[ "$1" == "up -d" ]]; then
+            ARGS="${ARGS} -f $PWD/docker-compose.override.mac.yml"
+            docker-sync start
+        elif [[ "$1" == "stop" ]]; then
+            docker-sync stop
+        fi
+    fi
+
+    docker-compose ${ARGS} $1
+
+    # Remove temporal files
+    if [[ -f .id ]]; then
+        rm -rf .id
+    fi
+
+    if [[ -f .ssh_config ]]; then
+        rm -rf .ssh_config
+    fi
 }
 
 # run docker-compose commands on traefik service.
 _traefik_service() {
     docker-compose -f /usr/local/bin/dk_traefik/docker-compose.yml $1
 }
-
 
 # -----------------------------------------------
 
