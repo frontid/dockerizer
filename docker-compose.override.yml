@@ -12,7 +12,6 @@ services:
       PHP_XDEBUG_REMOTE_AUTOSTART: 1
       PHP_XDEBUG_DEFAULT_ENABLE: 1
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
-      PHP_IDE_CONFIG: serverName=my-ide
       #  Please see DOCKER_HOST -> https://github.com/docker/for-linux/issues/264
       PHP_XDEBUG_REMOTE_HOST: $DOCKER_PROJECT_HOST
       PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-120}
