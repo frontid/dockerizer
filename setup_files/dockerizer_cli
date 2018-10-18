@@ -73,7 +73,7 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
 
     echo "Cloning a new version of dockerizer"
 
-    git clone https://github.com/frontid/dockerizer.git /tmp/dockerizer
+    git clone git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
     echo "------------------------"
     echo "Installing..."
