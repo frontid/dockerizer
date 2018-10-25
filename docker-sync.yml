@@ -3,11 +3,14 @@ version: "2"
 syncs:
   "docker-sync-${PROJECT_NAME}":
     src: './'
+    sync_args: '-prefer newer'
+    sync_userid: '501' # userid of the user "me" in the container
+    sync_groupid: '20'
     sync_strategy: 'native_osx'
-    sync_userid: '501:82'
     sync_excludes:
       - '.DS_Store'
       - '.git'
       - '.gitignore'
       - '.idea'
       - '.id'
+      - '.ssh_config'
