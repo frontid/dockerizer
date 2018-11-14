@@ -12,6 +12,7 @@ This is the shared docker configuration file. On it you can configure things lik
 | PHP_POST_MAX_SIZE        | PHP max $_POST size                        | |
 | PHP_UPLOAD_MAX_FILESIZE  | PHP max $_POST file size                   | |
 | PHP_MEMORY_LIMIT         | PHP apache memory limit (cli is unlimited) | |
+| PHP_TAG                  | Sets the php container/version to be used. | For **linux and mac there are two group of possible values**. *"7.1-dev-4.8.0"* format for linux and *"7.2-dev-macos-4.8.0"* for mac.|
 
 For the rest of available variables please see  [https://github.com/wodby/docker4drupal](https://github.com/wodby/docker4drupal)
 

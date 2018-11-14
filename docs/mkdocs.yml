@@ -9,4 +9,5 @@ pages:
     - Requirements: requirements.md
     - Uninstall: uninstall.md
     - Troubleshoot: troubleshoot.md
+    - Mac: mac.md
 theme: readthedocs

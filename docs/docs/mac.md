@@ -1,30 +1,9 @@
-# Requirements
+Dockerizer is compatible with mac and out of the box will be **almost** ready to use.  
 
-```bash
-brew install docker-sync
-brew install unision
-brew install ugenmayer/dockersync/unox
-brew install bash
-```
+"**Almost**" means that you will need to do a small override since **Mac has it own PHP container**. 
 
-Brew  ([Homebrew](http://brew.sh/)) is a tool you need under OSX to install / easy compile other tools.
+Normally on a new or an existent project you will need a `.docker.env` file configured for your project (See [install page](install) instructions) and this file will contain the PHP container the project will use and normally will be a linux version.
+  
+If all your team is using linux it is ok, but **if your team uses mainly Mac** then you can select a mac container as a default PHP container (See [.docker.env file options](dockerenv) for more references).
 
-# Config
-
-You should change the image for php container. So, you should create at your `web` directory a file called `.docker.override.env` with the follow contain:
-
-```yml
-PHP_TAG=7.2-dev-macos-4.8.0
-```
-
-That's all, now run `dk start` and happy coding!
-
-# Debug
-
-For debugging it's necessary add the server into phpstorm. When you active the debugger, you can see a message like this:
-
-    Can't find a source position. Server with name 'my-ide' doesn't exist.
-
-So, you need to add a server called `my-ide`.
-
-Also, you need to configure a map folder into phpstorm, for this, you need to check **Use path mappings** option and configure the root folder to **/var/www/html/web**.
+On the other hand, **If your team uses linux and you need a mac container for your local development**, the way to use a mac version only at your localhost is via `.docker.override.env` (See [.docker.env file options](dockerenv) for more references).
