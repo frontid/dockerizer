@@ -1,4 +1,5 @@
 version: "3.4"
+# version: "3.4" is required to allow to docker-compose.override.yml and docker for mac.
 
 services:
 
