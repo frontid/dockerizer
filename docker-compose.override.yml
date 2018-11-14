@@ -24,7 +24,7 @@ services:
       SSH_PRIVATE_KEY: 1
     volumes:
       - ./.id:/etc/gotpl/id_rsa.tmpl
-      - ./.ssh_config:/ect/gotpl/ssh_config.tmpl
+      - ./.ssh_config:/etc/gotpl/ssh_config.tmpl
 
   apache:
     network_mode: traefik_default
