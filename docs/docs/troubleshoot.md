@@ -1,4 +1,4 @@
-# I cant connect to the DB as I was doing it on my localhost
+# I can't connect to the DB as I was doing it on my localhost
 Since the DB it's a independent container, the right way to connect to it is point to the remote container like this:
 
 ```
