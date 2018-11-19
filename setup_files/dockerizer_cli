@@ -18,6 +18,12 @@ _docker_project() {
 
     # Create temporal files for ssh configuration.
     if [[ "$1" == "up -d" ]]; then
+
+        # We need to create empty files since docker will trend to
+        # create dirs instead files. It's a known bug.
+        touch .id
+        touch .ssh_config
+
         # temporal file with ssh id_rsa.
         if [[ -f ~/.ssh/id_rsa ]]; then
             cat ~/.ssh/id_rsa > .id
