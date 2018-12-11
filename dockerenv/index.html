@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>The .docker.env file - Dockerizer</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "The .docker.env file";
+    var mkdocs_page_input_path = "dockerenv.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Dockerizer</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../install/">Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../domains/">Domains</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dk/">dk the dockerizer cli</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">The .docker.env file</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#dockerenv-file">.docker.env file</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../commands/">Available commands</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uninstall/">Uninstall</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshoot/">Troubleshoot</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mac/">Mac</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Dockerizer</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>The .docker.env file</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dockerenv-file">.docker.env file</h1>
+<p>This is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.</p>
+<table>
+<thead>
+<tr>
+<th>VAR</th>
+<th>MEANING</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROJECT_NAME</td>
+<td>The project base name</td>
+<td>Needs to be customized</td>
+</tr>
+<tr>
+<td>PROJECT_BASE_URL</td>
+<td>The project url</td>
+<td>Needs to be customized</td>
+</tr>
+<tr>
+<td>DOCKER_PROJECT_HOST</td>
+<td>IP of the docker host</td>
+<td>In order to xdebug you need the right docker host ip. Normally is 172.17.0.1 or 172.17.0.2</td>
+</tr>
+<tr>
+<td>PROJECT_BASE_PATH</td>
+<td>Base project's path</td>
+<td>If your project resides in a subdir you can specify it on PROJECT_BASE_PATH</td>
+</tr>
+<tr>
+<td>PHP_MAX_EXECUTION_TIME</td>
+<td>PHP max execution time</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP_POST_MAX_SIZE</td>
+<td>PHP max $_POST size</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP_UPLOAD_MAX_FILESIZE</td>
+<td>PHP max $_POST file size</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP_MEMORY_LIMIT</td>
+<td>PHP apache memory limit (cli is unlimited)</td>
+<td></td>
+</tr>
+<tr>
+<td>PHP_TAG</td>
+<td>Sets the php container/version to be used.</td>
+<td>For <strong>linux and mac there are two group of possible values</strong>. <em>"7.1-dev-4.8.0"</em> format for linux and <em>"7.2-dev-macos-4.8.0"</em> for mac.</td>
+</tr>
+</tbody>
+</table>
+<p>For the rest of available variables please see  <a href="https://github.com/wodby/docker4drupal">https://github.com/wodby/docker4drupal</a></p>
+<p>Since <code>.docker.env</code> is a common shared file you will not be able to make personal modifications on it like your docker IP since it would be different of your colleague's IP [<code>DOCKER_PROJECT_HOST</code>]. For this king of customizations you have <code>.docker.override.env</code>  </p>
+<p><code>.docker.override.env</code> should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original <code>.docker.env</code> file.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../commands/" class="btn btn-neutral float-right" title="Available commands">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../dk/" class="btn btn-neutral" title="dk the dockerizer cli"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../dk/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../commands/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

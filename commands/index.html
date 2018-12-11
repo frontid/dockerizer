@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Available commands - Dockerizer</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Available commands";
+    var mkdocs_page_input_path = "commands.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Dockerizer</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../install/">Install</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../domains/">Domains</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dk/">dk the dockerizer cli</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../dockerenv/">The .docker.env file</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Available commands</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#bower">bower</a></li>
+    
+
+    <li class="toctree-l2"><a href="#bundle">bundle</a></li>
+    
+
+    <li class="toctree-l2"><a href="#compass">compass</a></li>
+    
+
+    <li class="toctree-l2"><a href="#composer">composer</a></li>
+    
+
+    <li class="toctree-l2"><a href="#drush">drush</a></li>
+    
+
+    <li class="toctree-l2"><a href="#drupal-drupal-console">drupal (drupal console)</a></li>
+    
+
+    <li class="toctree-l2"><a href="#gem">gem</a></li>
+    
+
+    <li class="toctree-l2"><a href="#grunt">grunt</a></li>
+    
+
+    <li class="toctree-l2"><a href="#gulp">gulp</a></li>
+    
+
+    <li class="toctree-l2"><a href="#node">node</a></li>
+    
+
+    <li class="toctree-l2"><a href="#npm">npm</a></li>
+    
+
+    <li class="toctree-l2"><a href="#yarn">yarn</a></li>
+    
+
+    <li class="toctree-l2"><a href="#logs">logs</a></li>
+    
+
+    <li class="toctree-l2"><a href="#cmd">cmd</a></li>
+    
+
+    <li class="toctree-l2"><a href="#expose">expose</a></li>
+    
+
+    <li class="toctree-l2"><a href="#adding-new-command">Adding new command</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../requirements/">Requirements</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uninstall/">Uninstall</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../troubleshoot/">Troubleshoot</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mac/">Mac</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Dockerizer</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Available commands</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Thanks to smartcd (installed when you ran install.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.</p>
+<p>Currently there're the following common commands:</p>
+<h2 id="bower">bower</h2>
+<p>Accepts all common software params. </p>
+<hr />
+<h2 id="bundle">bundle</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="compass">compass</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="composer">composer</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="drush">drush</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="drupal-drupal-console">drupal (drupal console)</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="gem">gem</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="grunt">grunt</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="gulp">gulp</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="node">node</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="npm">npm</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="yarn">yarn</h2>
+<p>Accepts all common software params.</p>
+<hr />
+<h2 id="logs">logs</h2>
+<p><code>logs</code> shows the logs of all containers or of a specific one. This command can be run anywhere inside the dockerized dir and project.</p>
+<p>The available options are:<br />
+<code>-f</code> Follow log output.</p>
+<p><strong>Usage</strong><br />
+Show logs of all containers: <code>logs</code><br />
+Show logs of an specific container: <code>logs apache</code>, <code>logs php</code>, <code>logs masriadb</code><br />
+Show logs of an specific container with the follow option set: <code>logs -f apache</code></p>
+<hr />
+<h2 id="cmd">cmd</h2>
+<p><code>cmd</code> allows you to run arbitrary commands like <code>ls</code>, <code>tail</code> inside the <strong>container</strong>. Use this command when there is no an alias (see "common commands").  </p>
+<p><strong>Usage</strong><br />
+<code>cmd php ls -l</code> where "php" is the container and "ls -l" is the sent command.</p>
+<hr />
+<h2 id="expose">expose</h2>
+<p><code>expose</code> (Drops a container shell).<br />
+By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type <code>expose mariadb</code>.<br />
+If you want to enter as <strong>root</strong> just add <code>--root</code>: <code>expose apache --root</code>.</p>
+<p><strong>Available containers are:</strong> </p>
+<ul>
+<li>php (by default)</li>
+<li>mariadb (mysql)</li>
+<li>apache</li>
+<li>frontend</li>
+</ul>
+<p><strong>Usage</strong><br />
+<code>expose</code> drops a shell of php (default)<br />
+<code>expose apache</code> drops a shell of apache<br />
+<code>expose apache --root</code> drops a root shell of apache</p>
+<hr />
+<h1 id="adding-new-command">Adding new command</h1>
+<p>To create a new "command" like "drush" does just create a new empty file at ./bin dir and fill with this code:</p>
+<pre><code>#!/bin/bash
+source _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
+</code></pre>
+
+<p>CONTAINER NAME: The container where the command resides.
+COMMAND: the command to be run. </p>
+<p>And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it. </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../requirements/" class="btn btn-neutral float-right" title="Requirements">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../dockerenv/" class="btn btn-neutral" title="The .docker.env file"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../dockerenv/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../requirements/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
