@@ -13,19 +13,18 @@
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../css/highlight.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Install";
     var mkdocs_page_input_path = "install.md";
-    var mkdocs_page_url = null;
+    var mkdocs_page_url = "/install/";
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -39,7 +38,7 @@
         <a href=".." class="icon icon-home"> Dockerizer</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    <input type="text" name="q" placeholder="Search docs" />
   </form>
 </div>
       </div>
@@ -162,7 +161,7 @@ git clone git@github.com:YOU/YOUR-PROJECT.git web
 </code></pre>
 
 <p>Next you need "dockerize" a project. To accomplish that the only thing you need to do is  create <code>.docker.env</code> and commit the preferences on the file.<br />
-Dockerizer provides you an example. Copy <code>example.docker.env</code> as <code>.docker.env</code> at your "web" dir and configure it (See <strong><a href="/dockerenv">.docker.env</a></strong> documentation for a more detailed explanation). </p>
+Dockerizer provides you an example. Copy <code>example.docker.env</code> as <code>.docker.env</code> at your "web" dir and configure it (See <strong><a href="../dockerenv">.docker.env</a></strong> documentation for a more detailed explanation). </p>
 <p>That's all, now run <code>dk start</code> and happy coding!</p>
 <h1 id="run-a-configured-project">Run a configured project</h1>
 <p>If your project already has <code>.docker.env</code> pushed on your project follow these steps.</p>
@@ -215,8 +214,9 @@ dk start
     </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
 
 </body>
 </html>

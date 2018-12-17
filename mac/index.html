@@ -13,19 +13,18 @@
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../css/highlight.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "Mac";
     var mkdocs_page_input_path = "mac.md";
-    var mkdocs_page_url = null;
+    var mkdocs_page_url = "/mac/";
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -39,7 +38,7 @@
         <a href=".." class="icon icon-home"> Dockerizer</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    <input type="text" name="q" placeholder="Search docs" />
   </form>
 </div>
       </div>
@@ -135,9 +134,9 @@
               
                 <p>Dockerizer is compatible with mac and out of the box will be <strong>almost</strong> ready to use.  </p>
 <p>"<strong>Almost</strong>" means that you will need to do a small override since <strong>Mac has it own PHP container</strong>. </p>
-<p>Normally on a new or an existent project you will need a <code>.docker.env</code> file configured for your project (See <a href="install">install page</a> instructions) and this file will contain the PHP container the project will use and normally will be a linux version.</p>
-<p>If all your team is using linux it is ok, but <strong>if your team uses mainly Mac</strong> then you can select a mac container as a default PHP container (See <a href="dockerenv">.docker.env file options</a> for more references).</p>
-<p>On the other hand, <strong>If your team uses linux and you need a mac container for your local development</strong>, the way to use a mac version only at your localhost is via <code>.docker.override.env</code> (See <a href="dockerenv">.docker.env file options</a> for more references).</p>
+<p>Normally on a new or an existent project you will need a <code>.docker.env</code> file configured for your project (See <a href="../install">install page</a> instructions) and this file will contain the PHP container the project will use and normally will be a linux version.</p>
+<p>If all your team is using linux it is ok, but <strong>if your team uses mainly Mac</strong> then you can select a mac container as a default PHP container (See <a href="../dockerenv">.docker.env file options</a> for more references).</p>
+<p>On the other hand, <strong>If your team uses linux and you need a mac container for your local development</strong>, the way to use a mac version only at your localhost is via <code>.docker.override.env</code> (See <a href="../dockerenv">.docker.env file options</a> for more references).</p>
               
             </div>
           </div>
@@ -178,8 +177,9 @@
     </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
 
 </body>
 </html>

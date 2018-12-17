@@ -13,19 +13,18 @@
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="../css/highlight.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "dk the dockerizer cli";
     var mkdocs_page_input_path = "dk.md";
-    var mkdocs_page_url = null;
+    var mkdocs_page_url = "/dk/";
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
   
 </head>
 
@@ -39,7 +38,7 @@
         <a href=".." class="icon icon-home"> Dockerizer</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    <input type="text" name="q" placeholder="Search docs" />
   </form>
 </div>
       </div>
@@ -151,7 +150,7 @@
                 <h2 id="dk-the-dockerizer-cli">"dk" the dockerizer cli</h2>
 <p>Dockerizer uses a very simple tool to manage the projects. </p>
 <h2 id="dk-new">dk new</h2>
-<p>This command will prepare a dockerizer dir for you. For example if you run <code>dk new foo</code> it will create <code>foo</code> dir with the dockerizer structure ready to use. So the only thing you need to do is create web dir as mentioned at <a href="/install">Configure a new project</a> on the Install section. </p>
+<p>This command will prepare a dockerizer dir for you. For example if you run <code>dk new foo</code> it will create <code>foo</code> dir with the dockerizer structure ready to use. So the only thing you need to do is create web dir as mentioned at <a href="../install">Configure a new project</a> on the Install section. </p>
 <h2 id="dk-on-projects">dk on projects</h2>
 <p>When you have a configured "dockerized" project you will want to start, stop, and restart it right?<br />
 Well. Just go to the project and run <code>dk start|stop|restart</code>.</p>
@@ -204,8 +203,9 @@ Well, run <code>dk stop|start traefik</code> :) (no matter the current path you 
     </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
 
 </body>
 </html>

@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/install/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/domains/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/dk/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/dockerenv/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/commands/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/requirements/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/uninstall/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/troubleshoot/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-11</lastmod>
+     <loc>/mac/</loc>
+     <lastmod>2018-12-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
