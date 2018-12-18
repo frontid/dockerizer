@@ -1,0 +1,6 @@
+#!/bin/bash
+
+user_uid=0
+user_group=0
+# source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+source _command_wrapper 'terminus' 'terminus' $@

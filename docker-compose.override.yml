@@ -72,6 +72,22 @@ services:
       - ./:/var/www/html
     command: tail -f /dev/null
 
+#  terminus:
+#    container_name: ${PROJECT_NAME}_terminus
+#    network_mode: traefik_default
+#    image: quay.io/pantheon-public/build-tools-ci
+#    environment:
+#      TERMINUS_CACHE_DIR: "/terminus/cache"
+#      SSH_AUTH_SOCK: /ssh-agent
+#      MACHINE_TOKEN: $MACHINE_TOKEN
+#      SITE: $SITE
+#    volumes:
+#      - ./storage/terminus:/terminus/cache
+#      - ./:/app:cached
+#      - ./:/var/www/html
+#      - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+#    command: tail -f /dev/null
+
 #  postgres:
 #    container_name: ${PROJECT_NAME}_postgres
 #    image: wodby/postgres:${POSTGRESS_TAG}
