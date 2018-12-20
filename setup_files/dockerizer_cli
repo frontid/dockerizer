@@ -3,6 +3,15 @@
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
+    bin_path=$(which _command_wrapper)
+    
+    if [ -z bin_path ]; then
+        project_path="."
+    else
+        project_path="$(dirname $bin_path)/../"
+    fi
+    cd $project_path > /dev/null
+
     if [ -e web/.docker.env ]; then
 
         if [ -e web/.docker.override.env ]; then
@@ -13,6 +22,7 @@ _docker_project() {
 
     else
         echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/\e[0m"
+        cd - > /dev/null
         exit 1
     fi
 
@@ -56,6 +66,7 @@ _docker_project() {
     if [[ -f .ssh_config ]]; then
         rm -rf .ssh_config
     fi
+    cd - > /dev/null
 }
 
 # run docker-compose commands on traefik service.
