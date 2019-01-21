@@ -8,6 +8,9 @@ services:
   php:
     network_mode: traefik_default
     environment:
+      # Please see Users and permissions -> https://github.com/wodby/php#users-and-permissions
+      PHP_FPM_USER: 1000
+      PHP_FPM_GROUP: 1000
       PHP_XDEBUG: 1
       PHP_XDEBUG_REMOTE_AUTOSTART: 1
       PHP_XDEBUG_DEFAULT_ENABLE: 1
