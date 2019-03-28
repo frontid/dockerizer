@@ -8,15 +8,11 @@ services:
   php:
     network_mode: traefik_default
     environment:
-      # Please see Users and permissions -> https://github.com/wodby/php#users-and-permissions
-      PHP_FPM_USER: 1000
-      PHP_FPM_GROUP: 1000
       PHP_XDEBUG: 1
       PHP_XDEBUG_REMOTE_AUTOSTART: 1
       PHP_XDEBUG_DEFAULT_ENABLE: 1
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
-      #  Please see DOCKER_HOST -> https://github.com/docker/for-linux/issues/264
-      PHP_XDEBUG_REMOTE_HOST: $DOCKER_PROJECT_HOST
+      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1
       PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-120}
       PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-32M}
       PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
@@ -41,10 +37,6 @@ services:
       APACHE_BACKEND_HOST: "${PROJECT_NAME}_php"
       APACHE_DOCUMENT_ROOT: /var/www/html/web/$PROJECT_BASE_PATH
     labels:
-      # Our traefik needs the exact name instead just "apache" since
-      # it holds many containters and each one has it own unique name.
-      traefik.backend: ${PROJECT_NAME}_apache
-
       # Minimal modifications to allow subdomain wildcard. Any URL that does not match with
       # taken domains like pma."project".localhost will fall intro apache container.
       traefik.frontend.rule: HostRegexp:${PROJECT_BASE_URL}, {subdomain:[a-z]+}.${PROJECT_BASE_URL}
@@ -59,13 +51,11 @@ services:
       PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.pma.localhost'
-      - 'traefik.backend=${PROJECT_NAME}_pma'
 
   mailhog:
     network_mode: traefik_default
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.mailhog.localhost'
-      - 'traefik.backend=${PROJECT_NAME}_mailhog'
 
   frontend:
     container_name: ${PROJECT_NAME}_frontend

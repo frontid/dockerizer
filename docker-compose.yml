@@ -26,22 +26,25 @@ services:
       DB_PASSWORD: $DB_PASSWORD
       DB_NAME: $DB_NAME
       DB_DRIVER: $DB_DRIVER
+      PHP_FPM_USER: wodby
+      PHP_FPM_GROUP: wodby
       COLUMNS: 80 # Set 80 columns for docker exec -it.
     ## Read instructions at https://wodby.com/stacks/drupal/docs/local/xdebug/
     #      PHP_XDEBUG: 1
     #      PHP_XDEBUG_DEFAULT_ENABLE: 1
     #      PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
     #      PHP_IDE_CONFIG: serverName=my-ide
-    #      PHP_XDEBUG_REMOTE_HOST: host.docker.internal # Docker 18.03+ & Linux/Mac/Win
-    #      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1 # Linux, Docker < 18.03
+    #      PHP_XDEBUG_REMOTE_HOST: host.docker.internal # Docker 18.03+ Mac/Win
+    #      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1 # Linux
     #      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS, Docker < 18.03
     #      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows, Docker < 18.03
+    #      PHP_XDEBUG_REMOTE_LOG: /tmp/php-xdebug.log
     volumes:
       - ./:/var/www/html
   ## For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
-      # - ./:/var/www/html:cached # User-guided caching
-      # - docker-sync-test:/var/www/html:nocopy # Docker-sync
-  ## For Xdebug profiler files
+  #      - ./:/var/www/html:cached # User-guided caching
+  #      - docker-sync:/var/www/html # Docker-sync
+  ## For XHProf and Xdebug profiler traces
   #      - files:/mnt/files
 
 
@@ -58,10 +61,10 @@ services:
     volumes:
       - ./:/var/www/html
 # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
-      # - ./:/var/www/html:cached # User-guided caching
-      # - docker-sync-test:/var/www/html:nocopy # Docker-sync
+#      - ./:/var/www/html:cached # User-guided caching
+#      - docker-sync:/var/www/html # Docker-sync
     labels:
-      - 'traefik.backend=apache'
+      - 'traefik.backend=${PROJECT_NAME}_apache'
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:${PROJECT_BASE_URL}'
 
@@ -75,7 +78,7 @@ services:
       PHP_UPLOAD_MAX_FILESIZE: 1G
       PHP_MAX_INPUT_VARS: 1G
     labels:
-      - 'traefik.backend=pma'
+      - 'traefik.backend=${PROJECT_NAME}_pma'
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:pma.${PROJECT_BASE_URL}'
 
@@ -83,6 +86,6 @@ services:
     image: mailhog/mailhog
     container_name: "${PROJECT_NAME}_mailhog"
     labels:
-    - 'traefik.backend=mailhog'
-    - 'traefik.port=8025'
-    - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+      - 'traefik.backend=${PROJECT_NAME}_mailhog'
+      - 'traefik.port=8025'
+      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
