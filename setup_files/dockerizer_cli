@@ -10,6 +10,7 @@ _docker_project() {
     else
         project_path="$(dirname $bin_path)/../"
     fi
+
     cd $project_path > /dev/null
 
     if [ -e web/.docker.env ]; then
@@ -74,8 +75,25 @@ _traefik_service() {
     docker-compose -f /usr/local/bin/dk_traefik/docker-compose.yml $1
 }
 
+# run docker-compose commands on traefik service.
+_track_dockerized_project() {
+    touch ~/.dockerizer_track
+
+    if grep -Fxq "$PWD" ~/.dockerizer_track
+    then
+        echo "This path already is tracked."
+    else
+        echo $PWD >> ~/.dockerizer_track
+    fi
+}
+
 # -----------------------------------------------
 
+
+# Temporal solution to add pre-existing projects to the config file.
+if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
+    _track_dockerized_project
+fi
 
 # Start project?
 if [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
@@ -110,6 +128,7 @@ if [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
     git clone https://github.com/frontid/dockerizer.git $2
     cd $2
     ./setup.sh
+    _track_dockerized_project
 fi
 
 # Self update dockerizer
@@ -130,5 +149,20 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
     sudo chmod +x /usr/local/bin/dk
+
+    echo "Updating all dockerized instances."
+    echo ""
+
+    # Just to prevent errors.
+    touch ~/.dockerizer_track
+
+    while read path; do
+        cd "$path"
+        echo "Updating $path"
+        git reset --hard > /dev/null
+        git pull origin master
+        echo ""
+    done <~/.dockerizer_track
+
     echo "Done."
 fi
