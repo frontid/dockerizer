@@ -1,4 +1,6 @@
 site_name: Dockerizer
+repo_url: https://github.com/frontid/dockerizer
+edit_uri: ""
 pages:
     - Home: index.md
     - Install: install.md
