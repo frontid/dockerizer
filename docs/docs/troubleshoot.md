@@ -36,10 +36,17 @@ We should connect from our web project using this config:
 
 Since dockerizer provides a self signed certificate to allow https localhost development, iy's common to see a warning link this:
 
-![](img/your-connection-is-not-private.png)
+[![](img/your-connection-is-not-private.png)](img/your-connection-is-not-private.png)
 
 The solution at chrome is to open a new tab and paste this command: `chrome://flags/#allow-insecure-localhost` mark the option to "enabled" and restart the browser:
 
-![](img/conf-chrome-allow-https-self-signed.png) 
+[![](img/conf-chrome-allow-https-self-signed.png) ](img/conf-chrome-allow-https-self-signed.png)
 
 Now chrome will show the page without prompting you with "Your connection is not private" anymore.
+
+# I want PhpStorm stop debugging drush!
+
+Just disable those options at your PhpStorm settings and you are done.
+
+[![](img/drush-disable-xdebug-phpstorm.png)](img/drush-disable-xdebug-phpstorm.png) 
+
