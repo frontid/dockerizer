@@ -157,11 +157,6 @@
 <td>Needs to be customized</td>
 </tr>
 <tr>
-<td>DOCKER_PROJECT_HOST</td>
-<td>IP of the docker host</td>
-<td>In order to xdebug you need the right docker host ip. Normally is 172.17.0.1 or 172.17.0.2</td>
-</tr>
-<tr>
 <td>PROJECT_BASE_PATH</td>
 <td>Base project's path</td>
 <td>If your project resides in a subdir you can specify it on PROJECT_BASE_PATH</td>
@@ -194,7 +189,7 @@
 </tbody>
 </table>
 <p>For the rest of available variables please see  <a href="https://github.com/wodby/docker4drupal">https://github.com/wodby/docker4drupal</a></p>
-<p>Since <code>.docker.env</code> is a common shared file you will not be able to make personal modifications on it like your docker IP since it would be different of your colleague's IP [<code>DOCKER_PROJECT_HOST</code>]. For this king of customizations you have <code>.docker.override.env</code>  </p>
+<p>Since <code>.docker.env</code> is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have <code>.docker.override.env</code>  </p>
 <p><code>.docker.override.env</code> should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original <code>.docker.env</code> file.</p>
               
             </div>

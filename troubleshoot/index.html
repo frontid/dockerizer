@@ -98,6 +98,9 @@
     <li class="toctree-l2"><a href="#chrome-shows-me-your-connection-is-not-private-when-i-try-to-enter-to-the-https-dockerized-page">Chrome shows me "Your connection is not private" when I try to enter to the https dockerized page.</a></li>
     
 
+    <li class="toctree-l2"><a href="#i-want-phpstorm-stop-debugging-drush">I want PhpStorm stop debugging drush!</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -170,10 +173,13 @@ DB_DRIVER=mysql
 
 <h1 id="chrome-shows-me-your-connection-is-not-private-when-i-try-to-enter-to-the-https-dockerized-page">Chrome shows me "Your connection is not private" when I try to enter to the https dockerized page.</h1>
 <p>Since dockerizer provides a self signed certificate to allow https localhost development, iy's common to see a warning link this:</p>
-<p><img alt="" src="../img/your-connection-is-not-private.png" /></p>
+<p><a href="../img/your-connection-is-not-private.png"><img alt="" src="../img/your-connection-is-not-private.png" /></a></p>
 <p>The solution at chrome is to open a new tab and paste this command: <code>chrome://flags/#allow-insecure-localhost</code> mark the option to "enabled" and restart the browser:</p>
-<p><img alt="" src="../img/conf-chrome-allow-https-self-signed.png" /> </p>
+<p><a href="../img/conf-chrome-allow-https-self-signed.png"><img alt="" src="../img/conf-chrome-allow-https-self-signed.png" /> </a></p>
 <p>Now chrome will show the page without prompting you with "Your connection is not private" anymore.</p>
+<h1 id="i-want-phpstorm-stop-debugging-drush">I want PhpStorm stop debugging drush!</h1>
+<p>Just disable those options at your PhpStorm settings and you are done.</p>
+<p><a href="../img/drush-disable-xdebug-phpstorm.png"><img alt="" src="../img/drush-disable-xdebug-phpstorm.png" /></a> </p>
               
             </div>
           </div>
