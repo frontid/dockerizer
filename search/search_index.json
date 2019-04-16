@@ -197,7 +197,7 @@
         }, 
         {
             "location": "/troubleshoot/", 
-            "text": "I can't connect to the DB as I was doing it on my localhost\n\n\nSince the DB it's a independent container, the right way to connect to it is point to the remote container like this:\n\n\n'database' =\n '[DB_NAME]',\n'username' =\n '[DB_USER]',\n'password' =\n '[DB_PASSWORD]',\n'host' =\n '[PROJECTNAME]_[DB_HOST]',\n\n\n\n\nBasically we are using the configured db params at \n.docker.env\n. For example if we have a .docker.env configured like this: \n\n\n...\n\nPROJECTNAME=foo\n\nDB_NAME=db\nDB_USER=db\nDB_PASSWORD=db\nDB_ROOT_PASSWORD=root\nDB_HOST=mariadb\nDB_DRIVER=mysql\n\n....\n\n\n\n\nWe should connect from our web project using this config:\n\n\n'database' =\n 'db',\n'username' =\n 'db',\n'password' =\n 'db',\n'host' =\n 'foo_mariadb',\n\n\n\n\nChrome shows me \"Your connection is not private\" when I try to enter to the https dockerized page.\n\n\nSince dockerizer provides a self signed certificate to allow https localhost development, iy's common to see a warning link this:\n\n\n\n\nThe solution at chrome is to open a new tab and paste this command: \nchrome://flags/#allow-insecure-localhost\n mark the option to \"enabled\" and restart the browser:\n\n\n \n\n\nNow chrome will show the page without prompting you with \"Your connection is not private\" anymore.\n\n\nI want PhpStorm stop debugging drush!\n\n\nJust disable those options at your PhpStorm settings and you are done.", 
+            "text": "I can't connect to the DB as I was doing it on my localhost\n\n\nSince the DB it's a independent container, the right way to connect to it is point to the remote container like this:\n\n\n'database' =\n '[DB_NAME]',\n'username' =\n '[DB_USER]',\n'password' =\n '[DB_PASSWORD]',\n'host' =\n '[PROJECTNAME]_[DB_HOST]',\n\n\n\n\nBasically we are using the configured db params at \n.docker.env\n. For example if we have a .docker.env configured like this: \n\n\n...\n\nPROJECTNAME=foo\n\nDB_NAME=db\nDB_USER=db\nDB_PASSWORD=db\nDB_ROOT_PASSWORD=root\nDB_HOST=mariadb\nDB_DRIVER=mysql\n\n....\n\n\n\n\nWe should connect from our web project using this config:\n\n\n'database' =\n 'db',\n'username' =\n 'db',\n'password' =\n 'db',\n'host' =\n 'foo_mariadb',\n\n\n\n\nChrome shows me \"Your connection is not private\" when I try to enter to the https dockerized page.\n\n\nSince dockerizer provides a self signed certificate to allow https localhost development, iy's common to see a warning link this:\n\n\n\n\nThe solution at chrome is to open a new tab and paste this command: \nchrome://flags/#allow-insecure-localhost\n mark the option to \"enabled\" and restart the browser:\n\n\n \n\n\nNow chrome will show the page without prompting you with \"Your connection is not private\" anymore.\n\n\nI want PhpStorm stop debugging drush!\n\n\nJust disable those options at your PhpStorm settings and you are done.\n\n\n \n\n\nHow can I debug drush scripts in drupal 8?\n\n\nDue to drupal-launcher loses it's mind when you are trying to debug a script. You need to bypass it calling directly the real drush command like this:\n\n\ncmd php ./vendor/drush/drush/drush foo:command", 
             "title": "Troubleshoot"
         }, 
         {
@@ -214,6 +214,11 @@
             "location": "/troubleshoot/#i-want-phpstorm-stop-debugging-drush", 
             "text": "Just disable those options at your PhpStorm settings and you are done.", 
             "title": "I want PhpStorm stop debugging drush!"
+        }, 
+        {
+            "location": "/troubleshoot/#how-can-i-debug-drush-scripts-in-drupal-8", 
+            "text": "Due to drupal-launcher loses it's mind when you are trying to debug a script. You need to bypass it calling directly the real drush command like this:  cmd php ./vendor/drush/drush/drush foo:command", 
+            "title": "How can I debug drush scripts in drupal 8?"
         }, 
         {
             "location": "/mac/", 

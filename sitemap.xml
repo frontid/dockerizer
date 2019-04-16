@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/install/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/domains/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/dk/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/dockerenv/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/commands/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/requirements/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/uninstall/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/troubleshoot/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>/mac/</loc>
-     <lastmod>2019-04-03</lastmod>
+     <lastmod>2019-04-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

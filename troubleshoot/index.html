@@ -101,6 +101,9 @@
     <li class="toctree-l2"><a href="#i-want-phpstorm-stop-debugging-drush">I want PhpStorm stop debugging drush!</a></li>
     
 
+    <li class="toctree-l2"><a href="#how-can-i-debug-drush-scripts-in-drupal-8">How can I debug drush scripts in drupal 8?</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -180,6 +183,9 @@ DB_DRIVER=mysql
 <h1 id="i-want-phpstorm-stop-debugging-drush">I want PhpStorm stop debugging drush!</h1>
 <p>Just disable those options at your PhpStorm settings and you are done.</p>
 <p><a href="../img/drush-disable-xdebug-phpstorm.png"><img alt="" src="../img/drush-disable-xdebug-phpstorm.png" /></a> </p>
+<h1 id="how-can-i-debug-drush-scripts-in-drupal-8">How can I debug drush scripts in drupal 8?</h1>
+<p>Due to drupal-launcher loses it's mind when you are trying to debug a script. You need to bypass it calling directly the real drush command like this:</p>
+<p><code>cmd php ./vendor/drush/drush/drush foo:command</code> </p>
               
             </div>
           </div>
