@@ -50,3 +50,10 @@ Just disable those options at your PhpStorm settings and you are done.
 
 [![](img/drush-disable-xdebug-phpstorm.png)](img/drush-disable-xdebug-phpstorm.png) 
 
+
+# How can I debug drush scripts in drupal 8?
+
+Due to drupal-launcher loses it's mind when you are trying to debug a script. You need to bypass it calling directly the real drush command like this:
+
+`cmd php ./vendor/drush/drush/drush foo:command` 
+
