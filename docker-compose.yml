@@ -47,6 +47,13 @@ services:
   ## For XHProf and Xdebug profiler traces
   #      - files:/mnt/files
 
+  mailhog:
+    image: mailhog/mailhog
+    container_name: "${PROJECT_NAME}_mailhog"
+    labels:
+      - 'traefik.backend=${PROJECT_NAME}_mailhog'
+      - 'traefik.port=8025'
+      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
 
   apache:
     image: wodby/apache:$APACHE_TAG
@@ -60,9 +67,9 @@ services:
       APACHE_DOCUMENT_ROOT: /var/www/html/web
     volumes:
       - ./:/var/www/html
-# For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
-#      - ./:/var/www/html:cached # User-guided caching
-#      - docker-sync:/var/www/html # Docker-sync
+    # For macOS users (https://wodby.com/stacks/drupal/docs/local/docker-for-mac/)
+    #      - ./:/var/www/html:cached # User-guided caching
+    #      - docker-sync:/var/www/html # Docker-sync
     labels:
       - 'traefik.backend=${PROJECT_NAME}_apache'
       - 'traefik.port=80'
@@ -81,11 +88,3 @@ services:
       - 'traefik.backend=${PROJECT_NAME}_pma'
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:pma.${PROJECT_BASE_URL}'
-
-  mailhog:
-    image: mailhog/mailhog
-    container_name: "${PROJECT_NAME}_mailhog"
-    labels:
-      - 'traefik.backend=${PROJECT_NAME}_mailhog'
-      - 'traefik.port=8025'
-      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'

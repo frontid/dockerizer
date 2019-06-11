@@ -6,8 +6,8 @@ services:
     container_name: proxy_traefik
     build: ./traefik
     network_mode: traefik_default
-    restart: always
-    command: --web --docker --logLevel=DEBUG
+    restart: unless-stopped
+    command: -c /dev/null --web --docker --logLevel=DEBUG
     ports:
       - '80:80'
       - '443:443'
