@@ -2,24 +2,6 @@ Thanks to smartcd (installed when you ran install.sh) you can run common command
 
 Currently there're the following common commands:
 
-##bower
-
-Accepts all common software params. 
-
----
-
-##bundle
-
-Accepts all common software params.
-
----
-
-##compass
-
-Accepts all common software params.
-
----
-
 ##composer
 
 Accepts all common software params.
@@ -33,24 +15,6 @@ Accepts all common software params.
 ---
 
 ##drupal (drupal console)
-
-Accepts all common software params.
-
----
-
-##gem
-
-Accepts all common software params.
-
----
-
-##grunt
-
-Accepts all common software params.
-
----
-
-##gulp
 
 Accepts all common software params.
 
@@ -115,14 +79,19 @@ If you want to enter as **root** just add `--root`: `expose apache --root`.
 
 ---
 
+#Where are gulp and grunt buddy?
+Since npm (**and preferably yarn**) includes the exact needed version of those apps into `node_modules` dir, we have retired and even discouraged the global usage of those tools. So, you really only need to add those tools into the `package.json` and configure it to run the scripts and you are done.
+
 #Adding new command
 To create a new "command" like "drush" does just create a new empty file at ./bin dir and fill with this code:
 
 ```
 #!/bin/bash
-source _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
+source _command_wrapper_exec '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
 ```
-CONTAINER NAME: The container where the command resides.
-COMMAND: the command to be run. 
+`[CONTAINER NAME]`: The container where the command resides.  
+`[COMMAND]`: the command to be run. 
+
+**NOTE**: In the case you are creating a new command for `node` container use `_command_wrapper_exec` instead.
 
 And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it. 
