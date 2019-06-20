@@ -77,15 +77,6 @@
     <a class="current" href="./">Available commands</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#bower">bower</a></li>
-    
-
-    <li class="toctree-l2"><a href="#bundle">bundle</a></li>
-    
-
-    <li class="toctree-l2"><a href="#compass">compass</a></li>
-    
-
     <li class="toctree-l2"><a href="#composer">composer</a></li>
     
 
@@ -93,15 +84,6 @@
     
 
     <li class="toctree-l2"><a href="#drupal-drupal-console">drupal (drupal console)</a></li>
-    
-
-    <li class="toctree-l2"><a href="#gem">gem</a></li>
-    
-
-    <li class="toctree-l2"><a href="#grunt">grunt</a></li>
-    
-
-    <li class="toctree-l2"><a href="#gulp">gulp</a></li>
     
 
     <li class="toctree-l2"><a href="#node">node</a></li>
@@ -120,6 +102,9 @@
     
 
     <li class="toctree-l2"><a href="#expose">expose</a></li>
+    
+
+    <li class="toctree-l2"><a href="#where-are-gulp-and-grunt-buddy">Where are gulp and grunt buddy?</a></li>
     
 
     <li class="toctree-l2"><a href="#adding-new-command">Adding new command</a></li>
@@ -182,15 +167,6 @@
               
                 <p>Thanks to smartcd (installed when you ran install.sh) you can run common command inside the containers in a transparent way. It is possible because there is a "bin" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.</p>
 <p>Currently there're the following common commands:</p>
-<h2 id="bower">bower</h2>
-<p>Accepts all common software params. </p>
-<hr />
-<h2 id="bundle">bundle</h2>
-<p>Accepts all common software params.</p>
-<hr />
-<h2 id="compass">compass</h2>
-<p>Accepts all common software params.</p>
-<hr />
 <h2 id="composer">composer</h2>
 <p>Accepts all common software params.</p>
 <hr />
@@ -198,15 +174,6 @@
 <p>Accepts all common software params.</p>
 <hr />
 <h2 id="drupal-drupal-console">drupal (drupal console)</h2>
-<p>Accepts all common software params.</p>
-<hr />
-<h2 id="gem">gem</h2>
-<p>Accepts all common software params.</p>
-<hr />
-<h2 id="grunt">grunt</h2>
-<p>Accepts all common software params.</p>
-<hr />
-<h2 id="gulp">gulp</h2>
 <p>Accepts all common software params.</p>
 <hr />
 <h2 id="node">node</h2>
@@ -248,14 +215,17 @@ If you want to enter as <strong>root</strong> just add <code>--root</code>: <cod
 <code>expose apache</code> drops a shell of apache<br />
 <code>expose apache --root</code> drops a root shell of apache</p>
 <hr />
+<h1 id="where-are-gulp-and-grunt-buddy">Where are gulp and grunt buddy?</h1>
+<p>Since npm (<strong>and preferably yarn</strong>) includes the exact needed version of those apps into <code>node_modules</code> dir, we have retired and even discouraged the global usage of those tools. So, you really only need to add those tools into the <code>package.json</code> and configure it to run the scripts and you are done.</p>
 <h1 id="adding-new-command">Adding new command</h1>
 <p>To create a new "command" like "drush" does just create a new empty file at ./bin dir and fill with this code:</p>
 <pre><code>#!/bin/bash
-source _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
+source _command_wrapper_exec '[CONTAINER NAME]' 'exec' '[COMMAND]' $@
 </code></pre>
 
-<p>CONTAINER NAME: The container where the command resides.
-COMMAND: the command to be run. </p>
+<p><code>[CONTAINER NAME]</code>: The container where the command resides.<br />
+<code>[COMMAND]</code>: the command to be run. </p>
+<p><strong>NOTE</strong>: In the case you are creating a new command for <code>node</code> container use <code>_command_wrapper_exec</code> instead.</p>
 <p>And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it. </p>
               
             </div>

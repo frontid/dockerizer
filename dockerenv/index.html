@@ -74,6 +74,18 @@
             
     <li class="toctree-l2"><a href="#dockerenv-file">.docker.env file</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#general">General</a></li>
+        
+            <li><a class="toctree-l3" href="#php-specific">PHP specific</a></li>
+        
+            <li><a class="toctree-l3" href="#mariadbmysql-specific">MariaDB/MYSQL specific</a></li>
+        
+            <li><a class="toctree-l3" href="#modifying-variables-just-for-you">Modifying variables just for you</a></li>
+        
+        </ul>
+    
 
     </ul>
 	    </li>
@@ -137,10 +149,11 @@
               
                 <h1 id="dockerenv-file">.docker.env file</h1>
 <p>This is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.</p>
+<h2 id="general">General</h2>
 <table>
 <thead>
 <tr>
-<th>VAR</th>
+<th>PROJECT VARS</th>
 <th>MEANING</th>
 <th></th>
 </tr>
@@ -161,6 +174,18 @@
 <td>Base project's path</td>
 <td>If your project resides in a subdir you can specify it on PROJECT_BASE_PATH</td>
 </tr>
+</tbody>
+</table>
+<h2 id="php-specific">PHP specific</h2>
+<table>
+<thead>
+<tr>
+<th>PHP VARS</th>
+<th>MEANING</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>PHP_MAX_EXECUTION_TIME</td>
 <td>PHP max execution time</td>
@@ -188,7 +213,66 @@
 </tr>
 </tbody>
 </table>
+<h2 id="mariadbmysql-specific">MariaDB/MYSQL specific</h2>
+<p>The MariaDB default values ( defined in <code>docker-compose.override.yml</code> ) are configured for a system with 2 GB RAM available and SSD/NVMe disks. You can comment out these vars to get a default MariaDB configuration.</p>
+<table>
+<thead>
+<tr>
+<th>MariaDB VARS</th>
+<th>MEANING</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MYSQL_INNODB_BUFFER_POOL_SIZE</td>
+<td>Size of memory available for data structures of InnoDB, buffers, caches, indexes</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_INNODB_IO_CAPACITY</td>
+<td>I/O activity for XtraDB/InnoDB background tasks</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_INNODB_LOG_BUFFER_SIZE</td>
+<td>Size in bytes of the buffer for writing InnoDB redo log files to disk</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_INNODB_LOG_FILE_SIZE</td>
+<td>Size in bytes of each InnoDB redo log file in the log group</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_INNODB_READ_IO_THREADS</td>
+<td>Number of I/O threads for XtraDB/InnoDB reads</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_INNODB_WRITE_IO_THREADS</td>
+<td>Number of I/O threads for XtraDB/InnoDB writes</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_OPTIMIZER_SEARCH_DEPTH</td>
+<td>How deep into the execution path the optimizer should look before deciding which plan to use</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_QUERY_CACHE_TYPE</td>
+<td>Type of cache for SELECT queries</td>
+<td></td>
+</tr>
+<tr>
+<td>MYSQL_QUERY_CACHE_SIZE</td>
+<td>Size in bytes available to the query cache</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <p>For the rest of available variables please see  <a href="https://github.com/wodby/docker4drupal">https://github.com/wodby/docker4drupal</a></p>
+<h2 id="modifying-variables-just-for-you">Modifying variables just for you</h2>
 <p>Since <code>.docker.env</code> is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have <code>.docker.override.env</code>  </p>
 <p><code>.docker.override.env</code> should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original <code>.docker.env</code> file.</p>
               

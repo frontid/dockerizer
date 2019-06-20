@@ -37,12 +37,12 @@
         }, 
         {
             "location": "/domains/", 
-            "text": "Globally available domains\n\n\nlocalhost:8080\n shows you all registered domains for all running projects under dockerizer.\n\n\nAvailable domains by project\n\n\nEach project will have the following domains (if you configured PROJECT_NAME as \"foo\"):\n\n- \nfoo.localhost\n -\n Website\n\n- \nfoo.pma.localhost\n -\n PhpMyAdmin\n\n- \nfoo.mailhog.localhost\n-\n MailHog client.", 
+            "text": "Globally available domains\n\n\n\n\ntraefik.localhost\n-\n Traefik UI. Shows you all registered domains for all running projects under dockerizer.\n\n\nportainer.localhost\n-\n Docker UI. Gives you an overview of all dockerizer projects and manage them.\n\n\n\n\n\n\nAvailable domains by project\n\n\nEach project will have the following domains (if you configured PROJECT_NAME as \"foo\"):\n\n- \nfoo.localhost\n -\n Website\n\n- \nfoo.pma.localhost\n -\n PhpMyAdmin\n\n- \nfoo.mailhog.localhost\n-\n MailHog client.", 
             "title": "Domains"
         }, 
         {
             "location": "/domains/#globally-available-domains", 
-            "text": "localhost:8080  shows you all registered domains for all running projects under dockerizer.", 
+            "text": "traefik.localhost -  Traefik UI. Shows you all registered domains for all running projects under dockerizer.  portainer.localhost -  Docker UI. Gives you an overview of all dockerizer projects and manage them.", 
             "title": "Globally available domains"
         }, 
         {
@@ -52,7 +52,7 @@
         }, 
         {
             "location": "/dk/", 
-            "text": "\"dk\" the dockerizer cli\n\n\nDockerizer uses a very simple tool to manage the projects. \n\n\ndk new\n\n\nThis command will prepare a dockerizer dir for you. For example if you run \ndk new foo\n it will create \nfoo\n dir with the dockerizer structure ready to use. So the only thing you need to do is create web dir as mentioned at \nConfigure a new project\n on the Install section. \n\n\ndk on projects\n\n\nWhen you have a configured \"dockerized\" project you will want to start, stop, and restart it right?\n\nWell. Just go to the project and run \ndk start|stop|restart\n.\n\n\ndk on proxy\n\n\nAnd what if you want to stop the proxy to release the 80 and 443 ports?\n\nWell, run \ndk stop|start traefik\n :) (no matter the current path you are on).\n\n\ndk self-update\n\n\nIf there is a new version of the dk tool you can easily upgrade it with this command.", 
+            "text": "\"dk\" the dockerizer cli\n\n\nDockerizer uses a very simple tool to manage the projects. \n\n\ndk new\n\n\nThis command will prepare a dockerizer dir for you. For example if you run \ndk new foo\n it will create \nfoo\n dir with the dockerizer structure ready to use. So the only thing you need to do is create web dir as mentioned at \nConfigure a new project\n on the Install section. \n\n\ndk on your projects\n\n\nWhen you have a configured \"dockerized\" project you will want to start, stop, and restart it right?\n\nWell. Just go to the project and run \ndk start|stop|restart\n.\n\n\ndk for traefik\n\n\nAnd what if you want to stop the proxy to release the 80 and 443 ports?\n\nWell, run \ndk stop|start traefik\n :) (no matter the current path you are on).\n\n\n`dk self-update\n\n\nIf there is a new version of the dk tool you can easily upgrade it with this command.", 
             "title": "dk the dockerizer cli"
         }, 
         {
@@ -66,49 +66,54 @@
             "title": "dk new"
         }, 
         {
-            "location": "/dk/#dk-on-projects", 
+            "location": "/dk/#dk-on-your-projects", 
             "text": "When you have a configured \"dockerized\" project you will want to start, stop, and restart it right? \nWell. Just go to the project and run  dk start|stop|restart .", 
-            "title": "dk on projects"
+            "title": "dk on your projects"
         }, 
         {
-            "location": "/dk/#dk-on-proxy", 
+            "location": "/dk/#dk-for-traefik", 
             "text": "And what if you want to stop the proxy to release the 80 and 443 ports? \nWell, run  dk stop|start traefik  :) (no matter the current path you are on).", 
-            "title": "dk on proxy"
+            "title": "dk for traefik"
         }, 
         {
             "location": "/dk/#dk-self-update", 
             "text": "If there is a new version of the dk tool you can easily upgrade it with this command.", 
-            "title": "dk self-update"
+            "title": "`dk self-update"
         }, 
         {
             "location": "/dockerenv/", 
-            "text": ".docker.env file\n\n\nThis is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.\n\n\n\n\n\n\n\n\nVAR\n\n\nMEANING\n\n\n\n\n\n\n\n\n\n\n\n\nPROJECT_NAME\n\n\nThe project base name\n\n\nNeeds to be customized\n\n\n\n\n\n\nPROJECT_BASE_URL\n\n\nThe project url\n\n\nNeeds to be customized\n\n\n\n\n\n\nPROJECT_BASE_PATH\n\n\nBase project's path\n\n\nIf your project resides in a subdir you can specify it on PROJECT_BASE_PATH\n\n\n\n\n\n\nPHP_MAX_EXECUTION_TIME\n\n\nPHP max execution time\n\n\n\n\n\n\n\n\nPHP_POST_MAX_SIZE\n\n\nPHP max $_POST size\n\n\n\n\n\n\n\n\nPHP_UPLOAD_MAX_FILESIZE\n\n\nPHP max $_POST file size\n\n\n\n\n\n\n\n\nPHP_MEMORY_LIMIT\n\n\nPHP apache memory limit (cli is unlimited)\n\n\n\n\n\n\n\n\nPHP_TAG\n\n\nSets the php container/version to be used.\n\n\nFor \nlinux and mac there are two group of possible values\n. \n\"7.1-dev-4.8.0\"\n format for linux and \n\"7.2-dev-macos-4.8.0\"\n for mac.\n\n\n\n\n\n\n\n\nFor the rest of available variables please see  \nhttps://github.com/wodby/docker4drupal\n\n\nSince \n.docker.env\n is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have \n.docker.override.env\n  \n\n\n.docker.override.env\n should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original \n.docker.env\n file.", 
+            "text": ".docker.env file\n\n\nThis is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.\n\n\nGeneral\n\n\n\n\n\n\n\n\nPROJECT VARS\n\n\nMEANING\n\n\n\n\n\n\n\n\n\n\n\n\nPROJECT_NAME\n\n\nThe project base name\n\n\nNeeds to be customized\n\n\n\n\n\n\nPROJECT_BASE_URL\n\n\nThe project url\n\n\nNeeds to be customized\n\n\n\n\n\n\nPROJECT_BASE_PATH\n\n\nBase project's path\n\n\nIf your project resides in a subdir you can specify it on PROJECT_BASE_PATH\n\n\n\n\n\n\n\n\nPHP specific\n\n\n\n\n\n\n\n\nPHP VARS\n\n\nMEANING\n\n\n\n\n\n\n\n\n\n\n\n\nPHP_MAX_EXECUTION_TIME\n\n\nPHP max execution time\n\n\n\n\n\n\n\n\nPHP_POST_MAX_SIZE\n\n\nPHP max $_POST size\n\n\n\n\n\n\n\n\nPHP_UPLOAD_MAX_FILESIZE\n\n\nPHP max $_POST file size\n\n\n\n\n\n\n\n\nPHP_MEMORY_LIMIT\n\n\nPHP apache memory limit (cli is unlimited)\n\n\n\n\n\n\n\n\nPHP_TAG\n\n\nSets the php container/version to be used.\n\n\nFor \nlinux and mac there are two group of possible values\n. \n\"7.1-dev-4.8.0\"\n format for linux and \n\"7.2-dev-macos-4.8.0\"\n for mac.\n\n\n\n\n\n\n\n\nMariaDB/MYSQL specific\n\n\nThe MariaDB default values ( defined in \ndocker-compose.override.yml\n ) are configured for a system with 2 GB RAM available and SSD/NVMe disks. You can comment out these vars to get a default MariaDB configuration.\n\n\n\n\n\n\n\n\nMariaDB VARS\n\n\nMEANING\n\n\n\n\n\n\n\n\n\n\n\n\nMYSQL_INNODB_BUFFER_POOL_SIZE\n\n\nSize of memory available for data structures of InnoDB, buffers, caches, indexes\n\n\n\n\n\n\n\n\nMYSQL_INNODB_IO_CAPACITY\n\n\nI/O activity for XtraDB/InnoDB background tasks\n\n\n\n\n\n\n\n\nMYSQL_INNODB_LOG_BUFFER_SIZE\n\n\nSize in bytes of the buffer for writing InnoDB redo log files to disk\n\n\n\n\n\n\n\n\nMYSQL_INNODB_LOG_FILE_SIZE\n\n\nSize in bytes of each InnoDB redo log file in the log group\n\n\n\n\n\n\n\n\nMYSQL_INNODB_READ_IO_THREADS\n\n\nNumber of I/O threads for XtraDB/InnoDB reads\n\n\n\n\n\n\n\n\nMYSQL_INNODB_WRITE_IO_THREADS\n\n\nNumber of I/O threads for XtraDB/InnoDB writes\n\n\n\n\n\n\n\n\nMYSQL_OPTIMIZER_SEARCH_DEPTH\n\n\nHow deep into the execution path the optimizer should look before deciding which plan to use\n\n\n\n\n\n\n\n\nMYSQL_QUERY_CACHE_TYPE\n\n\nType of cache for SELECT queries\n\n\n\n\n\n\n\n\nMYSQL_QUERY_CACHE_SIZE\n\n\nSize in bytes available to the query cache\n\n\n\n\n\n\n\n\n\n\nFor the rest of available variables please see  \nhttps://github.com/wodby/docker4drupal\n\n\nModifying variables just for you\n\n\nSince \n.docker.env\n is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have \n.docker.override.env\n  \n\n\n.docker.override.env\n should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original \n.docker.env\n file.", 
             "title": "The .docker.env file"
         }, 
         {
             "location": "/dockerenv/#dockerenv-file", 
-            "text": "This is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.     VAR  MEANING       PROJECT_NAME  The project base name  Needs to be customized    PROJECT_BASE_URL  The project url  Needs to be customized    PROJECT_BASE_PATH  Base project's path  If your project resides in a subdir you can specify it on PROJECT_BASE_PATH    PHP_MAX_EXECUTION_TIME  PHP max execution time     PHP_POST_MAX_SIZE  PHP max $_POST size     PHP_UPLOAD_MAX_FILESIZE  PHP max $_POST file size     PHP_MEMORY_LIMIT  PHP apache memory limit (cli is unlimited)     PHP_TAG  Sets the php container/version to be used.  For  linux and mac there are two group of possible values .  \"7.1-dev-4.8.0\"  format for linux and  \"7.2-dev-macos-4.8.0\"  for mac.     For the rest of available variables please see   https://github.com/wodby/docker4drupal  Since  .docker.env  is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have  .docker.override.env     .docker.override.env  should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original  .docker.env  file.", 
+            "text": "This is the shared docker configuration file. On it you can configure things like PHP version, MySQL version, PHP, settings an all you need to fit the project into the docker.", 
             "title": ".docker.env file"
         }, 
         {
+            "location": "/dockerenv/#general", 
+            "text": "PROJECT VARS  MEANING       PROJECT_NAME  The project base name  Needs to be customized    PROJECT_BASE_URL  The project url  Needs to be customized    PROJECT_BASE_PATH  Base project's path  If your project resides in a subdir you can specify it on PROJECT_BASE_PATH", 
+            "title": "General"
+        }, 
+        {
+            "location": "/dockerenv/#php-specific", 
+            "text": "PHP VARS  MEANING       PHP_MAX_EXECUTION_TIME  PHP max execution time     PHP_POST_MAX_SIZE  PHP max $_POST size     PHP_UPLOAD_MAX_FILESIZE  PHP max $_POST file size     PHP_MEMORY_LIMIT  PHP apache memory limit (cli is unlimited)     PHP_TAG  Sets the php container/version to be used.  For  linux and mac there are two group of possible values .  \"7.1-dev-4.8.0\"  format for linux and  \"7.2-dev-macos-4.8.0\"  for mac.", 
+            "title": "PHP specific"
+        }, 
+        {
+            "location": "/dockerenv/#mariadbmysql-specific", 
+            "text": "The MariaDB default values ( defined in  docker-compose.override.yml  ) are configured for a system with 2 GB RAM available and SSD/NVMe disks. You can comment out these vars to get a default MariaDB configuration.     MariaDB VARS  MEANING       MYSQL_INNODB_BUFFER_POOL_SIZE  Size of memory available for data structures of InnoDB, buffers, caches, indexes     MYSQL_INNODB_IO_CAPACITY  I/O activity for XtraDB/InnoDB background tasks     MYSQL_INNODB_LOG_BUFFER_SIZE  Size in bytes of the buffer for writing InnoDB redo log files to disk     MYSQL_INNODB_LOG_FILE_SIZE  Size in bytes of each InnoDB redo log file in the log group     MYSQL_INNODB_READ_IO_THREADS  Number of I/O threads for XtraDB/InnoDB reads     MYSQL_INNODB_WRITE_IO_THREADS  Number of I/O threads for XtraDB/InnoDB writes     MYSQL_OPTIMIZER_SEARCH_DEPTH  How deep into the execution path the optimizer should look before deciding which plan to use     MYSQL_QUERY_CACHE_TYPE  Type of cache for SELECT queries     MYSQL_QUERY_CACHE_SIZE  Size in bytes available to the query cache      For the rest of available variables please see   https://github.com/wodby/docker4drupal", 
+            "title": "MariaDB/MYSQL specific"
+        }, 
+        {
+            "location": "/dockerenv/#modifying-variables-just-for-you", 
+            "text": "Since  .docker.env  is a common shared file you will not be able to make personal modifications on it. For this king of customizations you have  .docker.override.env     .docker.override.env  should be never committed since it is only for you and your environment. The usage is really simple. Just put in there the variables you want to override with the new value like in the original  .docker.env  file.", 
+            "title": "Modifying variables just for you"
+        }, 
+        {
             "location": "/commands/", 
-            "text": "Thanks to smartcd (installed when you ran install.sh) you can run common command inside the containers in a transparent way. It is possible because there is a \"bin\" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.\n\n\nCurrently there're the following common commands:\n\n\nbower\n\n\nAccepts all common software params. \n\n\n\n\nbundle\n\n\nAccepts all common software params.\n\n\n\n\ncompass\n\n\nAccepts all common software params.\n\n\n\n\ncomposer\n\n\nAccepts all common software params.\n\n\n\n\ndrush\n\n\nAccepts all common software params.\n\n\n\n\ndrupal (drupal console)\n\n\nAccepts all common software params.\n\n\n\n\ngem\n\n\nAccepts all common software params.\n\n\n\n\ngrunt\n\n\nAccepts all common software params.\n\n\n\n\ngulp\n\n\nAccepts all common software params.\n\n\n\n\nnode\n\n\nAccepts all common software params.\n\n\n\n\nnpm\n\n\nAccepts all common software params.\n\n\n\n\nyarn\n\n\nAccepts all common software params.\n\n\n\n\nlogs\n\n\nlogs\n shows the logs of all containers or of a specific one. This command can be run anywhere inside the dockerized dir and project.\n\n\nThe available options are:\n\n\n-f\n Follow log output.\n\n\nUsage\n\nShow logs of all containers: \nlogs\n\nShow logs of an specific container: \nlogs apache\n, \nlogs php\n, \nlogs masriadb\n\nShow logs of an specific container with the follow option set: \nlogs -f apache\n\n\n\n\ncmd\n\n\ncmd\n allows you to run arbitrary commands like \nls\n, \ntail\n inside the \ncontainer\n. Use this command when there is no an alias (see \"common commands\").  \n\n\nUsage\n\n\ncmd php ls -l\n where \"php\" is the container and \"ls -l\" is the sent command.\n\n\n\n\nexpose\n\n\nexpose\n (Drops a container shell).\n\nBy default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type \nexpose mariadb\n.\n\nIf you want to enter as \nroot\n just add \n--root\n: \nexpose apache --root\n.\n\n\nAvailable containers are:\n \n\n\n\n\nphp (by default)\n\n\nmariadb (mysql)\n\n\napache\n\n\nfrontend\n\n\n\n\nUsage\n\n\nexpose\n drops a shell of php (default)\n\n\nexpose apache\n drops a shell of apache\n\n\nexpose apache --root\n drops a root shell of apache\n\n\n\n\nAdding new command\n\n\nTo create a new \"command\" like \"drush\" does just create a new empty file at ./bin dir and fill with this code:\n\n\n#!/bin/bash\nsource _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@\n\n\n\n\nCONTAINER NAME: The container where the command resides.\nCOMMAND: the command to be run. \n\n\nAnd that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it.", 
+            "text": "Thanks to smartcd (installed when you ran install.sh) you can run common command inside the containers in a transparent way. It is possible because there is a \"bin\" dir with scripts with the same name of the real ones. These scripts just redirect the command into the right container.\n\n\nCurrently there're the following common commands:\n\n\ncomposer\n\n\nAccepts all common software params.\n\n\n\n\ndrush\n\n\nAccepts all common software params.\n\n\n\n\ndrupal (drupal console)\n\n\nAccepts all common software params.\n\n\n\n\nnode\n\n\nAccepts all common software params.\n\n\n\n\nnpm\n\n\nAccepts all common software params.\n\n\n\n\nyarn\n\n\nAccepts all common software params.\n\n\n\n\nlogs\n\n\nlogs\n shows the logs of all containers or of a specific one. This command can be run anywhere inside the dockerized dir and project.\n\n\nThe available options are:\n\n\n-f\n Follow log output.\n\n\nUsage\n\nShow logs of all containers: \nlogs\n\nShow logs of an specific container: \nlogs apache\n, \nlogs php\n, \nlogs masriadb\n\nShow logs of an specific container with the follow option set: \nlogs -f apache\n\n\n\n\ncmd\n\n\ncmd\n allows you to run arbitrary commands like \nls\n, \ntail\n inside the \ncontainer\n. Use this command when there is no an alias (see \"common commands\").  \n\n\nUsage\n\n\ncmd php ls -l\n where \"php\" is the container and \"ls -l\" is the sent command.\n\n\n\n\nexpose\n\n\nexpose\n (Drops a container shell).\n\nBy default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type \nexpose mariadb\n.\n\nIf you want to enter as \nroot\n just add \n--root\n: \nexpose apache --root\n.\n\n\nAvailable containers are:\n \n\n\n\n\nphp (by default)\n\n\nmariadb (mysql)\n\n\napache\n\n\nfrontend\n\n\n\n\nUsage\n\n\nexpose\n drops a shell of php (default)\n\n\nexpose apache\n drops a shell of apache\n\n\nexpose apache --root\n drops a root shell of apache\n\n\n\n\nWhere are gulp and grunt buddy?\n\n\nSince npm (\nand preferably yarn\n) includes the exact needed version of those apps into \nnode_modules\n dir, we have retired and even discouraged the global usage of those tools. So, you really only need to add those tools into the \npackage.json\n and configure it to run the scripts and you are done.\n\n\nAdding new command\n\n\nTo create a new \"command\" like \"drush\" does just create a new empty file at ./bin dir and fill with this code:\n\n\n#!/bin/bash\nsource _command_wrapper_exec '[CONTAINER NAME]' 'exec' '[COMMAND]' $@\n\n\n\n\n[CONTAINER NAME]\n: The container where the command resides.\n\n\n[COMMAND]\n: the command to be run. \n\n\nNOTE\n: In the case you are creating a new command for \nnode\n container use \n_command_wrapper_exec\n instead.\n\n\nAnd that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it.", 
             "title": "Available commands"
-        }, 
-        {
-            "location": "/commands/#bower", 
-            "text": "Accepts all common software params.", 
-            "title": "bower"
-        }, 
-        {
-            "location": "/commands/#bundle", 
-            "text": "Accepts all common software params.", 
-            "title": "bundle"
-        }, 
-        {
-            "location": "/commands/#compass", 
-            "text": "Accepts all common software params.", 
-            "title": "compass"
         }, 
         {
             "location": "/commands/#composer", 
@@ -124,21 +129,6 @@
             "location": "/commands/#drupal-drupal-console", 
             "text": "Accepts all common software params.", 
             "title": "drupal (drupal console)"
-        }, 
-        {
-            "location": "/commands/#gem", 
-            "text": "Accepts all common software params.", 
-            "title": "gem"
-        }, 
-        {
-            "location": "/commands/#grunt", 
-            "text": "Accepts all common software params.", 
-            "title": "grunt"
-        }, 
-        {
-            "location": "/commands/#gulp", 
-            "text": "Accepts all common software params.", 
-            "title": "gulp"
         }, 
         {
             "location": "/commands/#node", 
@@ -171,23 +161,28 @@
             "title": "expose"
         }, 
         {
+            "location": "/commands/#where-are-gulp-and-grunt-buddy", 
+            "text": "Since npm ( and preferably yarn ) includes the exact needed version of those apps into  node_modules  dir, we have retired and even discouraged the global usage of those tools. So, you really only need to add those tools into the  package.json  and configure it to run the scripts and you are done.", 
+            "title": "Where are gulp and grunt buddy?"
+        }, 
+        {
             "location": "/commands/#adding-new-command", 
-            "text": "To create a new \"command\" like \"drush\" does just create a new empty file at ./bin dir and fill with this code:  #!/bin/bash\nsource _command_wrapper '[CONTAINER NAME]' 'exec' '[COMMAND]' $@  CONTAINER NAME: The container where the command resides.\nCOMMAND: the command to be run.   And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it.", 
+            "text": "To create a new \"command\" like \"drush\" does just create a new empty file at ./bin dir and fill with this code:  #!/bin/bash\nsource _command_wrapper_exec '[CONTAINER NAME]' 'exec' '[COMMAND]' $@  [CONTAINER NAME] : The container where the command resides.  [COMMAND] : the command to be run.   NOTE : In the case you are creating a new command for  node  container use  _command_wrapper_exec  instead.  And that's all. Now you will be able to run the command locally as any other command and it will be pushed into the right container and run into it.", 
             "title": "Adding new command"
         }, 
         {
             "location": "/requirements/", 
-            "text": "All\n\n\n\n\nDocker 18.03+\n\n\ndocker-compose\n\n\ngit\n\n\nBrew  (\nHomebrew\n) only for mac.\n\n\n\n\nMac\n\n\nFor mac you need \nunison\n, \nbash\n and \ndocker-sync\n.  \n\n\ngem install docker-sync\nbrew install unison\nbrew install bash", 
+            "text": "Mac and Linux\n\n\n\n\nCURL\n\n\nDocker 18.03+\n\n\ndocker-compose\n\n\ngit\n\n\n\n\nMac\n\n\n\n\nBrew  (\nHomebrew\n) only for mac.\n\n\nGem\n\n\n\n\nYou need also \nunison\n, \nbash\n and \ndocker-sync\n.  \n\n\ngem install docker-sync\nbrew install unison\nbrew install bash", 
             "title": "Requirements"
         }, 
         {
-            "location": "/requirements/#all", 
-            "text": "Docker 18.03+  docker-compose  git  Brew  ( Homebrew ) only for mac.", 
-            "title": "All"
+            "location": "/requirements/#mac-and-linux", 
+            "text": "CURL  Docker 18.03+  docker-compose  git", 
+            "title": "Mac and Linux"
         }, 
         {
             "location": "/requirements/#mac", 
-            "text": "For mac you need  unison ,  bash  and  docker-sync .    gem install docker-sync\nbrew install unison\nbrew install bash", 
+            "text": "Brew  ( Homebrew ) only for mac.  Gem   You need also  unison ,  bash  and  docker-sync .    gem install docker-sync\nbrew install unison\nbrew install bash", 
             "title": "Mac"
         }, 
         {
