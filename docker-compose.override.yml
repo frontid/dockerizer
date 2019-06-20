@@ -67,13 +67,13 @@ services:
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.mailhog.localhost'
 
-  frontend:
-    container_name: ${PROJECT_NAME}_frontend
-    image: frontid/docker-front-tools:latest
+  node:
+    container_name: ${PROJECT_NAME}_node
     network_mode: traefik_default
+    user: "node"
+    image: "node:lts-jessie"
     volumes:
       - ./:/var/www/html
-    command: tail -f /dev/null
 
 #  postgres:
 #    container_name: ${PROJECT_NAME}_postgres
