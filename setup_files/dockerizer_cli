@@ -148,13 +148,20 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     dk stop traefik
 
     echo "------------------------"
-    echo "Installing..."
+    echo "Updating..."
     echo "------------------------"
 
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
     sudo chmod +x /usr/local/bin/dk
 
+    # ------------------------------
+
+    traefik_path="/usr/local/bin/dk_traefik"
+    sudo cp /tmp/dockerizer/setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
+    sudo cp -R /tmp/dockerizer/setup_files/traefik $traefik_path
+
+    # ------------------------------
     echo "Updating all dockerized instances."
     echo ""
 
