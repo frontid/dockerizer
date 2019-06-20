@@ -138,13 +138,10 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
 
     rm -rf /tmp/dockerizer
 
-    echo "Cloning a new version of dockerizer"
+    echo "Getting a new version of dockerizer"
 
     git clone git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
-    echo "------------------------"
-    echo "Stopping traefik..."
-    echo "------------------------"
     dk stop traefik
 
     echo "------------------------"
@@ -178,9 +175,6 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
         fi
     done <~/.dockerizer_track
 
-    echo "------------------------"
-    echo "Starting traefik..."
-    echo "------------------------"
     dk start traefik
 
     echo "Done."
