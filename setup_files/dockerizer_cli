@@ -143,6 +143,11 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     git clone git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
     echo "------------------------"
+    echo "Stopping traefik..."
+    echo "------------------------"
+    dk stop traefik
+
+    echo "------------------------"
     echo "Installing..."
     echo "------------------------"
 
@@ -157,12 +162,19 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     touch ~/.dockerizer_track
 
     while read path; do
-        cd "$path"
-        echo "Updating $path"
-        git reset --hard > /dev/null
-        git pull origin master
-        echo ""
+        if [[ -d "$path" ]]; then
+          cd "$path"
+          echo "Updating $path"
+          git reset --hard > /dev/null
+          git pull origin master
+          echo ""
+        fi
     done <~/.dockerizer_track
+
+    echo "------------------------"
+    echo "Starting traefik..."
+    echo "------------------------"
+    dk start traefik
 
     echo "Done."
 fi
