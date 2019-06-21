@@ -3,7 +3,7 @@
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
-    bin_path=$(which _command_wrapper)
+    bin_path=$(which _command_wrapper_exec)
     
     if [ -z bin_path ]; then
         project_path="."
