@@ -38,6 +38,9 @@ services:
   apache:
     network_mode: traefik_default
     environment:
+      # By default, PROJECT_BASE_PATH path is empty, but you can change this value
+      # inside of the .env file
+      PROJECT_BASE_PATH: ${PROJECT_BASE_PATH:-}
       # For xdebug when we hold a breakpoint we need the server
       # wait until we release the request. APACHE_FCGI_PROXY_TIMEOUT
       # prevent the "Gateway Timeout"
