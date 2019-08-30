@@ -27,6 +27,13 @@ services:
       PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-32M}
       PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
       PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-32M}
+      #### BLACKFIRE SUPPORT
+      #PHP_BLACKFIRE: 1
+      #BLACKFIRE_CLIENT_ID: CLIENT_XXXXXX
+      #BLACKFIRE_CLIENT_TOKEN: CLIENT_YYYYY
+      #PHP_BLACKFIRE_AGENT_HOST: "${PROJECT_NAME}_blackfire"
+      #### END BLACKFIRE SUPPORT
+
       # We need SSH_PRIVATE_KEY until
       # https://github.com/wodby/php/blob/master/7/docker-entrypoint.sh
       # applies the deprecation over init_ssh_client().
@@ -74,6 +81,10 @@ services:
     image: "node:lts-jessie"
     volumes:
       - ./:/var/www/html
+
+#  blackfire:
+#    network_mode: traefik_default
+
 
 # Just for legacy
 #  frontend:

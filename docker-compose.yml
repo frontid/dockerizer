@@ -88,3 +88,10 @@ services:
       - 'traefik.backend=${PROJECT_NAME}_pma'
       - 'traefik.port=80'
       - 'traefik.frontend.rule=Host:pma.${PROJECT_BASE_URL}'
+
+#  blackfire:
+#    image: blackfire/blackfire
+#    container_name: "${PROJECT_NAME}_blackfire"
+#    environment:
+#      BLACKFIRE_SERVER_ID: XXXXX
+#      BLACKFIRE_SERVER_TOKEN: YYYY
