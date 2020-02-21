@@ -6,7 +6,7 @@ services:
     environment:
       PHP_FPM_USER: 501
       PHP_FPM_GROUP: 20
-      
+      PHP_XDEBUG_REMOTE_HOST: host.docker.internal
     volumes:
       - docker-sync:/var/www/html:nocopy
       

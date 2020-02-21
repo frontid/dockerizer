@@ -3,4 +3,4 @@
 # dont need to take care about the drush location (different betweem drupal 7 and 8)
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-source _command_wrapper 'php' 'COLUMNS=160 drush' $@
+source _command_wrapper_exec 'php' 'COLUMNS=160 drush' $@

@@ -3,6 +3,16 @@
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
+    bin_path=$(which _command_wrapper_exec)
+    
+    if [ -z bin_path ]; then
+        project_path="."
+    else
+        project_path="$(dirname $bin_path)/../"
+    fi
+
+    cd $project_path > /dev/null
+
     if [ -e web/.docker.env ]; then
 
         if [ -e web/.docker.override.env ]; then
@@ -13,6 +23,7 @@ _docker_project() {
 
     else
         echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/\e[0m"
+        cd - > /dev/null
         exit 1
     fi
 
@@ -56,6 +67,7 @@ _docker_project() {
     if [[ -f .ssh_config ]]; then
         rm -rf .ssh_config
     fi
+    cd - > /dev/null
 }
 
 # run docker-compose commands on traefik service.
@@ -63,8 +75,25 @@ _traefik_service() {
     docker-compose -f /usr/local/bin/dk_traefik/docker-compose.yml $1
 }
 
+# run docker-compose commands on traefik service.
+_track_dockerized_project() {
+    touch ~/.dockerizer_track
+
+    if grep -Fxq "$PWD" ~/.dockerizer_track
+    then
+        echo "This path already is tracked."
+    else
+        echo $PWD >> ~/.dockerizer_track
+    fi
+}
+
 # -----------------------------------------------
 
+
+# Temporal solution to add pre-existing projects to the config file.
+if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
+    _track_dockerized_project
+fi
 
 # Start project?
 if [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
@@ -99,6 +128,7 @@ if [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
     git clone https://github.com/frontid/dockerizer.git $2
     cd $2
     ./setup.sh
+    _track_dockerized_project
 fi
 
 # Self update dockerizer
@@ -108,16 +138,44 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
 
     rm -rf /tmp/dockerizer
 
-    echo "Cloning a new version of dockerizer"
+    echo "Getting a new version of dockerizer"
 
     git clone git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
+    dk stop traefik
+
     echo "------------------------"
-    echo "Installing..."
+    echo "Updating..."
     echo "------------------------"
 
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
     sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
     sudo chmod +x /usr/local/bin/dk
+
+    # ------------------------------
+
+    traefik_path="/usr/local/bin/dk_traefik"
+    sudo cp /tmp/dockerizer/setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
+    sudo cp -R /tmp/dockerizer/setup_files/traefik $traefik_path
+
+    # ------------------------------
+    echo "Updating all dockerized instances."
+    echo ""
+
+    # Just to prevent errors.
+    touch ~/.dockerizer_track
+
+    while read path; do
+        if [[ -d "$path" ]]; then
+          cd "$path"
+          echo "Updating $path"
+          git reset --hard > /dev/null
+          git pull origin master
+          echo ""
+        fi
+    done <~/.dockerizer_track
+
+    dk start traefik
+
     echo "Done."
 fi

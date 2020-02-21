@@ -6,7 +6,7 @@ services:
     container_name: proxy_traefik
     build: ./traefik
     network_mode: traefik_default
-    restart: always
+    restart: unless-stopped
     command: --web --docker --logLevel=DEBUG
     ports:
       - '80:80'
@@ -14,3 +14,20 @@ services:
       - '8080:8080' # Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - 'traefik.backend=proxy_traefik'
+      - 'traefik.port=8080'
+      - 'traefik.frontend.rule=Host:traefik.localhost'
+
+
+  portainer:
+    image: portainer/portainer
+    container_name: "portainer_traefik"
+    network_mode: traefik_default
+    command: --no-auth -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - 'traefik.backend=portainer_traefik'
+      - 'traefik.port=9000'
+      - 'traefik.frontend.rule=Host:portainer.localhost'

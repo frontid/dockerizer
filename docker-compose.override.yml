@@ -4,6 +4,15 @@ services:
 
   mariadb:
     network_mode: traefik_default
+    environment:
+      MYSQL_INNODB_BUFFER_POOL_SIZE : ${MYSQL_INNODB_BUFFER_POOL_SIZE:-1G}
+      MYSQL_INNODB_IO_CAPACITY : ${MYSQL_INNODB_IO_CAPACITY:-2400}
+      MYSQL_INNODB_LOG_FILE_SIZE : ${MYSQL_INNODB_LOG_FILE_SIZE:-256M}
+      MYSQL_INNODB_READ_IO_THREADS : ${MYSQL_INNODB_READ_IO_THREADS:-16}
+      MYSQL_INNODB_WRITE_IO_THREADS : ${MYSQL_INNODB_WRITE_IO_THREADS:-16}
+      MYSQL_OPTIMIZER_SEARCH_DEPTH : ${MYSQL_OPTIMIZER_SEARCH_DEPTH:-0}
+      MYSQL_QUERY_CACHE_TYPE : ${MYSQL_QUERY_CACHE_TYPE:-0}
+      MYSQL_QUERY_CACHE_SIZE : ${MYSQL_QUERY_CACHE_SIZE:-0}
 
   php:
     network_mode: traefik_default
@@ -12,12 +21,19 @@ services:
       PHP_XDEBUG_REMOTE_AUTOSTART: 1
       PHP_XDEBUG_DEFAULT_ENABLE: 1
       PHP_XDEBUG_REMOTE_CONNECT_BACK: 0
-      #  Please see DOCKER_HOST -> https://github.com/docker/for-linux/issues/264
-      PHP_XDEBUG_REMOTE_HOST: $DOCKER_PROJECT_HOST
+      PHP_XDEBUG_REMOTE_HOST: 172.17.0.1
+      PHP_IDE_CONFIG: serverName=${PROJECT_NAME}.localhost
       PHP_MAX_EXECUTION_TIME: ${PHP_MAX_EXECUTION_TIME:-120}
       PHP_POST_MAX_SIZE: ${PHP_POST_MAX_SIZE:-32M}
       PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT:-512M}
       PHP_UPLOAD_MAX_FILESIZE: ${PHP_UPLOAD_MAX_FILESIZE:-32M}
+      #### BLACKFIRE SUPPORT
+      #PHP_BLACKFIRE: 1
+      #BLACKFIRE_CLIENT_ID: CLIENT_XXXXXX
+      #BLACKFIRE_CLIENT_TOKEN: CLIENT_YYYYY
+      #PHP_BLACKFIRE_AGENT_HOST: "${PROJECT_NAME}_blackfire"
+      #### END BLACKFIRE SUPPORT
+
       # We need SSH_PRIVATE_KEY until
       # https://github.com/wodby/php/blob/master/7/docker-entrypoint.sh
       # applies the deprecation over init_ssh_client().
@@ -38,10 +54,6 @@ services:
       APACHE_BACKEND_HOST: "${PROJECT_NAME}_php"
       APACHE_DOCUMENT_ROOT: /var/www/html/web/$PROJECT_BASE_PATH
     labels:
-      # Our traefik needs the exact name instead just "apache" since
-      # it holds many containters and each one has it own unique name.
-      traefik.backend: ${PROJECT_NAME}_apache
-
       # Minimal modifications to allow subdomain wildcard. Any URL that does not match with
       # taken domains like pma."project".localhost will fall intro apache container.
       traefik.frontend.rule: HostRegexp:${PROJECT_BASE_URL}, {subdomain:[a-z]+}.${PROJECT_BASE_URL}
@@ -56,21 +68,32 @@ services:
       PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.pma.localhost'
-      - 'traefik.backend=${PROJECT_NAME}_pma'
 
   mailhog:
     network_mode: traefik_default
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.mailhog.localhost'
-      - 'traefik.backend=${PROJECT_NAME}_mailhog'
 
-  frontend:
-    container_name: ${PROJECT_NAME}_frontend
-    image: frontid/docker-front-tools:latest
+  node:
+    container_name: ${PROJECT_NAME}_node
     network_mode: traefik_default
+    user: "node"
+    image: "node:lts-jessie"
     volumes:
       - ./:/var/www/html
-    command: tail -f /dev/null
+
+#  blackfire:
+#    network_mode: traefik_default
+
+
+# Just for legacy
+#  frontend:
+#    container_name: ${PROJECT_NAME}_frontend
+#    image: frontid/docker-front-tools:latest
+#    network_mode: traefik_default
+#    volumes:
+#      - ./:/var/www/html
+#    command: tail -f /dev/null
 
 #  terminus:
 #    container_name: ${PROJECT_NAME}_terminus

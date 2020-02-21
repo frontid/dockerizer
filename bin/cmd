@@ -4,4 +4,4 @@
 container=$1
 shift
 
-source _command_wrapper $container 'exec' $@
+source _command_wrapper_exec $container 'exec' $@

@@ -1,4 +1,6 @@
 site_name: Dockerizer
+repo_url: https://github.com/frontid/dockerizer
+edit_uri: ""
 pages:
     - Home: index.md
     - Install: install.md
@@ -7,6 +9,7 @@ pages:
     - The .docker.env file: dockerenv.md
     - Available commands: commands.md
     - Requirements: requirements.md
+    - Extensions: extensions.md
     - Uninstall: uninstall.md
     - Troubleshoot: troubleshoot.md
     - Mac: mac.md
