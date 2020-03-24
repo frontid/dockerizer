@@ -22,9 +22,13 @@ _docker_project() {
         fi
 
     else
-        echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/\e[0m"
-        cd - > /dev/null
-        exit 1
+        if [ -e .docker.env ]; then
+            cp .docker.env ./.env
+        else
+            echo -e "\e[31mYour project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/\e[0m"
+            cd - > /dev/null
+            exit 1
+        fi
     fi
 
     # Create temporal files for ssh configuration.
