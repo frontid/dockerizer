@@ -6,3 +6,4 @@ web
 .docker.override.env
 .docker.env
 docs/site
+storage
