@@ -44,6 +44,8 @@ _docker_project() {
         if [[ -f ~/.ssh/config ]]; then
             cat ~/.ssh/config > .ssh_config
         fi
+
+        ARGS_END="--remove-orphans"
     fi
 
     ARGS="-f $PWD/docker-compose.yml -f $PWD/docker-compose.override.yml"
@@ -57,7 +59,7 @@ _docker_project() {
         fi
     fi
 
-    docker-compose ${ARGS} $1
+    docker-compose ${ARGS} $1 ${ARGS_END}
 
     # Remove temporal files
     if [[ -f .id ]]; then
