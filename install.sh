@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+###Define available downloader
+
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
+if exists curl; then
+  echo 'We are using curl to fetch the files !'
+  downloader="curl -L "
+elif exists wget; then
+  echo 'We are using wget to fetch the files !'
+  downloader="wget -O - "
+else
+  echo 'Your system does not have Wget nor Curl available.'
+  echo 'You need to provide one of them for this installer to work'
+  exit
+fi
+
 rm -rf /tmp/dockerizer
 
 echo "Installing dockerizer"
@@ -14,7 +33,7 @@ echo -e "Installing smartcd"
 
 # Install smartcd if not installed.
 if [ ! -f "$HOME/.smartcd_config" ]; then
-  curl -L http://smartcd.org/install | bash
+  $downloader http://smartcd.org/install | bash
 else
     echo -e "\e[32mCurrently installed\e[0m"
 fi
