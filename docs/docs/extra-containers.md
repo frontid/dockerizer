@@ -11,10 +11,10 @@ In order to enable it you need to:
 - uncomment from docker-compose.override.yml the `blackfire` container
 - uncomment from docker-compose.override.yml, in the `php` container, the environment variables:
 ```bash
-	PHP_BLACKFIRE: 1
-    BLACKFIRE_CLIENT_ID: CLIENT_XXXXXX
-    BLACKFIRE_CLIENT_TOKEN: CLIENT_YYYYY
-    PHP_BLACKFIRE_AGENT_HOST: "${PROJECT_NAME}_blackfire"
+PHP_BLACKFIRE: 1
+BLACKFIRE_CLIENT_ID: CLIENT_XXXXXX  
+BLACKFIRE_CLIENT_TOKEN: CLIENT_YYYYY  
+PHP_BLACKFIRE_AGENT_HOST: "${PROJECT_NAME}_blackfire"
 ```
 - set variables BLACKFIRE_CLIENT_ID and BLACKFIRE_CLIENT_TOKEN
 
@@ -25,3 +25,4 @@ make sure you have defined solr variables from .example.docker.env in your /web/
 Once previous steps are finished, run the project as usual with `dk start` and create the core running this command: `solr create`.  
   
 And that's it, now you have a new core. You can check it at [youprojectname.solr.localhost]()
+

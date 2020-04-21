@@ -5,14 +5,14 @@ This is the shared docker configuration file that should be commited as part of 
 On this document you will find almost all variables you will need but not all of them. Visit [https://github.com/wodby/docker4drupal](https://github.com/wodby/docker4drupal) for more variables if you cant find what you want here.
 
 ## General variables 
-| PROJECT VARS             | MEANING                                    | |
+| VARS             | MEANING                                    | |
 |--------------------------|--------------------------------------------|--------------------------------------------------------------------------------------------|
 | PROJECT_NAME             | The project base name                      | Required                                                                     |
 | PROJECT_BASE_URL         | The project url                            | Required                                                                     |
 | PROJECT_BASE_PATH        | Base project's path                        | If your project resides in a sub dir like "docroot" or "web" you can specify it on PROJECT_BASE_PATH                |
 
 ## PHP variables
-| PHP VARS                      | MEANING                                    | |
+| VARS                      | MEANING                                    | |
 |--------------------------|--------------------------------------------|--------------------------------------------------------------------------------------------|
 | PHP_MAX_EXECUTION_TIME   | PHP max execution time                     | |
 | PHP_POST_MAX_SIZE        | PHP max $_POST size                        | |
@@ -23,7 +23,7 @@ On this document you will find almost all variables you will need but not all of
 ## MariaDB/MYSQL variables
 The MariaDB default values ( defined in `docker-compose.override.yml` ) are configured for a system with 2 GB RAM available and SSD/NVMe disks. You can comment out these vars to get a default MariaDB configuration.
 
-| MariaDB VARS                         | MEANING                                                                                        |
+| VARS                         | MEANING                                                                                        |
 |--------------------------------------|------------------------------------------------------------------------------------------------|
 | MYSQL_INNODB_BUFFER_POOL_SIZE        | Size of memory available for data structures of InnoDB, buffers, caches, indexes               |
 | MYSQL_INNODB_IO_CAPACITY             | I/O activity for XtraDB/InnoDB background tasks                                                |
@@ -37,10 +37,11 @@ The MariaDB default values ( defined in `docker-compose.override.yml` ) are conf
 
 ## Solr variables
 
-| MariaDB VARS             | MEANING                                         |
-|--------------------------|-------------------------------------------------|
-| SOLR_DEFAULT_CONFIG_SET  |  @see [https://github.com/wodby/solr#config-sets](https://github.com/wodby/solr#config-sets) |
-| SOLR_HEAP                |  How much RAM is pre assigned to Solr           |
+| VARS                     | MEANING                                               |
+|--------------------------|-------------------------------------------------------|
+| SOLR_CORE_CONFIG_DIR     |  Specifies where is located the core config.          |
+| SOLR_DEFAULT_CONFIG_SET  |  @see [https://github.com/wodby/solr#config-sets]()   |
+| SOLR_HEAP                |  How much RAM is pre assigned to Solr                 |
 
 
 -----
