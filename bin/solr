@@ -1,0 +1,96 @@
+#!/bin/bash
+#
+# This script starts Solr on localhost, creates a core with "solr create",
+# stops Solr, and then starts Solr as normal.
+# Any arguments are passed to the "solr create".
+# To simply create a core:
+#      docker run -P -d solr solr-create -c mycore
+# To create a core from mounted config:
+#      docker run -P -d -v $PWD/myconfig:/myconfig solr solr-create -c mycore -d /myconfig
+
+
+bin_path="`dirname $0`"
+# we need to be sudo?
+user_uid=0
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
+
+#  By default actions target a core which names equally to the project name
+CORE_NAME=$PROJECT_NAME
+if [ ! -z "$2" ]; then
+	#  Custom core name
+    CORE_NAME=$2
+fi
+
+######### Usage info ##############
+function usage() {
+ cat << EOF
+$(basename $0) [-h] [action] -- handles actions with solr cores.
+where:
+    -h  show this help text
+    action  it could be any of the following:
+    	init: 
+    		Creates a default core if it doesn't exists.
+
+    	create [core_name=${CORE_NAME}]: 
+    		which creates a core with the configset of ${PROJECT_NAME}. 
+    		It's possible to add a custom name, otherwise defaults to project name. 
+
+    	delete [core_name=${CORE_NAME}]: 
+    		removes a core. By default it deletes the project base core. 
+    		Otherwise a core name can be specified.
+    	
+    	reload [core_name=${CORE_NAME}]: 
+    		reloads a core. By default it reloads the project base core. 
+    		Otherwise a core name can be specified.
+
+	upgrade [core_name=${CORE_NAME}]: 
+		cleansup broken configset.
+
+	ping [core_name=${CORE_NAME}]: 
+		Checks if a core is alive.
+EOF
+
+}
+
+
+[ $# -eq 0 ] && { echo $usage ; exit 1; }
+if [ "$1" == "-h" ]; then
+  usage
+  exit 0
+fi
+######### End Usage info ##############
+
+echo $1
+
+# Check the provided arguments and set the variables.
+
+case $1 in
+	init)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make init -f /usr/local/bin/actions.mk"
+;;
+	create)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make create core=$CORE_NAME -f /usr/local/bin/actions.mk"
+;;
+remove|delete)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make delete core=$CORE_NAME -f /usr/local/bin/actions.mk"
+;;
+reload)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make reload core=$CORE_NAME -f /usr/local/bin/actions.mk"
+;;
+upgrade)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make reload core=$CORE_NAME -f /usr/local/bin/actions.mk"
+;;
+ping)
+	source _command_wrapper_exec 'solr' "COLUMNS=160 SOLR_DEFAULT_CONFIG_SET=$PROJECT_NAME make ping core=$CORE_NAME -f /usr/local/bin/actions.mk"
+;;
+*)	
+    #  "solr ?"
+    echo -e "Command \e[32m$1\e[0m unknown"
+    usage
+    exit 0
+;;
+esac
