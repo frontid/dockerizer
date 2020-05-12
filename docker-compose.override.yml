@@ -134,3 +134,18 @@ services:
 #      PGDATA: /var/lib/postgresql/data/pgdata
 #    volumes:
 #      - ./:/var/www/html
+
+#  solr:
+#    image: wodby/solr:$SOLR_TAG
+#    container_name: "${PROJECT_NAME}_solr"
+#    environment:
+#      PROJECT_NAME: ${PROJECT_NAME}
+#      SOLR_DEFAULT_CONFIG_SET: $SOLR_CONFIG_SET
+#      SOLR_HEAP: ${SOLR_HEAP:-1024m}
+#    network_mode: traefik_default
+#    labels:
+#      - 'traefik.frontend.rule=Host:${PROJECT_NAME}.solr.localhost'
+#      - "traefik.http.routers.${PROJECT_NAME}_solr.rule=Host(`solr.${PROJECT_BASE_URL}`)"
+#    volumes:
+#      - ./:/var/www/html
+#      - ${SOLR_CORE_CONFIG_DIR}:/opt/solr/server/solr/configsets/${PROJECT_NAME}

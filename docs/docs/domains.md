@@ -8,4 +8,5 @@
 Each project will have the following domains (if you configured PROJECT_NAME as "foo"):  
 - `foo.localhost` -> Website  
 - `foo.pma.localhost` -> PhpMyAdmin  
-- `foo.mailhog.localhost`-> MailHog client.
+- `foo.mailhog.localhost`-> MailHog client.  
+- `foo.solr.localhost`-> Solr (If you enabled solar since it is an optional container).
