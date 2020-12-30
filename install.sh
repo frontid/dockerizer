@@ -14,7 +14,7 @@ echo -e "Installing smartcd"
 
 # Install smartcd if not installed.
 if [ ! -f "$HOME/.smartcd_config" ]; then
-  curl -L http://smartcd.org/install | bash
+  curl -L https://raw.githubusercontent.com/cxreg/smartcd/master/download-and-install | bash
 else
     echo -e "\e[32mCurrently installed\e[0m"
 fi
