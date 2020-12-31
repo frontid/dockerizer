@@ -1,0 +1,47 @@
+#!/bin/bash
+
+current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+bin_path="`dirname blt`"
+root_dir="$( cd $bin_path && cd .. && pwd)"
+relative_path=${PWD#$root_dir}
+if [ -z "$user_uid" ]; then
+	user_uid=1000
+fi
+
+if [ -z "$user_group" ]; then
+	user_group=1000
+fi	
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    user_uid=501
+    user_group=20
+fi
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
+
+# We assign the container name to a variable then shift it from the array of params.
+container_name="php"
+
+container=$PROJECT_NAME
+container+="_$container_name"
+
+# If the input comes from a pipe or file ("< something.txt") we cant use "t" 
+#flag since it will fail with "the input device is not a TTY"
+# -t 0 == stdin
+if [ -t 0 ]; then
+  	tty="-it"
+else
+	tty="-i"
+fi
+
+command="docker exec $tty --user $user_uid:$user_group $container /bin/bash -c 'cd /var/www/html/web && ../bin/_blt $@'"
+
+# Only show a screen message if the output is stdout.
+if [ -t 1 ]; then
+  echo -e "SENDING \e[32m$0\e[0m TO \"$container\" container."
+fi
+
+eval "$command"
