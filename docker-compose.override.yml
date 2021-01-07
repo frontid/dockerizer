@@ -86,6 +86,10 @@ services:
 #  blackfire:
 #    network_mode: traefik_default
 
+#  chrome:
+#    network_mode: traefik_default
+     
+
 
 # Just for legacy
 #  frontend:
