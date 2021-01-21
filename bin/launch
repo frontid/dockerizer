@@ -1,0 +1,12 @@
+#!/bin/bash
+bin_path="`dirname $0`"
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
+
+url=$PROJECT_BASE_URL
+
+echo -e "Launch http://\e[32m$url\e[0m in browser."
+x-www-browser "http://$url"
