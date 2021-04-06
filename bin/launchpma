@@ -1,0 +1,25 @@
+#!/bin/bash
+bin_path="`dirname $0`"
+
+# Load project specific variables.
+set -o allexport
+source "${bin_path}/../.env"
+set +o allexport
+
+IFS='.' read -ra domains <<< "$PROJECT_BASE_URL"
+len=${#domains[@]}
+len=$(( $len - 1 ))
+url=""
+for i in "${!domains[@]}"
+do
+    if (($i >= $len)); then
+        url="${url}.pma"
+    fi
+    if (($i != 0)); then
+        url="${url}."
+    fi
+    url="${url}${domains[$i]}"
+done
+
+echo -e "Launch http://\e[32m$url\e[0m in browser."
+x-www-browser "http://$url"

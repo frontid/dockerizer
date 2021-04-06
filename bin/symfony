@@ -1,0 +1,3 @@
+#!/bin/bash
+# source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+source _command_wrapper_exec 'php' 'COLUMNS=160 symfony' $@
