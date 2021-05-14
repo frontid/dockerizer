@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
+source _command_wrapper_exec 'php' 'COLUMNS=160 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar '
+source _command_wrapper_exec 'php' 'COLUMNS=160 chmod +x wp-cli.phar '
+source _command_wrapper_exec 'php' 'COLUMNS=160 sudo mv wp-cli.phar /usr/local/bin/wp '
