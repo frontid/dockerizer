@@ -13,3 +13,6 @@ If you choose for Drupal you can run:
 
 1. composer create-project drupal/recommended-project web                                        # Drupal latest version in web folder
 2. cd web && drush si --db-url=mysql://db:db@dockerizer_mariadb:3306/db --account-pass=admin -y  # Install Drupal
+3. update .docker.env to point PROJECT_BASE_PATH=web
+
+
