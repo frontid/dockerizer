@@ -1,3 +1,19 @@
 #!/bin/bash
+
+function dkHelp () {
+  echo "Dockerizer command: console"
+  echo
+  echo "Symfony console, accepts all common software params."
+}
+
+while [ -n "$1" ]; do
+    case "$1" in
+        --dkhelp)
+            dkHelp
+            exit
+            ;;
+    esac
+done
+
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
 source _command_wrapper_exec 'php' 'COLUMNS=160 php bin/console' $@

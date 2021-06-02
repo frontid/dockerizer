@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function dkHelp () {
-  echo "Dockerizer command: launchpma"
+  echo "Dockerizer command: launchmailhog"
   echo
-  echo "Open a browser tab in the project phpMyAdmin URL."
+  echo "Open a browser tab in the project MailHog URL."
 }
 
 while [ -n "$1" ]; do
@@ -29,7 +29,7 @@ url=""
 for i in "${!domains[@]}"
 do
     if (($i >= $len)); then
-        url="${url}.pma"
+        url="${url}.mailhog"
     fi
     if (($i != 0)); then
         url="${url}."
