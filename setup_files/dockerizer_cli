@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Check if the .docker.env (and optionally .docker.override.env).
-# and run docker-compose commands.
-_docker_project() {
-    bin_path=$(which _command_wrapper_exec)
-    
+# Move to project home folder.
+_go_home_dir() {
+  bin_path=$(which _command_wrapper_exec)
+
     if [ -z bin_path ]; then
         project_path="."
     else
@@ -12,6 +11,12 @@ _docker_project() {
     fi
 
     cd $project_path > /dev/null
+}
+
+# Check if the .docker.env (and optionally .docker.override.env).
+# and run docker-compose commands.
+_docker_project() {
+    _go_home_dir
 
     if [ -e web/.docker.env ]; then
 
@@ -93,52 +98,74 @@ _track_dockerized_project() {
     fi
 }
 
+# Display dk help.
+_show_help() {
+   echo "Dockerizer is a docker development tool that allows you to run dockerized LAMP projects."
+   echo
+   echo "Github project: https://frontid.github.io/dockerizer/"
+   echo
+   echo "Syntax: dk [command]"
+   echo
+   echo "Commands:"
+   echo "new              This command will prepare a dockerizer dir for you."
+   echo "start [traefik]  When calling it in a project folder, it starts docker containers. If you add 'traefik' start the traefik service."
+   echo "stop [traefik]   When calling it in a project folder, it stops docker containers. If you add 'traefik' stop the traefik service."
+   echo "self-update      If there is a new version of the dk tool you can easily upgrade it with this command."
+   echo "help             Show this help."
+   echo
+   echo "Direct commands: (without dk prefix)"
+   echo "Adding --dkhelp option we have help."
+   echo
+
+   _go_home_dir
+   for filename in bin/*; do
+     baseFileName=$(basename "$filename")
+     firstCharacter=${baseFileName:0:1}
+     if [[ $firstCharacter != "_" ]]; then
+       echo $(basename "$filename")
+     fi
+   done
+}
+
 # -----------------------------------------------
 
 
 # Temporal solution to add pre-existing projects to the config file.
 if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
     _track_dockerized_project
-fi
 
 # Start project?
-if [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
+elif [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
     _docker_project "up -d"
-fi
 
 # Stop project?
-if [ ! -z "$1" ] && [ $1 = "stop" ] && [ -z "$2" ]; then
+elif [ ! -z "$1" ] && [ $1 = "stop" ] && [ -z "$2" ]; then
     _docker_project "stop"
-fi
 
 # Restart project?
-if [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
+elif [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
     # We dont use just "restart" because this: If you make changes to your docker-compose.yml
     # configuration these changes are not reflected after running this command.
     _docker_project "stop"
     _docker_project "up -d"
-fi
 
 # Start traefik?
-if [ ! -z "$1" ] && [ $1 = "start" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
+elif [ ! -z "$1" ] && [ $1 = "start" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
     _traefik_service "up -d"
-fi
 
 # Stop traefik?
-if [ ! -z "$1" ] && [ $1 = "stop" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
+elif [ ! -z "$1" ] && [ $1 = "stop" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
     _traefik_service "stop"
-fi
 
 # Add new dockerizer
-if [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
+elif [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
     git clone https://github.com/frontid/dockerizer.git $2
     cd $2
     ./setup.sh
     _track_dockerized_project
-fi
 
 # Self update dockerizer
-if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
+elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     echo "Cleaning /tmp/dockerizer"
     echo "------------------------"
 
@@ -184,4 +211,9 @@ if [ ! -z "$1" ] && [ $1 = "self-update" ]; then
     dk start traefik
 
     echo "Done."
+
+elif [ ! -z "$1" ] && [ $1 = "help" ]; then
+  _show_help
+else
+  _show_help
 fi

@@ -7,7 +7,7 @@ _dk() {
 
     if [ $COMP_CWORD -eq 1 ]; then
 
-        COMPREPLY=( $(compgen -W "start stop restart new self-update track" -- $cur) )
+        COMPREPLY=( $(compgen -W "start stop restart new self-update track help" -- $cur) )
 
     elif [ $COMP_CWORD -eq 2 ]; then
 

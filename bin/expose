@@ -1,5 +1,34 @@
 #!/bin/bash
 
+function dkHelp () {
+  echo "Dockerizer command: expose"
+  echo
+  echo "(Drops a container shell)."
+  echo "By default connects to the php container if you do not specify any other. But if you want to connect to another container like the DB one just type expose mariadb."
+  echo "If you want to enter as root just add --root: expose apache --root."
+  echo
+  echo "Available containers are:"
+  echo
+  echo "    php (by default)"
+  echo "    mariadb (mysql)"
+  echo "    apache"
+  echo "    frontend"
+  echo
+  echo "Usage"
+  echo "expose                drops a shell of php (default)"
+  echo "expose apache         drops a shell of apache"
+  echo "expose apache --root  drops a root shell of apache"
+}
+
+while [ -n "$1" ]; do
+    case "$1" in
+        --dkhelp)
+            dkHelp
+            exit
+            ;;
+    esac
+done
+
 bin_path="`dirname $0`"
 root_dir="$( cd $bin_path && cd .. && pwd)"
 relative_path=${PWD#$root_dir}

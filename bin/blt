@@ -1,5 +1,21 @@
 #!/bin/bash
 
+function dkHelp () {
+  echo "Dockerizer command: blt"
+  echo
+  echo "Acquia BLT (Build and Launch Tool), available on GitHub, provides an automation layer for testing, building, and launching Drupal 8 and 9 applications."
+  echo "Github: https://github.com/acquia/blt"
+}
+
+while [ -n "$1" ]; do
+    case "$1" in
+        --dkhelp)
+            dkHelp
+            exit
+            ;;
+    esac
+done
+
 current_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 bin_path="`dirname blt`"
 root_dir="$( cd $bin_path && cd .. && pwd)"
