@@ -1,3 +1,26 @@
 #!/bin/bash
 
+function dkHelp () {
+  echo "Dockerizer command: logs"
+  echo
+  echo "logs shows the logs of all containers or of a specific one. This command can be run anywhere inside the dockerized dir and project."
+  echo
+  echo "The available options are:"
+  echo "-f Follow log output."
+  echo
+  echo "Usage"
+  echo "Show logs of all containers:                                    logs"
+  echo "Show logs of an specific container:                             logs apache, logs php, logs masriadb"
+  echo "Show logs of an specific container with the follow option set:  logs -f apache"
+}
+
+while [ -n "$1" ]; do
+    case "$1" in
+        --dkhelp)
+            dkHelp
+            exit
+            ;;
+    esac
+done
+
 docker-compose logs $@

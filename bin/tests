@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function dkHelp () {
-  echo "Dockerizer command: composer"
+  echo "Dockerizer command: tests"
   echo
-  echo 'Accepts all common software params.'
+  echo "Execute PHPUnit project tests."
 }
 
 while [ -n "$1" ]; do
@@ -16,4 +16,4 @@ while [ -n "$1" ]; do
 done
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
-source _command_wrapper_exec 'php' 'composer' $@
+source _command_wrapper_exec 'php' 'COLUMNS=160 php bin/phpunit' $@
