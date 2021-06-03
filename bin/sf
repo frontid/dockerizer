@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function dkHelp () {
-  echo "Dockerizer command: symfony"
+  echo "Dockerizer command: sf"
   echo
   echo "Symfony CLI, accepts all common software params."
 }

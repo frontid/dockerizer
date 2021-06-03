@@ -110,6 +110,7 @@ _show_help() {
    echo "new              This command will prepare a dockerizer dir for you."
    echo "start [traefik]  When calling it in a project folder, it starts docker containers. If you add 'traefik' start the traefik service."
    echo "stop [traefik]   When calling it in a project folder, it stops docker containers. If you add 'traefik' stop the traefik service."
+   echo "down             When calling it in a project folder, it stops and removes containers, networks, images, and volumes."
    echo "self-update      If there is a new version of the dk tool you can easily upgrade it with this command."
    echo "help             Show this help."
    echo
@@ -117,6 +118,7 @@ _show_help() {
    echo "Adding --dkhelp option we have help."
    echo
 
+   # List direct commands available.
    _go_home_dir
    for filename in bin/*; do
      baseFileName=$(basename "$filename")
@@ -141,6 +143,10 @@ elif [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
 # Stop project?
 elif [ ! -z "$1" ] && [ $1 = "stop" ] && [ -z "$2" ]; then
     _docker_project "stop"
+
+# Stop and remove containers, networks, images, and volumes?
+elif [ ! -z "$1" ] && [ $1 = "down" ] && [ -z "$2" ]; then
+    _docker_project "down"
 
 # Restart project?
 elif [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
