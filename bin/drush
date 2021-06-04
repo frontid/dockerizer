@@ -6,14 +6,12 @@ function dkHelp () {
   echo 'Accepts all common software params.'
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 # Since docker4drupal internally uses "Drush Launcher" we
 # dont need to take care about the drush location (different betweem drupal 7 and 8)

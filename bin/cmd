@@ -9,14 +9,12 @@ function dkHelp () {
   echo 'cmd php ls -l where "php" is the container and "ls -l" is the sent command.'
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
 container=$1

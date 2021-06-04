@@ -6,14 +6,12 @@ function dkHelp () {
   echo "Open a browser tab in the project phpMyAdmin URL."
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 bin_path="`dirname $0`"
 
