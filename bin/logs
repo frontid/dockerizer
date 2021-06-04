@@ -14,13 +14,11 @@ function dkHelp () {
   echo "Show logs of an specific container with the follow option set:  logs -f apache"
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 docker-compose logs $@

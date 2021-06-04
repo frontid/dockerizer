@@ -6,14 +6,12 @@ function dkHelp () {
   echo "Traefik UI. Shows you all registered domains for all running projects under dockerizer."
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 echo -e "Launch http://traefik.localhost in browser."
 x-www-browser "http://traefik.localhost"

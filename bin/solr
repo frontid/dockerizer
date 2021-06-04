@@ -12,14 +12,13 @@ function dkHelp () {
   echo "     docker run -P -d -v $PWD/myconfig:/myconfig solr solr-create -c mycore -d /myconfig"
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
+
 #
 # This script starts Solr on localhost, creates a core with "solr create",
 # stops Solr, and then starts Solr as normal.

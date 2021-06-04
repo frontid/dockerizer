@@ -6,14 +6,12 @@ function dkHelp () {
   echo "install wordpress console in php container"
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 # source command_wrapper [CONTAINER NAME] [COMMAND] $@ = params to send.
 source _command_wrapper_exec 'php' 'COLUMNS=160 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar '

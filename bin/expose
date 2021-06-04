@@ -20,14 +20,12 @@ function dkHelp () {
   echo "expose apache --root  drops a root shell of apache"
 }
 
-while [ -n "$1" ]; do
-    case "$1" in
-        --dkhelp)
-            dkHelp
-            exit
-            ;;
-    esac
-done
+case "$1" in
+  --dkhelp)
+    dkHelp
+    exit
+    ;;
+esac
 
 bin_path="`dirname $0`"
 root_dir="$( cd $bin_path && cd .. && pwd)"
