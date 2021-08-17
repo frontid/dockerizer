@@ -30,7 +30,9 @@ And that's it, now you have a new core. You can check it at [youprojectname.solr
 You can run terminus by enabling it in the docker-compose.override.yml. Then you need to set into your `.docker.env` file the MACHINE_TOKEN and SITE constants.
 Once done you can run:
 
-`expose terminus
+```bash
+expose terminus
 terminus auth:login --machine-token=$MACHINE_TOKEN
 terminus drush $SITE.qa uli
-terminus drush $SITE.qa status`
+terminus drush $SITE.qa status
+```
