@@ -10,6 +10,7 @@ On this document you will find almost all variables you will need but not all of
 | PROJECT_NAME             | The project base name                      | Required                                                                     |
 | PROJECT_BASE_URL         | The project url                            | Required                                                                     |
 | PROJECT_BASE_PATH        | Base project's path                        | If your project resides in a sub dir like "docroot" or "web" you can specify it on PROJECT_BASE_PATH                |
+| CUSTOM_DOCKER_COMPOSE    | Special projects may require additional docker-compose services. You can add as many docker-compose.yml files as needed from inside your repository. | Optional. Example: CUSTOM_DOCKER_COMPOSE="web/setup/oidc/docker-compose.oidc.yml web/setup/redis/docker-compose.redis.yml" |
 
 ## PHP variables
 | VARS                      | MEANING                                    | |
