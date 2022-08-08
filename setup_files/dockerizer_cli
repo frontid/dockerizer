@@ -154,6 +154,10 @@ _show_help() {
 if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
     _track_dockerized_project
 
+# Logs
+elif [ ! -z "$1" ] && [ $1 = "logs" ]; then
+    _docker_project "logs $2"
+
 # Start project?
 elif [ ! -z "$1" ] && [ $1 = "start" ] && [ -z "$2" ] ; then
     _docker_project "up -d"
@@ -172,6 +176,11 @@ elif [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
     # configuration these changes are not reflected after running this command.
     _docker_project "stop"
     _docker_project "up -d"
+
+# Restart project specific
+elif [ ! -z "$1" ] && [ $1 = "restart" ]; then
+    _docker_project "stop $2"
+    _docker_project "start $2"
 
 # Start traefik?
 elif [ ! -z "$1" ] && [ $1 = "start" ] && [ ! -z "$2" ] && [ $2 = "traefik" ]; then
