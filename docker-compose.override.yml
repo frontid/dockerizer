@@ -82,7 +82,7 @@ services:
     container_name: ${PROJECT_NAME}_node
     network_mode: traefik_default
     user: "node"
-    image: "node:lts-jessie"
+#    image: "node:lts-jessie"
     volumes:
       - ./:/var/www/html
 
