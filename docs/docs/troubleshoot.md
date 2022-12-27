@@ -57,3 +57,9 @@ Due to drupal-launcher loses it's mind when you are trying to debug a script. Yo
 
 `cmd php ./vendor/drush/drush/drush foo:command` 
 
+
+# How can I set the private SSH key to use for connecting to other servers? 
+
+Dockerizer by default will load the private key placed at ~/.ssh/id_rsa. It will also load the special config (if it exists) placed at ~/.ssh/config.
+If you need to load a different key for one Dockerizer project, you can set it by using:
+`dk setenv ID_RSA ~/.ssh/custom_id_rsa`
