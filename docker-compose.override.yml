@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.7"
 
 services:
 
@@ -13,13 +13,14 @@ services:
       MYSQL_OPTIMIZER_SEARCH_DEPTH : ${MYSQL_OPTIMIZER_SEARCH_DEPTH:-0}
       MYSQL_QUERY_CACHE_TYPE : ${MYSQL_QUERY_CACHE_TYPE:-0}
       MYSQL_QUERY_CACHE_SIZE : ${MYSQL_QUERY_CACHE_SIZE:-0}
+    profiles: ["mariadb"]
 
   php:
     network_mode: traefik_default
     environment:
       ## Read instructions at https://wodby.com/docs/stacks/php/local/#xdebug
-      PHP_XDEBUG: 1
-      PHP_XDEBUG_MODE: debug
+      PHP_XDEBUG: ${PHP_DEBUG:-1}
+      PHP_XDEBUG_MODE: ${PHP_DEBUG_MODE:-debug}
       PHP_IDE_CONFIG: serverName=${PROJECT_NAME}.localhost
       PHP_XDEBUG_IDEKEY: "${PROJECT_NAME}.localhost"
       PHP_XDEBUG_CLIENT_HOST: 172.17.0.1 # Linux
@@ -45,6 +46,7 @@ services:
     volumes:
       - ./.id:/etc/gotpl/id_rsa.tmpl
       - ./.ssh_config:/etc/gotpl/ssh_config.tmpl
+    profiles: ["php", "apache-php"]
 
   apache:
     network_mode: traefik_default
@@ -61,6 +63,7 @@ services:
       # Minimal modifications to allow subdomain wildcard. Any URL that does not match with
       # taken domains like pma."project".localhost will fall intro apache container.
       traefik.frontend.rule: HostRegexp:${PROJECT_BASE_URL}, {subdomain:[a-z]+}.${PROJECT_BASE_URL}
+    profiles: ["apache", "apache-php"]
 
   pma:
     network_mode: traefik_default
@@ -72,11 +75,15 @@ services:
       PMA_HOST: "${PROJECT_NAME}_$DB_HOST"
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.pma.localhost'
+    profiles:
+      - pma
+      - mariadb
 
   mailhog:
     network_mode: traefik_default
     labels:
       - 'traefik.frontend.rule=Host:${PROJECT_NAME}.mailhog.localhost'
+    profiles: ["mailhog"]
 
   node:
     container_name: ${PROJECT_NAME}_node
@@ -85,6 +92,7 @@ services:
 #    image: "node:lts-jessie"
     volumes:
       - ./:/var/www/html
+    profiles: ["node"]
 
 #  blackfire:
 #    network_mode: traefik_default

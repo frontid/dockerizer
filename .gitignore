@@ -5,5 +5,7 @@ web
 # prevent those files get commited accidentally.
 .docker.override.env
 .docker.env
+# Contains local docker configuration
+.docker.local.env
 docs/site
 storage

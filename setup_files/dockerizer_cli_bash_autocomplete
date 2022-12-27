@@ -7,7 +7,7 @@ _dk() {
 
     if [ $COMP_CWORD -eq 1 ]; then
 
-        COMPREPLY=( $(compgen -W "start stop down restart new self-update track help" -- $cur) )
+        COMPREPLY=( $(compgen -W "start stop down restart new self-update setenv xdebug track help" -- $cur) )
 
     elif [ $COMP_CWORD -eq 2 ]; then
 
@@ -17,6 +17,12 @@ _dk() {
             ;;
           "stop")
             COMPREPLY=( $(compgen -W "traefik" -- $cur) )
+            ;;
+          "xdebug")
+            COMPREPLY=( $(compgen -W "on off" -- $cur) )
+            ;;
+          "setenv")
+            COMPREPLY=( $(compgen -W "ID_RSA SSH_CONFIG" -- $cur) )
             ;;
           *)
             ;;
