@@ -450,10 +450,11 @@ elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
   chmod +x *.sh
   sudo cp dockerizer_cli.sh /usr/local/bin/dk
 
-  exit_code=$("./dockerizer_update.sh $@")
+  ./dockerizer_update.sh "$@"
+
   # Return to previous dir
   cd $BACKDIR > /dev/null
-  exit $exit_code
+
 elif [ ! -z "$1" ] && [ $1 = "help" ]; then
   _show_help
 else

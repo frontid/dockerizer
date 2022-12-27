@@ -82,7 +82,7 @@ _show_help() {
    echo
    echo "OPTIONS:"
    echo -e "${BBlue}--branch${Color_Off}            Updates the dockerizer from a specific branch (release/tag)."
-   echo -e "${BBlue}--propagate_update${Color_Off}  Updates all the instances of the dockerizer to the specified branch."
+   echo -e "${BBlue}--propagate_update${Color_Off}  Updates all the instances of the dockerizer to the specified branch. Values accepted [on|off]"
    echo -e "${BBlue}--help${Color_Off}              Shows this help."
    echo
 
@@ -102,7 +102,10 @@ _parse_arguments() {
       --propagate_update=*)
         PROPAGATE_UPDATE="${1#*=}"
         ;;
-      --help) _show_help;;
+      --help)
+        _show_help
+        exit 0
+        ;;
       *)
 #        printf "************************************************************\n"
 #        printf "* Error: Invalid argument, run --help for valid arguments. *\n"
