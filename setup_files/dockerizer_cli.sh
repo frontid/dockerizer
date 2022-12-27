@@ -342,7 +342,7 @@ _parse_arguments() {
 # Run main process
 
 # Parse named arguments
-_parse_arguments
+_parse_arguments "$@"
 
 # Temporal solution to add pre-existing projects to the config file.
 if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
@@ -417,7 +417,6 @@ elif [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
     # configuration these changes are not reflected after running this command.
     _docker_project "stop"
     _docker_project "up -d"
-
 # Restart project specific
 elif [ ! -z "$1" ] && [ $1 = "restart" ]; then
     _docker_project "stop $2 $3 $4"
@@ -440,12 +439,13 @@ elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
 
   rm -rf /tmp/dockerizer
 
-  echo "Getting a new version of dockerizer"
+  echo -e "Getting a new version of dockerizer [${BBlue}$BRANCH${Color_Off}]"
   git clone -b $BRANCH git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
   # Before moving to a new directory save where we are
   BACKDIR=${OLDPWD:--}
   cd /tmp/dockerizer/setup_files > /dev/null
+  chmod +x *.sh
   $("./dockerizer_update.sh $@")
 
   # Return to previous dir
