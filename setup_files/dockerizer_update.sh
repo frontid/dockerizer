@@ -86,16 +86,6 @@ _show_help() {
    echo -e "${BBlue}--help${Color_Off}              Shows this help."
    echo
 
-   # List direct commands available.
-   _go_home_dir
-   for filename in bin/*; do
-     baseFileName=$(basename "$filename")
-     firstCharacter=${baseFileName:0:1}
-     if [[ $firstCharacter != "_" ]]; then
-       echo -e "\t- $(basename $filename)"
-     fi
-   done
-
 }
 
 # Parses all arguments to be used as named arguments

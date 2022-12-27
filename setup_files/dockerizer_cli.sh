@@ -446,10 +446,10 @@ elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
   BACKDIR=${OLDPWD:--}
   cd /tmp/dockerizer/setup_files > /dev/null
   chmod +x *.sh
-  $("./dockerizer_update.sh $@")
-
+  exit_code=$("./dockerizer_update.sh $@")
   # Return to previous dir
   cd $BACKDIR > /dev/null
+  exit $exit_code
 elif [ ! -z "$1" ] && [ $1 = "help" ]; then
   _show_help
 else
