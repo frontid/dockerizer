@@ -4,8 +4,9 @@ You might want to start up a new site quickly so here are the steps:
 
 1. dk new mysite
 2. cd mysite
-3. cp example.docker.env .docker.env
-4. dk start
+3. mkdir web 
+4. cp example.docker.env web/.docker.env
+5. dk start
 
 Now you can install the codebase of your choice Drupal, Laravel, Symfony, Wordpress...
 
