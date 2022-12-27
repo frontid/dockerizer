@@ -445,7 +445,11 @@ elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
   # Before moving to a new directory save where we are
   BACKDIR=${OLDPWD:--}
   cd /tmp/dockerizer/setup_files > /dev/null
+
+  # We need to update this same script, so it can be executed twice fixing possible errors during update.
   chmod +x *.sh
+  sudo cp dockerizer_cli.sh /usr/local/bin/dk
+
   exit_code=$("./dockerizer_update.sh $@")
   # Return to previous dir
   cd $BACKDIR > /dev/null
