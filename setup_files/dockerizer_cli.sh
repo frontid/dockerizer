@@ -88,7 +88,8 @@ _go_home_dir() {
 # Finds the .docker.env with the override and prepares it for running docker
 _prepare_env_file() {
   # Before moving to a new directory save where we are
-  BACKDIR=${OLDPWD:--}
+  BACKDIR=`pwd`
+
   # Go to project home
   _go_home_dir
 
@@ -117,6 +118,7 @@ _prepare_env_file() {
 
   # Return to previous dir
   cd $BACKDIR > /dev/null
+
 }
 
 # Stores data in the local docker environment
@@ -150,7 +152,7 @@ update_local_env() {
 
 _load_env_variables() {
   # Before moving to a new directory save where we are
-  BACKDIR=${OLDPWD:--}
+  BACKDIR=`pwd`
   # Go to project home
   _go_home_dir
 
@@ -162,6 +164,9 @@ _load_env_variables() {
     set -o allexport
     source .env
     set +o allexport
+  else
+    echo "NOT FOUND ENV `pwd`"
+
   fi
 
   # Return to previous dir
@@ -171,11 +176,12 @@ _load_env_variables() {
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
-	_prepare_env_file
-	_load_env_variables
 
+	#_prepare_env_file
+	_load_env_variables
 	# Before moving to a new directory save where we are
-	BACKDIR=${OLDPWD:--}
+	BACKDIR=`pwd`
+
 	# Go to project home
   _go_home_dir
 
@@ -235,7 +241,7 @@ _docker_project() {
   fi
 
 	# If we have profiles
-  if [ ! -z "PROFILES" ]; then
+  if [ ! -z "$PROFILES" ]; then
     echo -e "Active profiles: ${BGreen}$PROFILES${Color_Off}"
     # Split profiles by comma into an array
     IFS=',' read -ra PROFILES <<< "$PROFILES"
@@ -356,6 +362,7 @@ elif [ ! -z "$1" ] && [ $1 = "logs" ]; then
 elif [ ! -z "$1" ] && [ $1 = "start" ] ; then
 	# Do we have more parameters?
 	if [ ! -z "$2" ] ; then
+		
 		if [ $2 = "traefik" ]; then
 			# Start traefik
 			_traefik_service "up -d"
@@ -364,7 +371,7 @@ elif [ ! -z "$1" ] && [ $1 = "start" ] ; then
 			if [ ! -z "$3" ] ; then
 				_docker_project "up -d" $2 $3 $4
 			else
-				echo "Missing profiles specification. Use ${BBlack}dk start profiles apache,mysql${Color_Off}"
+				echo -e "Missing profiles specification. Use ${BBlue}dk start profiles apache,mysql${Color_Off}"
 			fi
 		else
 		  # dk start apache
@@ -385,7 +392,7 @@ elif [ ! -z "$1" ] && [ $1 = "stop" ] ; then
 			if [ ! -z "$3" ] ; then
 				_docker_project "stop" $2 $3 $4
 			else
-				echo "Missing profiles specification. Use ${BBlack}dk stop profiles apache,mysql${Color_Off}"
+				echo -e "Missing profiles specification. Use ${BBlue}dk stop profiles apache,mysql${Color_Off}"
 			fi
 		else
 			_docker_project "stop" $2 $3 $4
