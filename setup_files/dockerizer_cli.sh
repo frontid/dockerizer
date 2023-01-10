@@ -72,6 +72,35 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+_check_requirements() {
+  # Consider requirements would be met
+  REQUIREMENTS=1
+
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+
+  # Go to project home
+  _go_home_dir
+
+  docker_compose_plugin=$(docker compose version)
+  if [ $? = 1 ]; then
+    echo -e "${BRed}Please install docker compose plugin and try again: https://docs.docker.com/compose/install/linux/${Color_Off}"
+    REQUIREMENTS=0
+  fi
+
+  # We should always have a .docker.env in the project
+  if [ ! -f web/.docker.env ]; then
+    echo -e "${BRed}Your project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/${Color_Off}"
+    REQUIREMENTS=0
+  fi
+
+  cd $BACKDIR > /dev/null
+  if [ $REQUIREMENTS = 0 ]; then
+    exit 1
+  fi 
+
+}
+
 # Move to project home folder.
 _go_home_dir() {
   bin_path=$(which _command_wrapper_exec)
@@ -93,23 +122,25 @@ _prepare_env_file() {
   # Go to project home
   _go_home_dir
 
-	ENV_FILES=''
-	# We should always have a .docker.env in the project
-	if [ -e web/.docker.env ]; then
-		ENV_FILES=" web/.docker.env"
-	else
-    echo -e "${BRed}Your project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/${Color_Off}"
-    cd - > /dev/null
-    exit 1
-	fi
+  ENV_FILES=''
 
-	# We could have some specific override for the developer/machine
-	if [ -e web/.docker.override.env ]; then
+  # We would load default variables that will be overriden with other .env files
+  if [ -e .docker.default.env ]; then
+    ENV_FILES="$ENV_FILES ./.docker.default.env"
+  fi
+
+  # We should always have a .docker.env in the project
+  if [ -e web/.docker.env ]; then
+    ENV_FILES="$ENV_FILES web/.docker.env"
+  fi
+
+  # We could have some specific override for the developer/machine
+  if [ -e web/.docker.override.env ]; then
     ENV_FILES="$ENV_FILES web/.docker.override.env"
   fi
 
-	# We could also need to load specific docker enabled/disabled features
-	if [ -e .docker.local.env ]; then
+  # We could also need to load specific docker enabled/disabled features
+  if [ -e .docker.local.env ]; then
     ENV_FILES="$ENV_FILES ./.docker.local.env"
   fi
 
@@ -118,20 +149,19 @@ _prepare_env_file() {
 
   # Return to previous dir
   cd $BACKDIR > /dev/null
-
 }
 
 # Stores data in the local docker environment
 # Receives two parameters KEY VALUE
 update_local_env() {
-	# Before moving to a new directory save where we are
-	BACKDIR=${OLDPWD:--}
-	# Go to project home
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+  # Go to project home
   _go_home_dir
 
-	KEY=$1
-	VALUE=$2
-	if [ ! -f .docker.local.env ]; then
+  KEY=$1
+  VALUE=$2
+  if [ ! -f .docker.local.env ]; then
     touch ./.docker.local.env
   fi
 
@@ -177,12 +207,13 @@ _load_env_variables() {
 # and run docker-compose commands.
 _docker_project() {
 
-	#_prepare_env_file
-	_load_env_variables
-	# Before moving to a new directory save where we are
-	BACKDIR=`pwd`
+ _check_requirements
 
-	# Go to project home
+ _load_env_variables
+ # Before moving to a new directory save where we are
+ BACKDIR=`pwd`
+
+ # Go to project home
   _go_home_dir
 
   # Load default variables
