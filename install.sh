@@ -10,6 +10,12 @@ echo "------------------------"
 echo "Installing..."
 echo "------------------------"
 
+docker_compose_plugin=$(docker compose version)
+if [ $? = 1 ]; then
+    echo -e "${BRed}Please install docker compose plugin and try again: https://docs.docker.com/compose/install/linux/${Color_Off}"
+    exit 1
+fi
+
 echo -e "Installing smartcd"
 
 # Install smartcd if not installed.
