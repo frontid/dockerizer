@@ -33,7 +33,7 @@ else
 	tty="-i"
 fi
 
-command="docker-compose run --rm node /bin/bash -c 'cd /var/www/html$relative_path && $@'"
+command="docker compose run --rm node /bin/bash -c 'cd /var/www/html$relative_path && $@'"
 
 # Only show a screen message if the output is stdout.
 if [ -t 1 ]; then
