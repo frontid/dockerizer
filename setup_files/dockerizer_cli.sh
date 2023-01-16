@@ -218,7 +218,9 @@ _docker_project() {
 
   # Load default variables
   ID_RSA="${ID_RSA:-~/.ssh/id_rsa}"
+  ID_RSA="${ID_RSA/\~/$HOME}"
   SSH_CONFIG="${SSH_CONFIG:-~/.ssh/config}"
+  SSH_CONFIG="${SSH_CONFIG/\~/$HOME}"
   PROFILES="${PROFILES:-}"
 	CONTAINER=$2
 
@@ -230,7 +232,6 @@ _docker_project() {
 
   # Create temporal files for ssh configuration.
   if [[ "$1" == "up -d" ]]; then
-
     # We need to create empty files since docker will try to
     # create dirs instead files. It's a known bug.
     touch .id
@@ -239,6 +240,8 @@ _docker_project() {
     # temporal file with ssh id_rsa.
     if [[ -f "$ID_RSA" ]]; then
         cat "$ID_RSA" > .id
+    else
+	echo "Private key not found at: $ID_RSA"
     fi
 
     # temporal file with ssh config.
@@ -285,7 +288,7 @@ _docker_project() {
     fi
   fi
 
-	echo "docker compose ${ARGS} $1 $CONTAINER ${ARGS_END}"
+  echo "docker compose ${ARGS} $1 $CONTAINER ${ARGS_END}"
   docker compose ${ARGS} $1 $CONTAINER ${ARGS_END}
 
   # Remove temporal files
