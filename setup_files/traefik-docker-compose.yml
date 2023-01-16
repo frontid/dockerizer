@@ -18,7 +18,10 @@ services:
       - 'traefik.backend=proxy_traefik'
       - 'traefik.port=8080'
       - 'traefik.frontend.rule=Host:traefik.localhost'
-
+    logging:
+      options:
+        max-size: '10m'
+        max-file: '3'
 
   portainer:
     image: portainer/portainer

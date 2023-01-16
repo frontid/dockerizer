@@ -72,6 +72,35 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+_check_requirements() {
+  # Consider requirements would be met
+  REQUIREMENTS=1
+
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+
+  # Go to project home
+  _go_home_dir
+
+  docker_compose_plugin=$(docker compose version)
+  if [ $? = 1 ]; then
+    echo -e "${BRed}Please install docker compose plugin and try again: https://docs.docker.com/compose/install/linux/${Color_Off}"
+    REQUIREMENTS=0
+  fi
+
+  # We should always have a .docker.env in the project
+  if [ ! -f web/.docker.env ]; then
+    echo -e "${BRed}Your project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/${Color_Off}"
+    REQUIREMENTS=0
+  fi
+
+  cd $BACKDIR > /dev/null
+  if [ $REQUIREMENTS = 0 ]; then
+    exit 1
+  fi 
+
+}
+
 # Move to project home folder.
 _go_home_dir() {
   bin_path=$(which _command_wrapper_exec)
@@ -87,28 +116,31 @@ _go_home_dir() {
 
 # Finds the .docker.env with the override and prepares it for running docker
 _prepare_env_file() {
-  # Before moving to a new directory save where we're
-  BACKDIR=${OLDPWD:--}
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+
   # Go to project home
   _go_home_dir
 
-	ENV_FILES=''
-	# We should always have a .docker.env in the project
-	if [ -e web/.docker.env ]; then
-		ENV_FILES=" web/.docker.env"
-	else
-    echo -e "${BRed}Your project must provide \".docker.env\" file in order to work with dockerizer. Please see https://frontid.github.io/dockerizer/dockerenv/${Color_Off}"
-    cd - > /dev/null
-    exit 1
-	fi
+  ENV_FILES=''
 
-	# We could have some specific override for the developer/machine
-	if [ -e web/.docker.override.env ]; then
+  # We would load default variables that will be overriden with other .env files
+  if [ -e .docker.default.env ]; then
+    ENV_FILES="$ENV_FILES ./.docker.default.env"
+  fi
+
+  # We should always have a .docker.env in the project
+  if [ -e web/.docker.env ]; then
+    ENV_FILES="$ENV_FILES web/.docker.env"
+  fi
+
+  # We could have some specific override for the developer/machine
+  if [ -e web/.docker.override.env ]; then
     ENV_FILES="$ENV_FILES web/.docker.override.env"
   fi
 
-	# We could also need to load specific docker enabled/disabled features
-	if [ -e .docker.local.env ]; then
+  # We could also need to load specific docker enabled/disabled features
+  if [ -e .docker.local.env ]; then
     ENV_FILES="$ENV_FILES ./.docker.local.env"
   fi
 
@@ -122,14 +154,14 @@ _prepare_env_file() {
 # Stores data in the local docker environment
 # Receives two parameters KEY VALUE
 update_local_env() {
-	# Before moving to a new directory save where we're
-	BACKDIR=${OLDPWD:--}
-	# Go to project home
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+  # Go to project home
   _go_home_dir
 
-	KEY=$1
-	VALUE=$2
-	if [ ! -f .docker.local.env ]; then
+  KEY=$1
+  VALUE=$2
+  if [ ! -f .docker.local.env ]; then
     touch ./.docker.local.env
   fi
 
@@ -149,8 +181,8 @@ update_local_env() {
 }
 
 _load_env_variables() {
-  # Before moving to a new directory save where we're
-  BACKDIR=${OLDPWD:--}
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
   # Go to project home
   _go_home_dir
 
@@ -162,6 +194,9 @@ _load_env_variables() {
     set -o allexport
     source .env
     set +o allexport
+  else
+    echo "NOT FOUND ENV `pwd`"
+
   fi
 
   # Return to previous dir
@@ -171,12 +206,14 @@ _load_env_variables() {
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
-	_prepare_env_file
-	_load_env_variables
 
-	# Before moving to a new directory save where we're
-	BACKDIR=${OLDPWD:--}
-	# Go to project home
+ _check_requirements
+
+ _load_env_variables
+ # Before moving to a new directory save where we are
+ BACKDIR=`pwd`
+
+ # Go to project home
   _go_home_dir
 
   # Load default variables
@@ -235,7 +272,7 @@ _docker_project() {
   fi
 
 	# If we have profiles
-  if [ ! -z "PROFILES" ]; then
+  if [ ! -z "$PROFILES" ]; then
     echo -e "Active profiles: ${BGreen}$PROFILES${Color_Off}"
     # Split profiles by comma into an array
     IFS=',' read -ra PROFILES <<< "$PROFILES"
@@ -275,7 +312,7 @@ _track_dockerized_project() {
 
   if grep -Fxq "$PWD" ~/.dockerizer_track
   then
-    echo "This path already is tracked."
+    echo "This path is already tracked."
   else
     echo $PWD >> ~/.dockerizer_track
   fi
@@ -290,14 +327,14 @@ _show_help() {
    echo "Syntax: dk [command]"
    echo
    echo "Commands:"
-   echo "new              This command will prepare a dockerizer dir for you."
+   echo "new [dirname]   Creates an instance of dockerizer for a new project which will be located at dirname."
    echo "start [traefik]  When calling it in a project folder, it starts docker containers. You can start specific containers by adding them last, including traefik. If you add 'traefik' start the traefik service."
    echo "stop [traefik]   When calling it in a project folder, it stops docker containers. You can stop specific containers by adding them last, including traefik. If you add 'traefik' stop the traefik service."
    echo "down             When calling it in a project folder, it stops and removes containers, networks, images, and volumes."
    echo "xdebug [on/off]  Activates/Deactivates the xdebug for the PHP container."
    echo "setenv           Allows custom settings to be added for the current dockerized project. Settings like ID_RSA / SSH_CONFIG."
    echo "self-update      If there is a new version of the dk tool you can easily upgrade it with this command. It supports two parameters"
-   echo "help             Show this help."
+   echo "help             Shows this help."
    echo
    echo "Direct commands: (without dk prefix)"
    echo -e "Add parameter ${BGreen}--dkhelp${Color_Off} option to see the help section."
@@ -313,7 +350,36 @@ _show_help() {
    done
 }
 
+# Parses all arguments to be used as named arguments
+# Exampled obtained from:
+# https://www.drupal.org/node/244924#script-based-on-guidelines-given-above
+# More about this: https://unix.stackexchange.com/questions/129391/passing-named-arguments-to-shell-scripts
+_parse_arguments() {
+  # Parse Command Line Arguments
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --branch=*)
+        BRANCH="${1#*=}"
+        ;;
+      --propagate_update=*)
+        PROPAGATE_UPDATE="${1#*=}"
+        ;;
+#      --help) _show_help;;
+      *)
+#        printf "************************************************************\n"
+#        printf "* Error: Invalid argument, run --help for valid arguments. *\n"
+#        printf "************************************************************\n"
+#        exit 1
+    esac
+    shift
+  done
+}
+
 # -----------------------------------------------
+# Run main process
+
+# Parse named arguments
+_parse_arguments "$@"
 
 # Temporal solution to add pre-existing projects to the config file.
 if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
@@ -327,6 +393,7 @@ elif [ ! -z "$1" ] && [ $1 = "logs" ]; then
 elif [ ! -z "$1" ] && [ $1 = "start" ] ; then
 	# Do we have more parameters?
 	if [ ! -z "$2" ] ; then
+		
 		if [ $2 = "traefik" ]; then
 			# Start traefik
 			_traefik_service "up -d"
@@ -335,7 +402,7 @@ elif [ ! -z "$1" ] && [ $1 = "start" ] ; then
 			if [ ! -z "$3" ] ; then
 				_docker_project "up -d" $2 $3 $4
 			else
-				echo "Missing profiles specification. Use ${BBlack}dk start profiles apache,mysql${Color_Off}"
+				echo -e "Missing profiles specification. Use ${BBlue}dk start profiles apache,mysql${Color_Off}"
 			fi
 		else
 		  # dk start apache
@@ -356,7 +423,7 @@ elif [ ! -z "$1" ] && [ $1 = "stop" ] ; then
 			if [ ! -z "$3" ] ; then
 				_docker_project "stop" $2 $3 $4
 			else
-				echo "Missing profiles specification. Use ${BBlack}dk stop profiles apache,mysql${Color_Off}"
+				echo -e "Missing profiles specification. Use ${BBlue}dk stop profiles apache,mysql${Color_Off}"
 			fi
 		else
 			_docker_project "stop" $2 $3 $4
@@ -382,14 +449,12 @@ elif [ ! -z "$1" ] && [ $1 = "setenv" ] && [ ! -z "$2" ]  && [ ! -z "$3" ]; then
   update_local_env $2 $3
   _load_env_variables
   echo -e "New value of ${BBlue}$2${Color_Off}: ${BRed}${!2}${Color_Off}"
-
 # Restart project?
 elif [ ! -z "$1" ] && [ $1 = "restart" ] && [ -z "$2" ]; then
     # We dont use just "restart" because this: If you make changes to your docker-compose.yml
     # configuration these changes are not reflected after running this command.
     _docker_project "stop"
     _docker_project "up -d"
-
 # Restart project specific
 elif [ ! -z "$1" ] && [ $1 = "restart" ]; then
     _docker_project "stop $2 $3 $4"
@@ -404,57 +469,29 @@ elif [ ! -z "$1" ] && [ $1 = "new" ] && [ ! -z "$2" ]; then
 
 # Self update dockerizer
 elif [ ! -z "$1" ] && [ $1 = "self-update" ]; then
-  BRANCH=${2:-'master'} # Updates DK from a specific branch
-  PROPAGATE_UPDATE=${3:-'on'} # Update all dockerized projects with this branch
+  BRANCH=${BRANCH:-'master'} # --branch=[branch] Updates DK from a specific branch
+  PROPAGATE_UPDATE=${PROPAGATE_UPDATE:-'on'} # --propagate_update=[on/off] Update all dockerized projects with this branch
 
   echo "Cleaning /tmp/dockerizer"
   echo "------------------------"
 
   rm -rf /tmp/dockerizer
 
-  echo "Getting a new version of dockerizer"
-
+  echo -e "Getting a new version of dockerizer [${BBlue}$BRANCH${Color_Off}]"
   git clone -b $BRANCH git@github.com:frontid/dockerizer.git /tmp/dockerizer
 
-  dk stop traefik
+  # Before moving to a new directory save where we are
+  BACKDIR=${OLDPWD:--}
+  cd /tmp/dockerizer/setup_files > /dev/null
 
-  echo "------------------------"
-  echo "Updating..."
-  echo "------------------------"
+  # We need to update this same script, so it can be executed twice fixing possible errors during update.
+  chmod +x *.sh
+  sudo cp dockerizer_cli.sh /usr/local/bin/dk
 
-  sudo cp /tmp/dockerizer/setup_files/dockerizer_cli.sh /usr/local/bin/dk
-  sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
-  sudo chmod +x /usr/local/bin/dk
+  ./dockerizer_update.sh "$@"
 
-  # ------------------------------
-
-  traefik_path="/usr/local/bin/dk_traefik"
-  sudo cp /tmp/dockerizer/setup_files/traefik-docker-compose.yml "$traefik_path/docker-compose.yml"
-  sudo cp -R /tmp/dockerizer/setup_files/traefik $traefik_path
-
-  # ------------------------------
-  if [ $PROPAGATE_UPDATE = 'on' ]; then
-    echo "Updating all dockerized instances."
-    echo ""
-
-    # Just to prevent errors.
-    touch ~/.dockerizer_track
-
-    while read path; do
-        if [[ -d "$path" ]]; then
-          cd "$path"
-          echo "Updating $path"
-          git reset --hard > /dev/null
-          git pull origin master
-          echo ""
-        fi
-    done <~/.dockerizer_track
-  else
-    echo "Skipped updates on all dockerized instances."
-    echo ""
-  fi
-  dk start traefik
-  echo "Done."
+  # Return to previous dir
+  cd $BACKDIR > /dev/null
 
 elif [ ! -z "$1" ] && [ $1 = "help" ]; then
   _show_help
