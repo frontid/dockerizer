@@ -203,17 +203,74 @@ _load_env_variables() {
   cd $BACKDIR > /dev/null
 }
 
+# Gets the docker compose line for execution considering
+# all docker-compose files and variables, it also supports
+# passing by parameters. 
+# It will set the variable DOCKER_RUN as result.
+_get_docker_run() {
+
+  _check_requirements
+
+  _load_env_variables
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
+
+  # Go to project home
+  _go_home_dir
+
+  # Load default variables
+  PROFILES="${PROFILES:-}"
+
+  # Load docker-compose override
+  ARGS="-f $PWD/docker-compose.yml -f $PWD/docker-compose.override.yml"
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    ARGS="${ARGS} -f $PWD/docker-compose.override.mac.yml"
+  fi
+
+  # Loads additional docker compose files defined in .docker.env
+  if [ ! -z "$CUSTOM_DOCKER_COMPOSE" ]; then
+    echo -e "Detected custom docker compose: ${BGreen}$CUSTOM_DOCKER_COMPOSE${Color_Off}"
+    added_docker_compose=(${CUSTOM_DOCKER_COMPOSE})
+    for new_docker_compose in "${added_docker_compose[@]}"
+    do
+        ARGS+=" -f $PWD/${new_docker_compose}"
+    done
+  fi
+
+	# If we have profiles
+  if [ ! -z "$PROFILES" ]; then
+    echo -e "Active profiles: ${BGreen}$PROFILES${Color_Off}"
+    # Split profiles by comma into an array
+    IFS=',' read -ra PROFILES <<< "$PROFILES"
+    for i in "${PROFILES[@]}"; do
+      ARGS="${ARGS} --profile ${i}"
+    done
+
+    if [[ " ${PROFILES[*]} " =~ " php " ]]; then
+      echo -e "Running with XDEBUG ${BGreen}$PHP_DEBUG_MODE${Color_Off}";
+    fi
+  fi
+
+  #echo "docker compose ${ARGS} $1 $CONTAINER ${ARGS_END}"
+  DOCKER_RUN="docker compose ${ARGS} $@"
+
+  # Return to previous dir
+  # cd $BACKDIR > /dev/null
+  # Remember to return back
+}
+
 # Check if the .docker.env (and optionally .docker.override.env).
 # and run docker-compose commands.
 _docker_project() {
 
- _check_requirements
+  _check_requirements
 
- _load_env_variables
- # Before moving to a new directory save where we are
- BACKDIR=`pwd`
+  _load_env_variables
+  # Before moving to a new directory save where we are
+  BACKDIR=`pwd`
 
- # Go to project home
+  # Go to project home
   _go_home_dir
 
   # Load default variables
@@ -239,9 +296,9 @@ _docker_project() {
 
     # temporal file with ssh id_rsa.
     if [[ -f "$ID_RSA" ]]; then
-        cat "$ID_RSA" > .id
+      cat "$ID_RSA" > .id
     else
-	echo "Private key not found at: $ID_RSA"
+	    echo "Private key not found at: $ID_RSA"
     fi
 
     # temporal file with ssh config.
@@ -378,6 +435,19 @@ _parse_arguments() {
   done
 }
 
+# Returns the arguments as of a position. 
+# It needs to get first the number of arguments to skip and the rest of args.
+# Example: If you want to remove the first two parameters and get the rest, 
+#          this method should be called like this: 
+#           _proxy_arguments 2 "$@"
+_proxy_arguments() {
+  PROXIED_ARGS=""
+  START=`expr $1 + 2`
+  for ((i=$START; i<=$#; ++i)); do
+    PROXIED_ARGS="$PROXIED_ARGS ${!i}"
+  done 
+}
+
 # -----------------------------------------------
 # Run main process
 
@@ -390,7 +460,11 @@ if [ ! -z "$1" ] && [ $1 = "track" ] && [ -z "$2" ] ; then
 
 # Logs
 elif [ ! -z "$1" ] && [ $1 = "logs" ]; then
-    _docker_project "logs $2"
+ 
+  _get_docker_run
+  #echo "$DOCKER_RUN $@"
+  $DOCKER_RUN "$@"
+
 
 # Start project?
 elif [ ! -z "$1" ] && [ $1 = "start" ] ; then
