@@ -48,7 +48,7 @@ sudo cp -R /tmp/dockerizer/setup_files/traefik $traefik_path
 echo ""
 echo -e "Installing/updating dk cli"
 
-sudo cp /tmp/dockerizer/setup_files/dockerizer_cli /usr/local/bin/dk
+sudo cp /tmp/dockerizer/setup_files/dockerizer_cli.sh /usr/local/bin/dk
 sudo cp /tmp/dockerizer/setup_files/dockerizer_cli_bash_autocomplete /etc/bash_completion.d/dk
 sudo chmod +x /usr/local/bin/dk
 
